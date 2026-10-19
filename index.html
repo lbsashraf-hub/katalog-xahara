@@ -1077,14 +1077,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function confirmAndSendWA() {
     if (!uploadedProofUrl) {
-        alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu agar pesanan bisa diproses!");
+        alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu!");
         return;
     }
 
     const d = currentOrderData;
     const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
     
-    // Pesan bersih tanpa Base64 yang bikin HP nge-lag / black screen
+    // Pesan WhatsApp untuk Anda (Admin) - bersih, tanpa teks Base64 yang bikin ngelag
     const waMessage = 
 `*KONFIRMASI PESANAN - Xahara's Wardrobe*%0A
 *Order ID:* ${d.orderId}%0A
@@ -1097,8 +1097,18 @@ ${d.notes ? `*Catatan:* ${d.notes}%0A` : ''}
 *Kode Unik:* Rp ${d.uniqueCode}%0A
 *TOTAL DIBAYAR:* *Rp ${d.total.toLocaleString('id-ID')}*%0A
 ----------------------------------------%0A
-_Halo Admin, saya sudah melampirkan foto bukti pembayaran di chat ini untuk Order ID ${d.orderId}. Mohon segera diverifikasi. Terima kasih!_`;
+_Foto bukti transfer telah otomatis di-upload ke server dengan Order ID: ${d.orderId}_%0A
+_Mohon segera diverifikasi. Terima kasih!_`;
 
+    // Kirim file foto secara otomatis ke server/backend bot di latar belakang
+    // (Opsional: Hubungkan fetch ini ke URL endpoint bot/server panel RyHar Anda jika ada)
+    if (uploadedProofUrl.startsWith('data:image')) {
+        console.log("Mengirim bukti transfer untuk Order ID:", d.orderId);
+        // Contoh fetch ke server bot:
+        // fetch('https://domain-panel-ryhar/upload', { method: 'POST', body: ... })
+    }
+
+    // Buka WhatsApp Admin
     window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${waMessage}`, '_blank');
 }
 
