@@ -733,6 +733,7 @@
 
         // AUTOMATIC PROOF UPLOAD TO IMGBB CLOUD API
         async function handleProofUpload(e) {
+                async function handleProofUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
 
@@ -768,7 +769,8 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    uploadedProofUrl = result.data.url_viewer || result.data.url;
+                    // Menggunakan direct link gambar agar langsung terbuka sebagai file gambar
+                    uploadedProofUrl = result.data.url;
                     document.getElementById('uploadStatusText').innerText = "✓ Berhasil diunggah ke cloud! Siap dikirim ke WA.";
                 } else {
                     alert("Gagal mengunggah foto ke ImgBB server.");
