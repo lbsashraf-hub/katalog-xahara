@@ -1075,7 +1075,7 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.readAsDataURL(file);
         }
 
-        function confirmAndSendWA() {
+        async function confirmAndSendWA() {
     if (!uploadedProofUrl) {
         alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu!");
         return;
@@ -1084,7 +1084,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const d = currentOrderData;
     const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
     
-    // Pesan WhatsApp untuk Anda (Admin) - bersih, tanpa teks Base64 yang bikin ngelag
+    // 1. Kirim foto ke server Express.js bot di latar belakang secara diam-diam
+    try {
+        const response = await fetch('https://domain-panel-anda.ryhar.my.id/api/upload-bukti', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                orderId: d.orderId,
+                imageBase64: uploadedProofUrl 
+            })
+        });
+        const result = await response.json();
+        console.log("Upload server response:", result);
+    } catch (err) {
+        console.error("Gagal upload otomatis ke server:", err);
+    }
+
+    // 2. Pesan WhatsApp bersih untuk Anda (Admin biasa)
     const waMessage = 
 `*KONFIRMASI PESANAN - Xahara's Wardrobe*%0A
 *Order ID:* ${d.orderId}%0A
@@ -1097,19 +1113,12 @@ ${d.notes ? `*Catatan:* ${d.notes}%0A` : ''}
 *Kode Unik:* Rp ${d.uniqueCode}%0A
 *TOTAL DIBAYAR:* *Rp ${d.total.toLocaleString('id-ID')}*%0A
 ----------------------------------------%0A
-_Foto bukti transfer telah otomatis di-upload ke server dengan Order ID: ${d.orderId}_%0A
+_Bukti transfer telah otomatis tersimpan di server dengan Order ID: ${d.orderId}_%0A
 _Mohon segera diverifikasi. Terima kasih!_`;
 
-    // Kirim file foto secara otomatis ke server/backend bot di latar belakang
-    // (Opsional: Hubungkan fetch ini ke URL endpoint bot/server panel RyHar Anda jika ada)
-    if (uploadedProofUrl.startsWith('data:image')) {
-        console.log("Mengirim bukti transfer untuk Order ID:", d.orderId);
-        // Contoh fetch ke server bot:
-        // fetch('https://domain-panel-ryhar/upload', { method: 'POST', body: ... })
-    }
-
-    // Buka WhatsApp Admin
-    window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${waMessage}`, '_blank');
+    // 3. Buka WhatsApp ke Nomor Admin Biasa Anda
+    const ADMIN_WA_BIASA = "6285770246502"; 
+    window.open(`https://wa.me/${ADMIN_WA_BIASA}?text=${waMessage}`, '_blank');
 }
 
         function startCountdown(seconds) {
