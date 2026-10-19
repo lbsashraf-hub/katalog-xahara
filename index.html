@@ -306,12 +306,12 @@
                     </p>
                 </div>
 
-                 <!-- UPLOAD BUKTI TRANSFER FORM -->
+                <!-- UPLOAD BUKTI TRANSFER FORM -->
                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left mb-5">
                     <label class="block text-xs font-extrabold text-slate-900 mb-1 flex items-center gap-1.5">
                         <i data-lucide="upload" class="w-4 h-4 text-brand-600"></i> Lampirkan Bukti Transfer *
                     </label>
-                    <p class="text-[11px] text-slate-500 mb-3">Upload screenshot/foto struk. Gambar otomatis diunggah ke server aman Telegram (Telegra.ph).</p>
+                    <p class="text-[11px] text-slate-500 mb-3">Upload screenshot/foto struk. Gambar otomatis diunggah ke cloud aman (Catbox).</p>
                     
                     <input type="file" id="transferProofInput" accept="image/*" onchange="handleProofUpload(event)" class="hidden">
                     
@@ -682,7 +682,8 @@
             btn.innerText = "Bayar via QRIS DANA";
             btn.onclick = processCheckout;
         }
-// PROCESS CHECKOUT & QRIS
+
+        // PROCESS CHECKOUT & QRIS
         function processCheckout() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
@@ -728,7 +729,7 @@
             startCountdown(15 * 60);
         }
 
-        // AUTOMATIC PROOF UPLOAD TO TELEGRAPH (100% Bebas Blokir Operator)
+        // AUTOMATIC PROOF UPLOAD TO CATBOX.MOE
         async function handleProofUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
@@ -743,38 +744,53 @@
             reader.onload = function(evt) {
                 document.getElementById('previewImg').src = evt.target.result;
                 document.getElementById('fileNameDisplay').innerText = file.name;
-                document.getElementById('uploadStatusText').innerText = "Sedang mengunggah ke server aman...";
+                document.getElementById('uploadStatusText').innerText = "Sedang mengunggah ke cloud aman...";
                 document.getElementById('uploadPlaceholder').classList.add('hidden');
                 document.getElementById('uploadPreview').classList.remove('hidden');
             };
             reader.readAsDataURL(file);
 
-                    // PROOF UPLOAD HANDLER (100% Instan, Tanpa Nyangkut & Tanpa Blokir)
-        function handleProofUpload(e) {
-            const file = e.target.files[0];
-            if (!file) return;
+            // Upload to Catbox.moe API
+            isUploading = true;
+            const btn = document.getElementById('btnConfirmWA');
+            btn.classList.add('opacity-50');
 
-            if (!file.type.startsWith('image/')) {
-                alert("Mohon upload file gambar (JPG/PNG)!");
+            const formData = new FormData();
+            formData.append("reqtype", "fileupload");
+            formData.append("fileToUpload", file);
+
+            try {
+                const response = await fetch("https://catbox.moe/user/api.php", {
+                    method: "POST",
+                    body: formData
+                });
+                const resultUrl = await response.text();
+
+                if (resultUrl && resultUrl.startsWith("http")) {
+                    uploadedProofUrl = resultUrl.trim();
+                    document.getElementById('uploadStatusText').innerText = "✓ Berhasil diunggah! Link sah & siap dikirim.";
+                } else {
+                    alert("Gagal mengunggah foto ke server.");
+                    uploadedProofUrl = "Gagal Diunggah";
+                }
+            } catch (err) {
+                console.error("Upload error:", err);
+                uploadedProofUrl = "Terjadi Kesalahan Koneksi Upload";
+            } finally {
+                isUploading = false;
+                btn.classList.remove('opacity-50');
+            }
+        }
+
+        // CONFIRM TO WA WITH CATBOX LINK
+        function confirmAndSendWA() {
+            if (isUploading) {
+                alert("Mohon tunggu sebentar, foto bukti transfer sedang diunggah ke cloud...");
                 return;
             }
 
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                uploadedProofUrl = evt.target.result; // Menyimpan data gambar lokal
-                document.getElementById('previewImg').src = evt.target.result;
-                document.getElementById('fileNameDisplay').innerText = file.name;
-                document.getElementById('uploadStatusText').innerText = "✓ Berhasil dilampirkan! Siap dikirim ke WA.";
-                document.getElementById('uploadPlaceholder').classList.add('hidden');
-                document.getElementById('uploadPreview').classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
-        }
-
-        // CONFIRM TO WA WITH PROOF
-        function confirmAndSendWA() {
-            if (!uploadedProofUrl) {
-                alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu!");
+            if (!uploadedProofUrl || uploadedProofUrl.includes("Gagal")) {
+                alert("Mohon lampirkan foto bukti transfer yang valid terlebih dahulu!");
                 return;
             }
 
@@ -793,13 +809,12 @@ ${d.notes ? `*Catatan:* ${d.notes}%0A` : ''}
 *Kode Unik:* Rp ${d.uniqueCode}%0A
 *TOTAL DIBAYAR:* *Rp ${d.total.toLocaleString('id-ID')}*%0A
 ----------------------------------------%0A
-_Saya melampirkan pesanan dan bukti pembayaran QRIS DANA. Mohon segera diproses!_`;
+*LINK BUKTI TRANSFER:*%0A${uploadedProofUrl}%0A
+----------------------------------------%0A
+_Mohon segera diverifikasi dan diproses pesanan saya. Terima kasih!_`;
 
             window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${waMessage}`, '_blank');
-            
-            alert("WhatsApp Admin terbuka!\n\nTips: Anda bisa langsung melampirkan/menempelkan (paste) foto bukti transfer dari galeri Anda ke dalam chat WhatsApp tersebut.");
         }
-
 
         // TIMER COUNTDOWN
         function startCountdown(seconds) {
