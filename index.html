@@ -53,16 +53,9 @@
             border-radius: 20px;
         }
 
-        /* --- STYLES ANIMASI MODERN --- */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px) scale(0.98);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(18px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         @keyframes shimmer {
@@ -70,22 +63,10 @@
             100% { background-position: 200% 0; }
         }
 
-        @keyframes shine {
-            100% { left: 125%; }
-        }
-
         @keyframes kenBurns {
             0% { transform: scale(1); }
             50% { transform: scale(1.06); }
             100% { transform: scale(1); }
-        }
-
-        @keyframes cartShake {
-            0%, 100% { transform: rotate(0deg); }
-            20% { transform: rotate(-12deg); }
-            40% { transform: rotate(12deg); }
-            60% { transform: rotate(-8deg); }
-            80% { transform: rotate(8deg); }
         }
 
         .animate-fade-in-up {
@@ -98,38 +79,8 @@
             animation: shimmer 3s infinite linear;
         }
 
-        /* Skeleton Loading Shimmer */
-        .skeleton-box {
-            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 37%, #f1f5f9 63%);
-            background-size: 400% 100%;
-            animation: shimmer 1.4s ease infinite;
-        }
-
-        /* Badge Kilau Cahaya */
-        .badge-shine {
-            position: relative;
-            overflow: hidden;
-        }
-        .badge-shine::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -60%;
-            width: 20%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: rotate(30deg);
-            animation: shine 3.5s infinite;
-        }
-
-        /* Hero Banner Zooming */
         .ken-burns-bg {
             animation: kenBurns 20s infinite alternate ease-in-out;
-        }
-
-        /* Cart Shake Effect */
-        .shake-cart {
-            animation: cartShake 0.5s ease-in-out;
         }
 
         .card-hover-effect {
@@ -150,9 +101,8 @@
     </div>
 
     <!-- GLASS NAVBAR -->
-    <header class="sticky top-0 z-40 glass-nav border-b border-slate-200/80 transition-all duration-300">
+    <header class="sticky top-0 z-40 glass-nav border-b border-slate-200/85 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-4">
-            <!-- Brand Logo -->
             <a href="#" class="flex items-center gap-2 group transition-transform duration-300 hover:scale-105">
                 <img src="logo.png" alt="Xahara's Wardrobe" class="w-10 h-10 object-contain rounded-xl shadow-sm">
                 <div class="flex flex-col">
@@ -161,14 +111,12 @@
                 </div>
             </a>
 
-            <!-- Search Bar Desktop -->
             <div class="hidden md:flex flex-1 max-w-md mx-8 relative">
                 <input type="text" id="searchInput" placeholder="Cari koleksi abaya, gamis, pakaian..." 
                        class="w-full pl-11 pr-4 py-2.5 bg-slate-100/80 border border-slate-200 focus:bg-white rounded-full text-xs font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all duration-300">
                 <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-3.5"></i>
             </div>
 
-            <!-- Header Actions -->
             <div class="flex items-center gap-3">
                 <button id="cartIconBtn" onclick="toggleCartModal(true)" class="relative p-2.5 text-slate-800 hover:text-brand-600 bg-slate-100/80 hover:bg-slate-100 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none">
                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
@@ -176,8 +124,6 @@
                 </button>
             </div>
         </div>
-
-        <!-- Search Bar Mobile -->
         <div class="md:hidden px-4 pb-3">
             <div class="relative">
                 <input type="text" id="searchInputMobile" placeholder="Cari pakaian favoritmu..." 
@@ -189,7 +135,6 @@
 
     <!-- MAIN CONTENT -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 flex-1 w-full">
-        
         <!-- HERO BANNER -->
         <div class="relative rounded-3xl overflow-hidden shadow-2xl mb-10 bg-slate-900 text-white min-h-[300px] sm:min-h-[380px] flex items-center animate-fade-in-up">
             <div class="absolute inset-0 z-0 opacity-40 mix-blend-overlay bg-cover bg-center ken-burns-bg" id="heroBg" style="background-image: url('IMG-20261019-WA0035.jpg');"></div>
@@ -220,19 +165,8 @@
                     <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Katalog Baju</h2>
                     <p class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Pilih busana terbaik sesuai dengan gaya personalmu.</p>
                 </div>
-
-                <!-- CUSTOM ELEGAN SORT BUTTON (Menggantikan Dropdown Bawaan HP) -->
-                <div class="flex items-center gap-2 self-start md:self-auto">
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Urutkan:</span>
-                    <button onclick="toggleSortModal(true)" class="flex items-center gap-2 bg-white border border-slate-200 hover:border-slate-800 rounded-xl px-4 py-2 text-xs font-bold text-slate-800 shadow-sm transition-all duration-300 hover:scale-105 active:scale-95">
-                        <i data-lucide="arrow-up-down" class="w-3.5 h-3.5 text-brand-600"></i>
-                        <span id="currentSortLabel">Paling Populer</span>
-                        <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-slate-400"></i>
-                    </button>
-                </div>
             </div>
 
-            <!-- Categories Filter Pills -->
             <div class="flex items-center gap-2 overflow-x-auto py-4 custom-scrollbar" id="categoryContainer">
                 <button onclick="filterCategory('all', this)" class="cat-btn active bg-slate-900 text-white px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md transition-all duration-300">Semua Produk</button>
                 <button onclick="filterCategory('Abaya', this)" class="cat-btn bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-300">Abaya</button>
@@ -242,7 +176,7 @@
 
         <!-- PRODUCT GRID -->
         <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            <!-- Rendered via JavaScript -->
+            <!-- Dynamic Render -->
         </div>
 
         <!-- EMPTY STATE -->
@@ -253,258 +187,47 @@
             <h3 class="text-base font-bold text-slate-800">Produk Tidak Ditemukan</h3>
             <p class="text-xs text-slate-500 mt-1">Coba gunakan kata kunci pencarian atau kategori lain.</p>
         </div>
-
-        <!-- TESTIMONI PELANGGAN -->
-        <section class="mt-20 pt-10 border-t border-slate-200 animate-fade-in-up">
-            <div class="text-center max-w-xl mx-auto mb-10">
-                <span class="text-[10px] font-black uppercase tracking-widest text-brand-600 bg-emerald-50 px-3 py-1 rounded-full">Testimoni Pelanggan</span>
-                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight mt-2">Kata Mereka tentang Xahara</h2>
-                <p class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Pengalaman berbelanja nyata dari para pelanggan setia kami.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between card-hover-effect">
-                    <div>
-                        <div class="flex items-center gap-1 text-amber-400 mb-3">
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                        </div>
-                        <p class="text-xs text-slate-600 leading-relaxed italic">"Bahan Sophia Abaya-nya beneran adem, gak menerawang dan ironless banget! Dipakai seharian pas acara tetep rapi."</p>
-                    </div>
-                    <div class="flex items-center gap-3 mt-5 pt-4 border-t border-slate-100">
-                        <div class="w-9 h-9 rounded-full bg-slate-900 text-white font-black text-xs flex items-center justify-center shadow-md">N</div>
-                        <div>
-                            <h4 class="font-extrabold text-xs text-slate-900">Nabila Putri</h4>
-                            <span class="text-[10px] text-slate-400">Pembeli Terverifikasi • Jakarta</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between card-hover-effect">
-                    <div>
-                        <div class="flex items-center gap-1 text-amber-400 mb-3">
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                        </div>
-                        <p class="text-xs text-slate-600 leading-relaxed italic">"Detail motif timbul dan kancing hiasannya manis banget. Jahitan rapi dan pengiriman super cepat."</p>
-                    </div>
-                    <div class="flex items-center gap-3 mt-5 pt-4 border-t border-slate-100">
-                        <div class="w-9 h-9 rounded-full bg-emerald-600 text-white font-black text-xs flex items-center justify-center shadow-md">R</div>
-                        <div>
-                            <h4 class="font-extrabold text-xs text-slate-900">Rina Rahmawati</h4>
-                            <span class="text-[10px] text-slate-400">Pembeli Terverifikasi • Bandung</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between card-hover-effect">
-                    <div>
-                        <div class="flex items-center gap-1 text-amber-400 mb-3">
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                            <i data-lucide="star" class="w-4 h-4 fill-amber-400"></i>
-                        </div>
-                        <p class="text-xs text-slate-600 leading-relaxed italic">"Adminnya ramah banget diajak konsultasi ukuran. Pas abayanya sampai ukurannya pas banget sesuai tabel LD/PB."</p>
-                    </div>
-                    <div class="flex items-center gap-3 mt-5 pt-4 border-t border-slate-100">
-                        <div class="w-9 h-9 rounded-full bg-teal-600 text-white font-black text-xs flex items-center justify-center shadow-md">S</div>
-                        <div>
-                            <h4 class="font-extrabold text-xs text-slate-900">Siti Sarah</h4>
-                            <span class="text-[10px] text-slate-400">Pembeli Terverifikasi • Surabaya</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-12 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
-            <div>
-                <div class="flex items-center justify-center sm:justify-start gap-2 font-black text-xl text-white tracking-tight">
-                    <img src="logo.png" alt="Xahara's Wardrobe" class="w-8 h-8 object-contain rounded-lg">
-                    <span>XAHARA'S WARDROBE</span>
-                </div>
-                <p class="text-xs text-slate-500 mt-2">Platform Belanja Fashion Online & Pembayaran QRIS DANA Semi-Otomatis.</p>
-            </div>
-            <div class="text-xs text-slate-500">
-                &copy; 2026 Xahara's Wardrobe. Hak Cipta Dilindungi.
-            </div>
-        </div>
-    </footer>
-
-    <!-- POP-UP SORTING ELEGAN (BOTTOM SHEET SANGAT MODIS) -->
-    <div id="sortModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4 transition-all duration-300" onclick="toggleSortModal(false)">
-        <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 shadow-2xl relative border border-slate-100 animate-fade-in-up" onclick="event.stopPropagation()">
-            <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-4 sm:hidden"></div>
-            
-            <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
-                <div class="flex items-center gap-2">
-                    <div class="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
-                        <i data-lucide="arrow-up-down" class="w-4 h-4"></i>
-                    </div>
-                    <h3 class="font-extrabold text-sm text-slate-900">Urutkan Katalog</h3>
-                </div>
-                <button onclick="toggleSortModal(false)" class="text-slate-400 hover:text-slate-600 p-1 rounded-full">
+    <!-- CART / CHECKOUT MODAL CONTAINER -->
+    <div id="cartModal" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-fade-in-up">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <h3 class="font-black text-base text-slate-900 flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-600"></i> Keranjang Belanja & Pembayaran
+                </h3>
+                <button onclick="toggleCartModal(false)" class="p-2 text-slate-400 hover:text-slate-700 rounded-full hover:bg-slate-200/50 transition">
                     <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
             </div>
 
-            <div class="space-y-2">
-                <button onclick="selectSort('featured', 'Paling Populer')" class="sort-opt-btn w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-900 bg-slate-900 text-white font-extrabold text-xs transition-all shadow-sm">
-                    <span>Paling Populer</span>
-                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 sort-check"></i>
-                </button>
-
-                <button onclick="selectSort('low-high', 'Harga: Termurah')" class="sort-opt-btn w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition-all">
-                    <span>Harga: Termurah</span>
-                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 hidden sort-check"></i>
-                </button>
-
-                <button onclick="selectSort('high-low', 'Harga: Termahal')" class="sort-opt-btn w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition-all">
-                    <span>Harga: Termahal</span>
-                    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 hidden sort-check"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- PRODUCT DETAIL MODAL -->
-    <div id="productModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 transition-all duration-300">
-        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative border border-slate-100 max-h-[90vh] flex flex-col animate-fade-in-up">
-            <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-white/90 hover:bg-white text-slate-700 p-2 rounded-full z-20 shadow-md transition-all hover:rotate-90">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
-            <div id="modalContent" class="p-6 overflow-y-auto custom-scrollbar">
-                <!-- Rendered via JS -->
-            </div>
-        </div>
-    </div>
-
-    <!-- CART & CHECKOUT DRAWER -->
-    <div id="cartModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex justify-end transition-all duration-300">
-        <div class="bg-white w-full max-w-md h-full flex flex-col shadow-2xl relative animate-fade-in-up">
-            
-            <!-- Cart Header -->
-            <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                <div class="flex items-center gap-2.5">
-                    <div class="p-2 bg-slate-900 text-white rounded-xl shadow-md">
-                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-base font-extrabold text-slate-900">Keranjang Belanja</h2>
-                        <p class="text-[11px] text-slate-400 font-medium">Periksa kembali item pilihanmu</p>
-                    </div>
-                </div>
-                <button onclick="toggleCartModal(false)" class="p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-100 transition-all hover:rotate-90">
-                    <i data-lucide="x" class="w-5 h-5"></i>
-                </button>
-            </div>
-
-            <!-- FITUR 4: PROGRESS BAR INDIKATOR GRATIS ONGKIR ANIMATIF -->
-            <div class="px-5 pt-4 pb-2 bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
-                <div class="flex items-center justify-between text-xs mb-1.5">
-                    <span id="freeShippingStatus" class="font-extrabold text-slate-800 flex items-center gap-1.5">
-                        <i data-lucide="truck" class="w-4 h-4 text-emerald-600"></i> Gratis Ongkir
-                    </span>
-                    <span id="freeShippingPercent" class="font-black text-emerald-600 text-[11px]">0%</span>
-                </div>
-                <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden p-0.5 border border-slate-200">
-                    <div id="freeShippingBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-700 ease-out shimmer-btn" style="width: 0%"></div>
-                </div>
-                <p id="freeShippingHint" class="text-[10px] text-slate-500 font-medium mt-1.5 leading-tight">
-                    Tambahkan <b id="freeShippingRemaining" class="text-slate-900">Rp 250.000</b> lagi untuk Gratis Ongkir!
-                </p>
-            </div>
-
-            <!-- STEP 1: CART ITEMS -->
-            <div id="cartStepItems" class="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar">
-                <div id="cartList" class="space-y-3">
-                    <!-- Rendered via JS -->
-                </div>
-            </div>
-
-            <!-- STEP 2: SHIPPING FORM -->
-            <div id="cartStepForm" class="hidden flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar">
-                <button onclick="goToCartItems()" class="text-xs font-bold text-slate-500 hover:text-slate-900 flex items-center gap-1 mb-1 transition-all hover:-translate-x-1">
-                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Kembali ke Produk
-                </button>
-                
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 mb-2">
-                    <h3 class="font-black text-slate-900 text-xs uppercase tracking-wider mb-0.5">Informasi Pemesan</h3>
-                    <p class="text-[11px] text-slate-500">Lengkapi data untuk pengiriman paket</p>
-                </div>
-
-                <form id="checkoutForm" class="space-y-3">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap *</label>
-                        <input type="text" id="custName" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:ring-2 focus:ring-slate-900 focus:outline-none transition-all" placeholder="Contoh: Budi Santoso">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Nomor WhatsApp *</label>
-                        <input type="tel" id="custPhone" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:ring-2 focus:ring-slate-900 focus:outline-none transition-all" placeholder="081234567890">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Alamat Lengkap Pengiriman *</label>
-                        <textarea id="custAddress" required rows="2" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:ring-2 focus:ring-slate-900 focus:outline-none transition-all" placeholder="Jalan, No. Rumah, RT/RW, Kecamatan, Kota"></textarea>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Catatan Tambahan (Opsional)</label>
-                        <input type="text" id="custNotes" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:ring-2 focus:ring-slate-900 focus:outline-none transition-all" placeholder="Instruksi khusus kurir / warna cadangan">
-                    </div>
-                </form>
-            </div>
-
-            <!-- STEP 3: PAYMENT & QRIS -->
-            <div id="cartStepPayment" class="hidden flex-1 overflow-y-auto p-5 text-center custom-scrollbar">
-                <div class="bg-slate-900 text-white p-3.5 rounded-2xl mb-4 text-left flex items-center justify-between shadow-lg">
-                    <div>
-                        <p class="text-[10px] text-slate-400 uppercase font-extrabold tracking-wider">ID Pesanan Anda</p>
-                        <p id="paymentOrderId" class="text-sm font-black text-emerald-400">#ORD-XXXXXX</p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-[10px] bg-emerald-500/20 text-emerald-300 font-bold px-2.5 py-1 rounded-full border border-emerald-500/30 animate-pulse">Menunggu Pembayaran</span>
-                    </div>
-                </div>
-
-                <div class="bg-rose-50 border border-rose-100 rounded-2xl p-3 mb-4 flex items-center justify-between">
+            <div id="cartModalBody" class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4">
+                <!-- Konten Dinamis Keranjang & QRIS -->
+                <div class="bg-rose-50 border border-rose-100 rounded-2xl p-3 flex items-center justify-between">
                     <div class="flex items-center gap-2 text-rose-700 text-xs font-bold">
-                        <i data-lucide="clock" class="w-4 h-4 animate-spin"></i> Sisa Waktu
+                        <i data-lucide="clock" class="w-4 h-4 animate-spin"></i> Sisa Waktu Pembayaran
                     </div>
                     <div id="countdownTimer" class="text-base font-black text-rose-600 tracking-wider">15:00</div>
                 </div>
 
-                <div class="bg-white border-2 border-slate-200 p-4 rounded-2xl inline-block mb-4 shadow-sm relative w-full">
-                    <img id="qrisImage" src="" alt="QRIS Code" class="w-full max-w-xs mx-auto object-contain rounded-lg">
+                <div class="bg-white border-2 border-slate-200 p-4 rounded-2xl text-center shadow-sm">
+                    <img id="qrisImage" src="qris.jpg" alt="QRIS Code" class="w-full max-w-xs mx-auto object-contain rounded-lg">
                     <div class="mt-3 text-[11px] font-bold text-slate-600 flex items-center justify-center gap-1.5 bg-slate-100 py-1.5 px-3 rounded-lg">
                         <i data-lucide="qr-code" class="w-4 h-4 text-slate-800"></i> Scan via DANA, BCA, OVO, ShopeePay, dll
                     </div>
                 </div>
 
-                <div class="bg-emerald-50 border border-emerald-200/80 rounded-2xl p-4 text-left mb-5 shadow-sm">
+                <div class="bg-emerald-50 border border-emerald-200/80 rounded-2xl p-4 text-left shadow-sm">
                     <span class="text-[11px] font-bold text-emerald-800 block">Total Tagihan Tepat (Termasuk Kode Unik):</span>
                     <div class="flex items-center justify-between mt-1">
-                        <span id="finalTotalDisplay" class="text-2xl font-black text-emerald-950">Rp 0</span>
-                        <button onclick="copyTotal()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1 shadow-sm hover:scale-105 active:scale-95">
+                        <span id="finalTotalDisplay" class="text-2xl font-black text-emerald-950">Rp 260.978</span>
+                        <button onclick="copyTotal()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1 shadow-sm">
                             <i data-lucide="copy" class="w-3.5 h-3.5"></i> Salin
                         </button>
                     </div>
-                    <p class="text-[10px] text-emerald-700 mt-1.5 font-medium leading-normal">
-                        *Transfer sesuai nominal pas hingga 3 angka terakhir (<b id="uniqueCodeText">Kode Unik Rp 0</b>) agar otomatis terverifikasi.
-                    </p>
                 </div>
 
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left mb-5">
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left">
                     <label class="block text-xs font-extrabold text-slate-900 mb-1 flex items-center gap-1.5">
                         <i data-lucide="upload" class="w-4 h-4 text-brand-600"></i> Lampirkan Bukti Transfer *
                     </label>
@@ -512,7 +235,7 @@
                     <input type="file" id="transferProofInput" accept="image/*" onchange="handleProofUpload(event)" class="hidden">
                     <label for="transferProofInput" class="cursor-pointer flex flex-col items-center justify-center border-2 border-dashed border-slate-300 hover:border-slate-800 bg-white rounded-xl p-4 transition-all text-center group">
                         <div id="uploadPlaceholder" class="flex flex-col items-center">
-                            <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center mb-2 group-hover:bg-slate-900 group-hover:text-white transition-all duration-300">
+                            <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center mb-2 group-hover:bg-slate-900 group-hover:text-white transition-all">
                                 <i data-lucide="image-plus" class="w-5 h-5"></i>
                             </div>
                             <span class="text-xs font-bold text-slate-800">Pilih Bukti Pembayaran</span>
@@ -521,7 +244,7 @@
                         <div id="uploadPreview" class="hidden flex flex-col items-center w-full">
                             <img id="previewImg" src="" class="max-h-36 rounded-lg border shadow-sm mb-2 object-contain">
                             <span id="fileNameDisplay" class="text-[11px] text-slate-700 font-bold truncate max-w-xs"></span>
-                            <span id="uploadStatusText" class="text-[10px] text-brand-600 font-extrabold mt-1 animate-pulse">✓ Berhasil dilampirkan! Siap dikirim.</span>
+                            <span id="uploadStatusText" class="text-[10px] text-brand-600 font-extrabold mt-1">✓ Berhasil dilampirkan! Siap dikirim.</span>
                         </div>
                     </label>
                 </div>
@@ -530,534 +253,51 @@
                     <i data-lucide="message-circle-code" class="w-5 h-5"></i> Konfirmasi ke WhatsApp Admin
                 </button>
             </div>
-
-            <!-- Cart Footer Summary -->
-            <div id="cartFooter" class="p-5 border-t border-slate-100 bg-slate-50/50">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Subtotal Produk</span>
-                    <span id="cartSubtotal" class="text-base font-black text-slate-900">Rp 0</span>
-                </div>
-                <button id="cartPrimaryBtn" onclick="goToCheckoutForm()" class="w-full bg-slate-900 hover:bg-brand-600 hover:text-slate-950 text-white font-extrabold py-3.5 rounded-2xl shadow-lg transition-all duration-300 text-xs sm:text-sm tracking-wide hover:scale-[1.01] active:scale-95">
-                    Lanjut Pengiriman
-                </button>
-            </div>
         </div>
     </div>
 
-  <!-- JAVASCRIPT LOGIC -->
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-8 mt-16 text-center text-xs">
+        &copy; 2026 Xahara's Wardrobe. Hak Cipta Dilindungi.
+    </footer>
+
+    <!-- SCRIPT UTAMA -->
     <script>
-        const ADMIN_WA_NUMBER = "6285717777286";
-        const FREE_SHIPPING_MIN = 250000;
-        
-        const products = [
-            {
-                id: 1,
-                name: "Sophia Abaya",
-                category: "Abaya",
-                rating: 4.9,
-                reviewsCount: 128,
-                badge: "BESTSELLER",
-                images: [
-                    "IMG-20261019-WA0035.jpg",
-                    "IMG-20261019-WA0037.jpg",
-                    "IMG-20261019-WA0038.jpg",
-                    "IMG-20261019-WA0039.jpg",
-                    "IMG-20261019-WA0036.jpg"
-                ],
-                imageNames: ["Hitam", "Cream", "Maroon", "Abu-abu", "Detail Model"],
-                sizes: [
-                    { name: "COUNTESS (S-M)", price: 260000, desc: "LD/PB 100/130cm" },
-                    { name: "PRINCESS (L-XL)", price: 270000, desc: "LD/PB 110/135cm" },
-                    { name: "QUEEN (XXL)", price: 285000, desc: "LD/PB 120/140cm" }
-                ],
-                material: "SOPHIA ANTI UV JACQUARD",
-                description: "Abaya eksklusif bermaterial Sophia Anti UV Jacquard. Karakteristik: Flowy, Ironless, Tidak Menerawang, dan Adem. Dilengkapi Loose Cutting, Zipper, Hidden Pocket, Motif Timbul, serta Kancing Hiasan."
-            },
-            {
-                id: 2,
-                name: "Aisha Luxury Gamis",
-                category: "Gamis",
-                rating: 4.8,
-                reviewsCount: 95,
-                badge: "NEW",
-                images: [
-                    "IMG-20261019-WA0037.jpg",
-                    "IMG-20261019-WA0035.jpg",
-                    "IMG-20261019-WA0038.jpg"
-                ],
-                imageNames: ["Mocca", "Obsidian Black", "Burgundy"],
-                sizes: [
-                    { name: "COUNTESS (S-M)", price: 245000, desc: "LD/PB 100/130cm" },
-                    { name: "PRINCESS (L-XL)", price: 255000, desc: "LD/PB 110/135cm" },
-                    { name: "QUEEN (XXL)", price: 270000, desc: "LD/PB 120/140cm" }
-                ],
-                material: "CERUTY BABYDOLL PREMIUM + FURING KATUN",
-                description: "Gamis mewah berbahan Ceruty Babydoll berkualitas tinggi dilapisi furing katun adem. Desain anggun dengan detail pita dan potongan lebar yang jatuh cantik."
-            },
-            {
-                id: 3,
-                name: "Zahra Silk Abaya",
-                category: "Abaya",
-                rating: 4.9,
-                reviewsCount: 84,
-                badge: "HOT",
-                images: [
-                    "IMG-20261019-WA0038.jpg",
-                    "IMG-20261019-WA0039.jpg",
-                    "IMG-20261019-WA0037.jpg"
-                ],
-                imageNames: ["Maroon Silk", "Silver Dust", "Champagne"],
-                sizes: [
-                    { name: "COUNTESS (S-M)", price: 275000, desc: "LD/PB 100/130cm" },
-                    { name: "PRINCESS (L-XL)", price: 285000, desc: "LD/PB 110/135cm" },
-                    { name: "QUEEN (XXL)", price: 300000, desc: "LD/PB 120/140cm" }
-                ],
-                material: "PREMIUM SILK JACQUARD SHIMMER",
-                description: "Abaya pesta premium dengan efek kilau lembut yang mewah. Nyaman dipakai, serat sangat halus, dan tampak berkilau elegan di bawah cahaya."
-            }
-        ];
+        lucide.createIcons();
 
-        let cart = [];
-        let activeCategory = 'all';
-        let currentSortType = 'featured';
-        let selectedSizeObj = null;
-        let currentModalProduct = null;
-        let activeImageIndex = 0;
-        let currentTotalWithUnique = 0;
-        let countdownInterval = null;
-        let currentOrderId = "";
-        let currentOrderData = {};
-        let uploadedProofUrl = "";
-document.addEventListener('DOMContentLoaded', () => {
-            renderProducts(products);
-            setupSearchListeners();
-            lucide.createIcons();
-        });
+        let countdownInterval;
+        let uploadedProofUrl = null;
+        let currentTotalWithUnique = 260978;
+        let currentOrderData = {
+            orderId: "ORD-" + Math.floor(100000 + Math.random() * 900000),
+            name: "Test",
+            phone: "085717777286",
+            address: "Ok",
+            notes: "Ok",
+            cart: [
+                { name: "Sophia Abaya", color: "Hitam", size: "S-M", qty: 1, price: 260000 }
+            ],
+            baseSubtotal: 260000,
+            uniqueCode: 978,
+            total: 260978
+        };
 
-        // CUSTOM ELEGAN SORT MODAL CONTROLLER
-        function toggleSortModal(show) {
-            const modal = document.getElementById('sortModal');
-            if(show) modal.classList.remove('hidden');
-            else modal.classList.add('hidden');
-        }
-
-        function selectSort(type, label) {
-            currentSortType = type;
-            document.getElementById('currentSortLabel').innerText = label;
-
-            const buttons = document.querySelectorAll('.sort-opt-btn');
-            buttons.forEach(btn => {
-                const isMatch = btn.getAttribute('onclick').includes(`'${type}'`);
-                const checkIcon = btn.querySelector('.sort-check');
-                if(isMatch) {
-                    btn.className = "sort-opt-btn w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-900 bg-slate-900 text-white font-extrabold text-xs transition-all shadow-sm";
-                    if(checkIcon) checkIcon.classList.remove('hidden');
-                } else {
-                    btn.className = "sort-opt-btn w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition-all";
-                    if(checkIcon) checkIcon.classList.add('hidden');
-                }
-            });
-
-            toggleSortModal(false);
-            showSkeletonLoading();
-            setTimeout(() => applyFilters(), 300);
-        }
-
-        function showSkeletonLoading() {
-            const grid = document.getElementById('productGrid');
-            const skeletonCard = `
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm flex flex-col justify-between">
-                    <div>
-                        <div class="aspect-[3/4] skeleton-box w-full"></div>
-                        <div class="p-4 space-y-2">
-                            <div class="h-2.5 skeleton-box rounded w-1/3"></div>
-                            <div class="h-4 skeleton-box rounded w-3/4"></div>
-                            <div class="h-4 skeleton-box rounded w-1/2 mt-2"></div>
-                        </div>
-                    </div>
-                    <div class="px-4 pb-4">
-                        <div class="h-9 skeleton-box rounded-xl w-full"></div>
-                    </div>
-                </div>
-            `;
-            grid.innerHTML = skeletonCard.repeat(4);
-        }
-
-        function renderProducts(items) {
-            const grid = document.getElementById('productGrid');
-            const emptyState = document.getElementById('emptyState');
-
-            if (items.length === 0) {
-                grid.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                return;
-            }
-
-            emptyState.classList.add('hidden');
-            grid.innerHTML = items.map((p, index) => {
-                const minPrice = Math.min(...p.sizes.map(s => s.price));
-                return `
-                <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm card-hover-effect flex flex-col justify-between group animate-fade-in-up" style="animation-delay: ${index * 80}ms">
-                    <div>
-                        <div class="relative overflow-hidden aspect-[3/4] bg-slate-100 cursor-pointer flex items-center justify-center" onclick="openProductModal(${p.id})">
-                            <img src="${p.images[0]}" alt="${p.name}" class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-500">
-                            ${p.badge ? `<span class="absolute top-3 left-3 bg-slate-900 text-white text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md badge-shine">${p.badge}</span>` : ''}
-                            <span class="absolute top-3 right-3 bg-white/90 backdrop-blur-md text-[11px] font-bold px-2 py-0.5 rounded-full text-slate-800 flex items-center gap-1 shadow-sm">
-                                <i data-lucide="star" class="w-3 h-3 text-amber-400 fill-amber-400"></i> ${p.rating}
-                            </span>
-                        </div>
-                        <div class="p-4">
-                            <span class="text-[10px] font-black tracking-widest text-brand-600 uppercase">${p.category}</span>
-                            <h3 onclick="openProductModal(${p.id})" class="font-bold text-slate-900 text-xs sm:text-sm mt-1 line-clamp-1 cursor-pointer hover:text-brand-600 transition-colors">${p.name}</h3>
-                            <p class="text-slate-900 font-extrabold text-sm sm:text-base mt-1.5">Mulai Rp ${minPrice.toLocaleString('id-ID')}</p>
-                        </div>
-                    </div>
-                    <div class="px-4 pb-4">
-                        <button onclick="openProductModal(${p.id})" class="w-full bg-slate-100 hover:bg-slate-900 hover:text-white text-slate-900 text-xs font-bold py-2.5 px-3 rounded-xl transition-all duration-300 flex items-center justify-center gap-1.5 hover:shadow-md">
-                            <i data-lucide="eye" class="w-4 h-4"></i> Lihat Detail
-                        </button>
-                    </div>
-                </div>
-            `}).join('');
-            lucide.createIcons();
-        }
-
-        function filterCategory(cat, btnElem) {
-            activeCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('bg-slate-900', 'text-white', 'shadow-md');
-                btn.classList.add('bg-white', 'text-slate-600', 'border');
-            });
-            if(btnElem) {
-                btnElem.classList.remove('bg-white', 'text-slate-600', 'border');
-                btnElem.classList.add('bg-slate-900', 'text-white', 'shadow-md');
-            }
-
-            showSkeletonLoading();
-            setTimeout(() => {
-                applyFilters();
-            }, 300);
-        }
-
-        function setupSearchListeners() {
-            const handler = (e) => { 
-                showSkeletonLoading();
-                setTimeout(() => applyFilters(e.target.value.toLowerCase()), 300);
-            };
-            document.getElementById('searchInput').addEventListener('input', handler);
-            document.getElementById('searchInputMobile').addEventListener('input', handler);
-        }
-
-        function applyFilters(queryOverride = null) {
-            const query = queryOverride !== null ? queryOverride : document.getElementById('searchInput').value.toLowerCase();
-            let filtered = products.filter(p => {
-                const matchCategory = activeCategory === 'all' || p.category === activeCategory;
-                const matchQuery = p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query);
-                return matchCategory && matchQuery;
-            });
-
-            if (currentSortType === 'low-high') filtered.sort((a,b) => Math.min(...a.sizes.map(s => s.price)) - Math.min(...b.sizes.map(s => s.price)));
-            if (currentSortType === 'high-low') filtered.sort((a,b) => Math.max(...b.sizes.map(s => s.price)) - Math.max(...a.sizes.map(s => s.price)));
-
-            renderProducts(filtered);
-        }
-
-        function openProductModal(id) {
-            const product = products.find(p => p.id === id);
-            currentModalProduct = product;
-            selectedSizeObj = product.sizes[0];
-            activeImageIndex = 0;
-
-            const thumbnailsHtml = product.images.map((img, idx) => `
-                <button onclick="switchMainImage(${idx}, '${img}', this)" class="thumb-btn flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden border-2 transition-all duration-300 relative ${idx === 0 ? 'border-slate-950 scale-105 shadow-md' : 'border-slate-200 opacity-70 hover:opacity-100'}">
-                    <img src="${img}" class="w-full h-full object-cover">
-                    <span class="absolute bottom-0 inset-x-0 bg-slate-950/70 text-white text-[8px] font-bold text-center py-0.5 truncate px-1">${product.imageNames[idx]}</span>
-                </button>
-            `).join('');
-
-            const sizesHtml = product.sizes.map((sz, idx) => `
-                <button onclick="selectSizeOption(${idx})" class="size-btn-item text-left p-3 border rounded-xl transition-all duration-300 ${idx === 0 ? 'border-slate-900 bg-slate-900 text-white shadow-md scale-[1.02]' : 'border-slate-200 bg-white text-slate-800 hover:border-slate-400'}">
-                    <div class="font-extrabold text-xs">${sz.name}</div>
-                    <div class="text-[10px] opacity-80 mt-0.5">${sz.desc}</div>
-                    <div class="font-black text-xs mt-1">Rp ${sz.price.toLocaleString('id-ID')}</div>
-                </button>
-            `).join('');
-
-            document.getElementById('modalContent').innerHTML = `
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/80 mb-3 relative flex items-center justify-center">
-                            <img id="mainProductImg" src="${product.images[0]}" class="w-full h-full object-cover object-top transition-all duration-300">
-                            <span id="activeColorBadge" class="absolute top-3 left-3 bg-slate-900/90 backdrop-blur-md text-white text-[10px] font-black px-3 py-1 rounded-full shadow-md uppercase tracking-wider">
-                                Varian: ${product.imageNames[0]}
-                            </span>
-                        </div>
-                        <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar">
-                            ${thumbnailsHtml}
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col justify-between">
-                        <div>
-                            <span class="text-[10px] font-black uppercase tracking-wider text-brand-600 bg-emerald-50 px-2.5 py-1 rounded-md">${product.category}</span>
-                            <h2 class="text-xl font-extrabold text-slate-900 mt-2">${product.name}</h2>
-                            
-                            <div class="flex items-center gap-1.5 mt-1.5">
-                                <div class="flex items-center text-amber-400">
-                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i>
-                                    <span class="text-xs font-bold text-slate-800 ml-1">${product.rating}</span>
-                                </div>
-                                <span class="text-slate-300 text-xs">•</span>
-                                <span class="text-xs font-semibold text-slate-500">${product.reviewsCount} ulasan pembeli</span>
-                            </div>
-
-                            <div class="mt-3 p-3 bg-slate-50 border border-slate-100 rounded-2xl">
-                                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Harga Pilihan Ukuran:</span>
-                                <p id="modalDynamicPrice" class="text-2xl font-black text-slate-900 mt-0.5">Rp ${selectedSizeObj.price.toLocaleString('id-ID')}</p>
-                            </div>
-
-                            <p class="text-xs text-slate-600 mt-3 leading-relaxed">${product.description}</p>
-                            
-                            <div class="mt-4">
-                                <label class="text-xs font-bold text-slate-800 block mb-2">Pilih Ukuran & Varian:</label>
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                                    ${sizesHtml}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 flex flex-col sm:flex-row gap-2">
-                            <button onclick="addToCartFromModal()" class="flex-1 bg-slate-900 hover:bg-brand-600 hover:text-slate-950 text-white font-extrabold py-3.5 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 text-xs uppercase tracking-wider shadow-lg hover:scale-[1.02] active:scale-95">
-                                <i data-lucide="shopping-bag" class="w-4 h-4"></i> Masukkan Keranjang
-                            </button>
-                            <button onclick="askAdminWA('${product.name}')" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-extrabold py-3.5 px-4 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 text-xs tracking-wider">
-                                <i data-lucide="message-square" class="w-4 h-4 text-emerald-600"></i> Tanya Admin
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            document.getElementById('productModal').classList.remove('hidden');
-            lucide.createIcons();
-        }
-
-        function switchMainImage(index, imgUrl, btn) {
-            activeImageIndex = index;
-            document.getElementById('mainProductImg').src = imgUrl;
-            document.getElementById('activeColorBadge').innerText = `Varian: ${currentModalProduct.imageNames[index]}`;
-            
-            document.querySelectorAll('.thumb-btn').forEach(b => {
-                b.classList.remove('border-slate-950', 'scale-105', 'shadow-md');
-                b.classList.add('border-slate-200', 'opacity-70');
-            });
-            btn.classList.remove('border-slate-200', 'opacity-70');
-            btn.classList.add('border-slate-950', 'scale-105', 'shadow-md');
-        }
-
-        function selectSizeOption(index) {
-            selectedSizeObj = currentModalProduct.sizes[index];
-            document.getElementById('modalDynamicPrice').innerText = `Rp ${selectedSizeObj.price.toLocaleString('id-ID')}`;
-
-            const buttons = document.querySelectorAll('.size-btn-item');
-            buttons.forEach((btn, idx) => {
-                if (idx === index) {
-                    btn.className = "size-btn-item text-left p-3 border rounded-xl transition-all duration-300 border-slate-900 bg-slate-900 text-white shadow-md scale-[1.02]";
-                } else {
-                    btn.className = "size-btn-item text-left p-3 border rounded-xl transition-all duration-300 border-slate-200 bg-white text-slate-800 hover:border-slate-400";
-                }
-            });
-        }
-
-        function askAdminWA(productName) {
-            const variantName = currentModalProduct.imageNames[activeImageIndex];
-            const message = `Halo Admin Xahara's Wardrobe,%0ASaya berminat dan mau pesan produk: *${productName}* - Varian Warna: *${variantName}* - Ukuran: *${selectedSizeObj.name}*. Mohon diinfokan ketersediaannya ya! Terima kasih.`;
-            window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${message}`, '_blank');
-        }
-
-        function closeProductModal() {
-            document.getElementById('productModal').classList.add('hidden');
-        }
-
-        function addToCartFromModal() {
-            if (!currentModalProduct || !selectedSizeObj) return;
-
-            const cartBtn = document.getElementById('cartIconBtn');
-            cartBtn.classList.add('shake-cart', 'text-brand-600');
-            setTimeout(() => cartBtn.classList.remove('shake-cart', 'text-brand-600'), 500);
-
-            const selectedColor = currentModalProduct.imageNames[activeImageIndex];
-            const selectedImg = currentModalProduct.images[activeImageIndex];
-            
-            const itemKey = `${currentModalProduct.id}-${selectedColor}-${selectedSizeObj.name}`;
-            const existing = cart.find(item => item.itemKey === itemKey);
-            
-            if (existing) {
-                existing.qty++;
-            } else {
-                cart.push({
-                    itemKey: itemKey,
-                    id: currentModalProduct.id,
-                    name: currentModalProduct.name,
-                    image: selectedImg,
-                    color: selectedColor,
-                    size: selectedSizeObj.name,
-                    price: selectedSizeObj.price,
-                    qty: 1
-                });
-            }
-            updateCartUI();
-            closeProductModal();
-            toggleCartModal(true);
-        }
-
-        function updateCartQty(itemKey, delta) {
-            const item = cart.find(i => i.itemKey === itemKey);
-            if (item) {
-                item.qty += delta;
-                if (item.qty <= 0) {
-                    cart = cart.filter(i => i.itemKey !== itemKey);
-                }
-            }
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-            const badge = document.getElementById('cartCountBadge');
-            badge.innerText = totalQty;
-            badge.classList.toggle('hidden', totalQty === 0);
-
-            const cartList = document.getElementById('cartList');
-            if (cart.length === 0) {
-                cartList.innerHTML = `
-                    <div class="text-center py-16 text-slate-400">
-                        <i data-lucide="shopping-bag" class="w-12 h-12 mx-auto mb-2 opacity-30 animate-pulse"></i>
-                        <p class="text-xs font-bold">Keranjang belanja masih kosong</p>
-                    </div>
-                `;
-            } else {
-                cartList.innerHTML = cart.map(item => `
-                    <div class="flex items-center justify-between bg-slate-50 p-3.5 rounded-2xl border border-slate-100 shadow-sm animate-fade-in-up">
-                        <div class="flex items-center gap-3">
-                            <img src="${item.image}" class="w-14 h-14 rounded-xl object-cover shadow-sm">
-                            <div>
-                                <h4 class="font-extrabold text-xs text-slate-900 line-clamp-1">${item.name}</h4>
-                                <div class="flex items-center gap-1.5 mt-0.5">
-                                    <span class="text-[10px] bg-brand-100 text-brand-800 px-2 py-0.5 rounded-md font-bold">${item.color}</span>
-                                    <span class="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-md font-bold">${item.size}</span>
-                                </div>
-                                <p class="text-xs font-black text-slate-900 mt-1">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-2.5 py-1 shadow-sm">
-                            <button onclick="updateCartQty('${item.itemKey}', -1)" class="text-slate-400 hover:text-rose-600 font-black text-xs transition-colors">-</button>
-                            <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
-                            <button onclick="updateCartQty('${item.itemKey}', 1)" class="text-slate-400 hover:text-slate-900 font-black text-xs transition-colors">+</button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            document.getElementById('cartSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
-            
-            const percent = Math.min(100, Math.round((subtotal / FREE_SHIPPING_MIN) * 100));
-            document.getElementById('freeShippingBar').style.width = `${percent}%`;
-            document.getElementById('freeShippingPercent').innerText = `${percent}%`;
-
-            const hintText = document.getElementById('freeShippingHint');
-            if (subtotal >= FREE_SHIPPING_MIN) {
-                hintText.innerHTML = `<span class="text-emerald-700 font-extrabold flex items-center gap-1">🎉 Selamat! Kamu Berhak Memperoleh Gratis Ongkir!</span>`;
-            } else {
-                const remaining = FREE_SHIPPING_MIN - subtotal;
-                hintText.innerHTML = `Tambahkan <b class="text-slate-900">Rp ${remaining.toLocaleString('id-ID')}</b> lagi untuk Gratis Ongkir!`;
-            }
-
-            const primaryBtn = document.getElementById('cartPrimaryBtn');
-            primaryBtn.disabled = cart.length === 0;
-            primaryBtn.classList.toggle('opacity-50', cart.length === 0);
-
-            lucide.createIcons();
-        }
-
-        function toggleCartModal(show = null) {
+        function toggleCartModal(show) {
             const modal = document.getElementById('cartModal');
-            if (show === true) modal.classList.remove('hidden');
-            else if (show === false) modal.classList.add('hidden');
-            else modal.classList.toggle('hidden');
-
-            if (!modal.classList.contains('hidden')) {
-                goToCartItems();
+            if (show) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                startCountdown(900);
+            } else {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+                clearInterval(countdownInterval);
             }
         }
 
-        function goToCartItems() {
-            document.getElementById('cartStepItems').classList.remove('hidden');
-            document.getElementById('cartStepForm').classList.add('hidden');
-            document.getElementById('cartStepPayment').classList.add('hidden');
-            document.getElementById('cartFooter').classList.remove('hidden');
-            
-            const btn = document.getElementById('cartPrimaryBtn');
-            btn.innerText = "Lanjut Pengiriman";
-            btn.onclick = goToCheckoutForm;
-        }
-
-        function goToCheckoutForm() {
-            if(cart.length === 0) return;
-            document.getElementById('cartStepItems').classList.add('hidden');
-            document.getElementById('cartStepForm').classList.remove('hidden');
-            document.getElementById('cartStepPayment').classList.add('hidden');
-
-            const btn = document.getElementById('cartPrimaryBtn');
-            btn.innerText = "Bayar via QRIS DANA";
-            btn.onclick = processCheckout;
-        }
-
-        function processCheckout() {
-            const name = document.getElementById('custName').value.trim();
-            const phone = document.getElementById('custPhone').value.trim();
-            const address = document.getElementById('custAddress').value.trim();
-            const notes = document.getElementById('custNotes').value.trim();
-
-            if (!name || !phone || !address) {
-                alert("Mohon isi Nama, Nomor WhatsApp, dan Alamat Lengkap!");
-                return;
-            }
-
-            currentOrderId = "ORD-" + Math.floor(100000 + Math.random() * 900000);
-            const uniqueCode = Math.floor(100 + Math.random() * 899);
-            const baseSubtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            currentTotalWithUnique = baseSubtotal + uniqueCode;
-
-            currentOrderData = {
-                orderId: currentOrderId,
-                name, phone, address, notes,
-                baseSubtotal, uniqueCode,
-                total: currentTotalWithUnique,
-                cart: [...cart]
-            };
-
-            uploadedProofUrl = "";
-            document.getElementById('transferProofInput').value = "";
-            document.getElementById('uploadPlaceholder').classList.remove('hidden');
-            document.getElementById('uploadPreview').classList.add('hidden');
-
-            document.getElementById('paymentOrderId').innerText = "#" + currentOrderId;
-            document.getElementById('qrisImage').src = 'qris.png';
-            document.getElementById('finalTotalDisplay').innerText = `Rp ${currentTotalWithUnique.toLocaleString('id-ID')}`;
-            document.getElementById('uniqueCodeText').innerText = `Kode Unik Rp ${uniqueCode}`;
-
-            document.getElementById('cartStepForm').classList.add('hidden');
-            document.getElementById('cartStepPayment').classList.remove('hidden');
-            document.getElementById('cartFooter').classList.add('hidden');
-
-            startCountdown(15 * 60);
-        }
-
-        function handleProofUpload(e) {
-            const file = e.target.files[0];
+        function handleProofUpload(event) {
+            const file = event.target.files[0];
             if (!file) return;
-
             if (!file.type.startsWith('image/')) {
                 alert("Mohon upload file gambar (JPG/PNG)!");
                 return;
@@ -1068,39 +308,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 uploadedProofUrl = evt.target.result;
                 document.getElementById('previewImg').src = evt.target.result;
                 document.getElementById('fileNameDisplay').innerText = file.name;
-                document.getElementById('uploadStatusText').innerText = "✓ Berhasil dilampirkan! Siap dikirim.";
                 document.getElementById('uploadPlaceholder').classList.add('hidden');
                 document.getElementById('uploadPreview').classList.remove('hidden');
             };
             reader.readAsDataURL(file);
         }
-async function confirmAndSendWA() {
-    if (!uploadedProofUrl) {
-        alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu!");
-        return;
-    }
 
-    const d = currentOrderData;
-    const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`)[span_0](start_span)[span_0](end_span).join('%0A');
-    
-    // 1. Mengirim foto secara otomatis ke server bot via IP & Port Network langsung
-    try {
-        const response = await fetch('http://38.45.72.91:2463/api/upload-bukti', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                orderId: d.orderId,
-                imageBase64: uploadedProofUrl 
-            })
-        });
-        const result = await response.json();
-        console.log("Upload server response:", result);
-    } catch (err) {
-        console.error("Gagal upload otomatis ke server:", err);
-    }
+        async function confirmAndSendWA() {
+            if (!uploadedProofUrl) {
+                alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu!");
+                return;
+            }
 
-    // 2. Format pesan WhatsApp untuk Admin (Tanpa black screen)
-    const waMessage = 
+            const d = currentOrderData;
+            const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
+            
+            // Mengirim foto otomatis ke server bot via IP & Port Network RyHar
+            try {
+                const response = await fetch('http://38.45.72.91:2463/api/upload-bukti', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderId: d.orderId,
+                        imageBase64: uploadedProofUrl 
+                    })
+                });
+                const result = await response.json();
+                console.log("Upload server response:", result);
+            } catch (err) {
+                console.error("Gagal upload otomatis ke server:", err);
+            }
+
+            // Format Pesan WhatsApp Admin
+            const waMessage = 
 `*KONFIRMASI PESANAN - Xahara's Wardrobe*%0A
 *Order ID:* ${d.orderId}%0A
 *Nama:* ${d.name}%0A
@@ -1115,9 +355,9 @@ ${d.notes ? `*Catatan:* ${d.notes}%0A` : ''}
 _Bukti transfer telah otomatis tersimpan di server dengan Order ID: ${d.orderId}_%0A
 _Mohon segera diverifikasi. Terima kasih!_`;
 
-    const ADMIN_WA_BIASA = "6285770246502"; 
-    window.open(`https://wa.me/${ADMIN_WA_BIASA}?text=${waMessage}`, '_blank');
-}
+            const ADMIN_WA_BIASA = "6285770246502"; 
+            window.open(`https://wa.me/${ADMIN_WA_BIASA}?text=${waMessage}`, '_blank');
+        }
         
         function startCountdown(seconds) {
             clearInterval(countdownInterval);
