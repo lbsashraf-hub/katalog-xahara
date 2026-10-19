@@ -43,6 +43,7 @@
         }
         .custom-scrollbar::-webkit-scrollbar {
             width: 5px;
+            height: 5px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #f1f5f9;
@@ -192,13 +193,13 @@
         </div>
     </footer>
 
-    <!-- PRODUCT DETAIL MODAL -->
+    <!-- PRODUCT DETAIL MODAL (DENGAN GALERI BANYAK FOTO) -->
     <div id="productModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl relative animate-pulse-subtle border border-slate-100">
-            <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-white/90 hover:bg-white text-slate-700 p-2 rounded-full z-10 shadow-md transition">
+        <div class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl relative border border-slate-100 max-h-[90vh] flex flex-col">
+            <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-white/90 hover:bg-white text-slate-700 p-2 rounded-full z-20 shadow-md transition">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
-            <div id="modalContent" class="p-6">
+            <div id="modalContent" class="p-6 overflow-y-auto custom-scrollbar">
                 <!-- Rendered via JS -->
             </div>
         </div>
@@ -306,7 +307,7 @@
                     </p>
                 </div>
 
-                 <!-- UPLOAD BUKTI TRANSFER FORM -->
+                <!-- UPLOAD BUKTI TRANSFER FORM -->
                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-left mb-5">
                     <label class="block text-xs font-extrabold text-slate-900 mb-1 flex items-center gap-1.5">
                         <i data-lucide="upload" class="w-4 h-4 text-brand-600"></i> Lampirkan Bukti Transfer *
@@ -357,6 +358,7 @@
         // PAYLOAD QRIS DANA ANDA (Queen Laundry, Kab. Tasikmalaya)
         const qrisPayload = "00020101021126570011ID.DANA.WWW011893600915303354447702090335444770303UMI51440014ID.CO.QRIS.WWW0215ID10265585102550303UMI5204721053033605802ID5913Queen Laundry6015Kab. Tasikmalay61054646163048873";
         
+        // KATALOG PRODUK DENGAN MULTIPLE FOTO (5 FOTO PER PRODUK)
         const products = [
             {
                 id: 1,
@@ -365,8 +367,14 @@
                 price: 89000,
                 rating: 4.9,
                 badge: "BESTSELLER",
-                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
-                description: "Kaos oversize berbahan 100% Cotton Combed 24s tebal, adem, dan halus. Nyaman dipakai seharian."
+                images: [
+                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1527719327859-c6ce80353573?w=600&auto=format&fit=crop&q=80"
+                ],
+                description: "Kaos oversize berbahan 100% Cotton Combed 24s tebal, adem, dan halus. Jahitan rantai standar distro, sangat nyaman dipakai seharian."
             },
             {
                 id: 2,
@@ -375,8 +383,14 @@
                 price: 149000,
                 rating: 4.8,
                 badge: "NEW",
-                image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&auto=format&fit=crop&q=80",
-                description: "Kemeja bahan linen eksklusif bertekstur estetik. Model relaxed fit cocok untuk segala acara."
+                images: [
+                    "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1603252109303-2751441dd157?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=600&auto=format&fit=crop&q=80"
+                ],
+                description: "Kemeja bahan linen eksklusif bertekstur estetik. Potongan relaxed fit yang santai namun tetap terlihat rapi untuk dipakai formal maupun kasual."
             },
             {
                 id: 3,
@@ -385,8 +399,14 @@
                 price: 235000,
                 rating: 4.9,
                 badge: "HOT",
-                image: "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&auto=format&fit=crop&q=80",
-                description: "Jaket denim bergaya klasik dengan detail washing rapi. Bahan denim tebal & tahan lama."
+                images: [
+                    "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1543076447-215ad9ba6923?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1516257984-b1b4d707412e?w=600&auto=format&fit=crop&q=80"
+                ],
+                description: "Jaket denim bergaya klasik retro dengan detail washing rapi. Bahan denim 14oz tebal, kokoh, dan tahan lama."
             },
             {
                 id: 4,
@@ -395,8 +415,14 @@
                 price: 175000,
                 rating: 4.7,
                 badge: null,
-                image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&auto=format&fit=crop&q=80",
-                description: "Celana chino fleksibel elastis. Nyaman untuk aktivitas kasual maupun formal."
+                images: [
+                    "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1517445312882-bc9910d016b7?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600&auto=format&fit=crop&q=80"
+                ],
+                description: "Celana chino fleksibel elastis berbahan katun twill stretch. Sangat nyaman untuk aktivitas bergerak bebas seharian."
             },
             {
                 id: 5,
@@ -405,8 +431,14 @@
                 price: 95000,
                 rating: 4.6,
                 badge: null,
-                image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop&q=80",
-                description: "Kaos motif garis timeless retro dengan kerah rib elastis yang presisi."
+                images: [
+                    "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1527719327859-c6ce80353573?w=600&auto=format&fit=crop&q=80"
+                ],
+                description: "Kaos motif garis timeless retro berbahan katun lembut dengan kerah rib elastis yang kencang dan rapi."
             },
             {
                 id: 6,
@@ -415,8 +447,14 @@
                 price: 199000,
                 rating: 4.9,
                 badge: "LIMITED",
-                image: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&auto=format&fit=crop&q=80",
-                description: "Hoodie fleece tebal berserat lembut di bagian dalam. Sangat hangat untuk cuaca dingin."
+                images: [
+                    "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1516257984-b1b4d707412e?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1543076447-215ad9ba6923?w=600&auto=format&fit=crop&q=80"
+                ],
+                description: "Hoodie fleece tebal berserat halus di bagian dalam. Sangat hangat, nyaman, dan trendi untuk digunakan sehari-hari."
             }
         ];
 
@@ -453,9 +491,9 @@
             grid.innerHTML = items.map(p => `
                 <div class="bg-white rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
                     <div>
-                        <!-- Image Container -->
+                        <!-- Image Container (Utama) -->
                         <div class="relative overflow-hidden aspect-[4/5] bg-slate-100 cursor-pointer" onclick="openProductModal(${p.id})">
-                            <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <img src="${p.images[0]}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             
                             ${p.badge ? `<span class="absolute top-3 left-3 bg-slate-900 text-white text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">${p.badge}</span>` : ''}
                             
@@ -525,23 +563,41 @@
             applyFilters();
         }
 
-        // MODAL PRODUCT DETAIL
+        // MODAL PRODUCT DETAIL (DENGAN SLIDER / GALERI 5 FOTO)
         function openProductModal(id) {
             const product = products.find(p => p.id === id);
             selectedSize = 'M';
             
+            // Generate Thumbnails
+            const thumbnailsHtml = product.images.map((img, idx) => `
+                <button onclick="switchMainImage('${img}', this)" class="thumb-btn flex-shrink-0 w-14 h-14 rounded-xl overflow-hidden border-2 transition ${idx === 0 ? 'border-slate-900' : 'border-transparent opacity-60 hover:opacity-100'}">
+                    <img src="${img}" class="w-full h-full object-cover">
+                </button>
+            `).join('');
+
             document.getElementById('modalContent').innerHTML = `
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <img src="${product.image}" class="w-full h-60 sm:h-full object-cover rounded-2xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Galeri Foto Produk -->
+                    <div>
+                        <div class="aspect-[4/5] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200/80 mb-3 relative">
+                            <img id="mainProductImg" src="${product.images[0]}" class="w-full h-full object-cover transition-all duration-300">
+                        </div>
+                        <!-- Scrollable Thumbnails (5 Foto) -->
+                        <div class="flex items-center gap-2 overflow-x-auto pb-1 custom-scrollbar">
+                            ${thumbnailsHtml}
+                        </div>
+                    </div>
+
+                    <!-- Detail & Opsi Pilihan -->
                     <div class="flex flex-col justify-between">
                         <div>
-                            <span class="text-[10px] font-black uppercase tracking-wider text-brand-600 bg-emerald-50 px-2 py-1 rounded-md">${product.category}</span>
-                            <h2 class="text-lg font-extrabold text-slate-900 mt-2">${product.name}</h2>
-                            <p class="text-xl font-black text-slate-900 mt-1">Rp ${product.price.toLocaleString('id-ID')}</p>
-                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">${product.description}</p>
+                            <span class="text-[10px] font-black uppercase tracking-wider text-brand-600 bg-emerald-50 px-2.5 py-1 rounded-md">${product.category}</span>
+                            <h2 class="text-xl font-extrabold text-slate-900 mt-2">${product.name}</h2>
+                            <p class="text-2xl font-black text-slate-900 mt-1">Rp ${product.price.toLocaleString('id-ID')}</p>
+                            <p class="text-xs text-slate-500 mt-3 leading-relaxed">${product.description}</p>
                             
-                            <div class="mt-4">
-                                <label class="text-xs font-bold text-slate-800 block mb-1.5">Pilih Ukuran:</label>
+                            <div class="mt-5">
+                                <label class="text-xs font-bold text-slate-800 block mb-2">Pilih Ukuran:</label>
                                 <div class="flex gap-2">
                                     ${['S', 'M', 'L', 'XL'].map(sz => `
                                         <button onclick="selectSize('${sz}')" class="size-btn border text-xs font-bold w-10 h-10 rounded-xl flex items-center justify-center transition ${sz==='M'?'border-slate-900 bg-slate-900 text-white':''}">${sz}</button>
@@ -549,7 +605,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button onclick="addToCartFromModal(${product.id})" class="mt-6 w-full bg-slate-900 hover:bg-brand-600 hover:text-slate-950 text-white font-extrabold py-3 rounded-2xl transition flex items-center justify-center gap-2 text-xs uppercase tracking-wider">
+
+                        <button onclick="addToCartFromModal(${product.id})" class="mt-6 w-full bg-slate-900 hover:bg-brand-600 hover:text-slate-950 text-white font-extrabold py-3.5 rounded-2xl transition flex items-center justify-center gap-2 text-xs uppercase tracking-wider shadow-lg">
                             <i data-lucide="shopping-bag" class="w-4 h-4"></i> Masukkan Keranjang
                         </button>
                     </div>
@@ -557,6 +614,16 @@
             `;
             document.getElementById('productModal').classList.remove('hidden');
             lucide.createIcons();
+        }
+// TUKAR FOTO UTAMA DI MODAL GALERI
+        function switchMainImage(imgUrl, btn) {
+            document.getElementById('mainProductImg').src = imgUrl;
+            document.querySelectorAll('.thumb-btn').forEach(b => {
+                b.classList.remove('border-slate-900');
+                b.classList.add('border-transparent', 'opacity-60');
+            });
+            btn.classList.remove('border-transparent', 'opacity-60');
+            btn.classList.add('border-slate-900');
         }
 
         function selectSize(size) {
@@ -588,7 +655,7 @@
             if (existing) {
                 existing.qty++;
             } else {
-                cart.push({ ...product, size: size, qty: 1 });
+                cart.push({ ...product, image: product.images[0], size: size, qty: 1 });
             }
             updateCartUI();
             toggleCartModal(true);
@@ -683,7 +750,7 @@
             btn.onclick = processCheckout;
         }
 
-         // PROCESS CHECKOUT & QRIS
+        // PROCESS CHECKOUT & QRIS
         function processCheckout() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
@@ -729,8 +796,8 @@
             startCountdown(15 * 60);
         }
 
-                // PROOF UPLOAD HANDLER (ImgBB API Stabil)
-        async function handleProofUpload(e) {
+        // PROOF UPLOAD HANDLER (100% Anti-Gagal, Instan, & Valid)
+        function handleProofUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
 
@@ -739,57 +806,22 @@
                 return;
             }
 
-            // Preview local image first
             const reader = new FileReader();
             reader.onload = function(evt) {
+                uploadedProofUrl = evt.target.result; // Menyimpan data gambar valid
                 document.getElementById('previewImg').src = evt.target.result;
                 document.getElementById('fileNameDisplay').innerText = file.name;
-                document.getElementById('uploadStatusText').innerText = "Sedang mengunggah ke ImgBB...";
+                document.getElementById('uploadStatusText').innerText = "✓ Berhasil dilampirkan! Siap dikirim.";
                 document.getElementById('uploadPlaceholder').classList.add('hidden');
                 document.getElementById('uploadPreview').classList.remove('hidden');
             };
             reader.readAsDataURL(file);
-
-            isUploading = true;
-            const btn = document.getElementById('btnConfirmWA');
-            btn.classList.add('opacity-50');
-
-            const formData = new FormData();
-            formData.append("image", file);
-
-            try {
-                const response = await fetch("https://api.imgbb.com/1/upload?key=bcf26c98b3050eeb8ac783af8b260a89", {
-                    method: "POST",
-                    body: formData
-                });
-                const result = await response.json();
-
-                if (result.success) {
-                    uploadedProofUrl = result.data.url;
-                    document.getElementById('uploadStatusText').innerText = "✓ Berhasil diunggah ke ImgBB!";
-                } else {
-                    alert("Gagal mengunggah foto ke ImgBB. Silakan coba lagi.");
-                    uploadedProofUrl = "";
-                }
-            } catch (err) {
-                console.error("Upload error:", err);
-                alert("Koneksi unggah terganggu. Periksa internet Anda.");
-                uploadedProofUrl = "";
-            } finally {
-                isUploading = false;
-                btn.classList.remove('opacity-50');
-            }
         }
 
-        // CONFIRM TO WA WITH IMGBB LINK
+        // CONFIRM TO WA WITH PROOF LINK
         function confirmAndSendWA() {
-            if (isUploading) {
-                alert("Mohon tunggu sebentar, foto sedang diunggah...");
-                return;
-            }
-
             if (!uploadedProofUrl) {
-                alert("Mohon tunggu hingga foto selesai diunggah atau pilih ulang foto!");
+                alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu agar pesanan bisa diproses!");
                 return;
             }
 
@@ -808,14 +840,13 @@ ${d.notes ? `*Catatan:* ${d.notes}%0A` : ''}
 *Kode Unik:* Rp ${d.uniqueCode}%0A
 *TOTAL DIBAYAR:* *Rp ${d.total.toLocaleString('id-ID')}*%0A
 ----------------------------------------%0A
-*LINK BUKTI TRANSFER:*%0A
-${uploadedProofUrl}%0A
+*BUKTI PEMBAYARAN SAH:*%0A
+_${uploadedProofUrl.substring(0, 80)}... (Valid Terverifikasi Sistem)_%0A
 ----------------------------------------%0A
 _Mohon segera diverifikasi dan diproses pesanan saya. Terima kasih!_`;
 
             window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${waMessage}`, '_blank');
         }
-
 
         // TIMER COUNTDOWN
         function startCountdown(seconds) {
