@@ -1076,15 +1076,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function confirmAndSendWA() {
-            if (!uploadedProofUrl) {
-                alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu agar pesanan bisa diproses!");
-                return;
-            }
+    if (!uploadedProofUrl) {
+        alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu agar pesanan bisa diproses!");
+        return;
+    }
 
-            const d = currentOrderData;
-            const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
-            
-            const waMessage = 
+    const d = currentOrderData;
+    const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
+    
+    // Pesan ini membawa string Base64 gambar agar langsung ditangkap oleh bot di server panel RyHar
+    const waMessage = 
 `*KONFIRMASI PESANAN - Xahara's Wardrobe*%0A
 *Order ID:* ${d.orderId}%0A
 *Nama:* ${d.name}%0A
@@ -1097,12 +1098,13 @@ ${d.notes ? `*Catatan:* ${d.notes}%0A` : ''}
 *TOTAL DIBAYAR:* *Rp ${d.total.toLocaleString('id-ID')}*%0A
 ----------------------------------------%0A
 *BUKTI PEMBAYARAN SAH:*%0A
-_${uploadedProofUrl.substring(0, 80)}... (Valid Terverifikasi Sistem)_%0A
+${uploadedProofUrl}%0A
 ----------------------------------------%0A
 _Mohon segera diverifikasi dan diproses pesanan saya. Terima kasih!_`;
 
-            window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${waMessage}`, '_blank');
-        }
+    window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${waMessage}`, '_blank');
+}
+
 
         function startCountdown(seconds) {
             clearInterval(countdownInterval);
