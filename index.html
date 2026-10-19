@@ -1084,7 +1084,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const d = currentOrderData;
     const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
     
-    // Pesan ini membawa string Base64 gambar agar langsung ditangkap oleh bot di server panel RyHar
+    // Pesan bersih tanpa Base64 yang bikin HP nge-lag / black screen
     const waMessage = 
 `*KONFIRMASI PESANAN - Xahara's Wardrobe*%0A
 *Order ID:* ${d.orderId}%0A
@@ -1097,14 +1097,10 @@ ${d.notes ? `*Catatan:* ${d.notes}%0A` : ''}
 *Kode Unik:* Rp ${d.uniqueCode}%0A
 *TOTAL DIBAYAR:* *Rp ${d.total.toLocaleString('id-ID')}*%0A
 ----------------------------------------%0A
-*BUKTI PEMBAYARAN SAH:*%0A
-${uploadedProofUrl}%0A
-----------------------------------------%0A
-_Mohon segera diverifikasi dan diproses pesanan saya. Terima kasih!_`;
+_Halo Admin, saya sudah melampirkan foto bukti pembayaran di chat ini untuk Order ID ${d.orderId}. Mohon segera diverifikasi. Terima kasih!_`;
 
     window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${waMessage}`, '_blank');
 }
-
 
         function startCountdown(seconds) {
             clearInterval(countdownInterval);
