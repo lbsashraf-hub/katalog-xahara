@@ -749,44 +749,30 @@
             };
             reader.readAsDataURL(file);
 
-            // Upload to Telegra.ph API
-            isUploading = true;
-            const btn = document.getElementById('btnConfirmWA');
-            btn.classList.add('opacity-50');
+                    // PROOF UPLOAD HANDLER (100% Instan, Tanpa Nyangkut & Tanpa Blokir)
+        function handleProofUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
 
-            const formData = new FormData();
-            formData.append("file", file);
-
-            try {
-                const response = await fetch("https://telegra.ph/upload", {
-                    method: "POST",
-                    body: formData
-                });
-                const result = await response.json();
-
-                if (result && result[0] && result[0].src) {
-                    uploadedProofUrl = "https://telegra.ph" + result[0].src;
-                    document.getElementById('uploadStatusText').innerText = "✓ Berhasil diunggah! Siap dikirim ke WA.";
-                } else {
-                    alert("Gagal mengunggah foto ke server.");
-                    uploadedProofUrl = "Gagal Diunggah ke Cloud";
-                }
-            } catch (err) {
-                console.error("Upload error:", err);
-                uploadedProofUrl = "Terjadi Kesalahan Koneksi Upload";
-            } finally {
-                isUploading = false;
-                btn.classList.remove('opacity-50');
-            }
-        }
-
-        // CONFIRM TO WA WITH TELEGRAPH IMAGE LINK
-        function confirmAndSendWA() {
-            if (isUploading) {
-                alert("Mohon tunggu sebentar, foto bukti transfer sedang diunggah ke server...");
+            if (!file.type.startsWith('image/')) {
+                alert("Mohon upload file gambar (JPG/PNG)!");
                 return;
             }
 
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                uploadedProofUrl = evt.target.result; // Menyimpan data gambar lokal
+                document.getElementById('previewImg').src = evt.target.result;
+                document.getElementById('fileNameDisplay').innerText = file.name;
+                document.getElementById('uploadStatusText').innerText = "✓ Berhasil dilampirkan! Siap dikirim ke WA.";
+                document.getElementById('uploadPlaceholder').classList.add('hidden');
+                document.getElementById('uploadPreview').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // CONFIRM TO WA WITH PROOF
+        function confirmAndSendWA() {
             if (!uploadedProofUrl) {
                 alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu!");
                 return;
@@ -807,12 +793,13 @@ ${d.notes ? `*Catatan:* ${d.notes}%0A` : ''}
 *Kode Unik:* Rp ${d.uniqueCode}%0A
 *TOTAL DIBAYAR:* *Rp ${d.total.toLocaleString('id-ID')}*%0A
 ----------------------------------------%0A
-*LINK BUKTI TRANSFER:*%0A${uploadedProofUrl}%0A
-----------------------------------------%0A
-_Mohon segera diverifikasi dan diproses pesanan saya. Terima kasih!_`;
+_Saya melampirkan pesanan dan bukti pembayaran QRIS DANA. Mohon segera diproses!_`;
 
             window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${waMessage}`, '_blank');
+            
+            alert("WhatsApp Admin terbuka!\n\nTips: Anda bisa langsung melampirkan/menempelkan (paste) foto bukti transfer dari galeri Anda ke dalam chat WhatsApp tersebut.");
         }
+
 
         // TIMER COUNTDOWN
         function startCountdown(seconds) {
