@@ -768,7 +768,7 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    uploadedProofUrl = result.data.url;
+                    uploadedProofUrl = result.data.url_viewer || result.data.url;
                     document.getElementById('uploadStatusText').innerText = "✓ Berhasil diunggah ke cloud! Siap dikirim ke WA.";
                 } else {
                     alert("Gagal mengunggah foto ke ImgBB server.");
