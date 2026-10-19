@@ -112,7 +112,7 @@
             </a>
 
             <div class="hidden md:flex flex-1 max-w-md mx-8 relative">
-                <input type="text" id="searchInput" placeholder="Cari koleksi abaya, gamis, pakaian..." 
+                <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Cari koleksi abaya, gamis, pakaian..." 
                        class="w-full pl-11 pr-4 py-2.5 bg-slate-100/80 border border-slate-200 focus:bg-white rounded-full text-xs font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all duration-300">
                 <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-3.5"></i>
             </div>
@@ -120,13 +120,13 @@
             <div class="flex items-center gap-3">
                 <button id="cartIconBtn" onclick="toggleCartModal(true)" class="relative p-2.5 text-slate-800 hover:text-brand-600 bg-slate-100/80 hover:bg-slate-100 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none">
                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-                    <span id="cartCountBadge" class="hidden absolute -top-1 -right-1 bg-brand-500 text-slate-950 text-[10px] font-extrabold rounded-full h-5 w-5 border-2 border-white flex items-center justify-center animate-bounce">0</span>
+                    <span id="cartCountBadge" class="hidden absolute -top-1 -right-1 bg-brand-500 text-slate-950 text-[10px] font-extrabold rounded-full h-5 w-5 border-2 border-white flex items-center justify-center">0</span>
                 </button>
             </div>
         </div>
         <div class="md:hidden px-4 pb-3">
             <div class="relative">
-                <input type="text" id="searchInputMobile" placeholder="Cari pakaian favoritmu..." 
+                <input type="text" id="searchInputMobile" oninput="handleSearch(this.value)" placeholder="Cari pakaian favoritmu..." 
                        class="w-full pl-10 pr-4 py-2 bg-slate-100 border border-slate-200 rounded-full text-xs font-medium focus:outline-none focus:ring-2 focus:ring-slate-900">
                 <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-2.5"></i>
             </div>
@@ -176,7 +176,16 @@
 
         <!-- PRODUCT GRID -->
         <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            <!-- Dynamic Render -->
+            <!-- Rendered via JavaScript -->
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="emptyState" class="hidden text-center py-20 bg-white rounded-3xl border border-slate-200/80 my-8">
+            <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                <i data-lucide="package-search" class="w-8 h-8"></i>
+            </div>
+            <h3 class="text-base font-bold text-slate-800">Produk Tidak Ditemukan</h3>
+            <p class="text-xs text-slate-500 mt-1">Coba gunakan kata kunci pencarian atau kategori lain.</p>
         </div>
     </main>
 
@@ -193,6 +202,9 @@
             </div>
 
             <div id="cartModalBody" class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4">
+                <!-- LIST ITEM KERANJANG -->
+                <div id="cartItemsList" class="space-y-3 pb-3 border-b border-slate-100"></div>
+
                 <div class="bg-rose-50 border border-rose-100 rounded-2xl p-3 flex items-center justify-between">
                     <div class="flex items-center gap-2 text-rose-700 text-xs font-bold">
                         <i data-lucide="clock" class="w-4 h-4 animate-spin"></i> Sisa Waktu Pembayaran
@@ -210,7 +222,7 @@
                 <div class="bg-emerald-50 border border-emerald-200/80 rounded-2xl p-4 text-left shadow-sm">
                     <span class="text-[11px] font-bold text-emerald-800 block">Total Tagihan Tepat (Termasuk Kode Unik):</span>
                     <div class="flex items-center justify-between mt-1">
-                        <span id="finalTotalDisplay" class="text-2xl font-black text-emerald-950">Rp 260.978</span>
+                        <span id="finalTotalDisplay" class="text-2xl font-black text-emerald-950">Rp 0</span>
                         <button onclick="copyTotal()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs px-3 py-1.5 rounded-xl font-bold transition flex items-center gap-1 shadow-sm">
                             <i data-lucide="copy" class="w-3.5 h-3.5"></i> Salin
                         </button>
@@ -255,26 +267,155 @@
     <script>
         lucide.createIcons();
 
+        // Data Produk Baju
+        const products = [
+            { id: 1, name: "Sophia Abaya", category: "Abaya", price: 260000, image: "IMG-20261019-WA0035.jpg", colors: ["Hitam", "Navy", "Maroon"], sizes: ["S-M", "L-XL"] },
+            { id: 2, name: "Zahra Gamis Exclusive", category: "Gamis", price: 285000, image: "IMG-20261019-WA0035.jpg", colors: ["Sage", "Cream", "Dusty Pink"], sizes: ["S-M", "L-XL"] },
+            { id: 3, name: "Malika Abaya Premium", category: "Abaya", price: 295000, image: "IMG-20261019-WA0035.jpg", colors: ["Hitam", "Bronze", "Emerald"], sizes: ["S-M", "L-XL", "XXL"] },
+            { id: 4, name: "Aisha Elegant Gamis", category: "Gamis", price: 270000, image: "IMG-20261019-WA0035.jpg", colors: ["Milo", "Grey", "Plum"], sizes: ["S-M", "L-XL"] }
+        ];
+
+        let cart = [];
+        let currentCategory = 'all';
+        let searchQuery = '';
         let countdownInterval;
         let uploadedProofUrl = null;
-        let currentTotalWithUnique = 260978;
-        let currentOrderData = {
-            orderId: "ORD-" + Math.floor(100000 + Math.random() * 900000),
-            name: "Test",
-            phone: "085717777286",
-            address: "Ok",
-            notes: "Ok",
-            cart: [
-                { name: "Sophia Abaya", color: "Hitam", size: "S-M", qty: 1, price: 260000 }
-            ],
-            baseSubtotal: 260000,
-            uniqueCode: 978,
-            total: 260978
-        };
+        let currentTotalWithUnique = 0;
+        let currentOrderData = {};
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            const filtered = products.filter(p => {
+                const matchCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchCat && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(p => `
+                <div class="bg-white rounded-3xl border border-slate-200/85 overflow-hidden shadow-sm flex flex-col justify-between card-hover-effect">
+                    <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full uppercase">${p.category}</span>
+                    </div>
+                    <div class="p-4 flex flex-col flex-1 justify-between">
+                        <div>
+                            <h3 class="font-extrabold text-sm text-slate-900 line-clamp-1">${p.name}</h3>
+                            <div class="text-brand-600 font-black text-sm mt-1">Rp ${p.price.toLocaleString('id-ID')}</div>
+                        </div>
+                        <button onclick="addToCart(${p.id})" class="mt-4 w-full bg-slate-900 hover:bg-brand-600 hover:text-slate-950 text-white font-extrabold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow-sm">
+                            <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> Tambah
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function filterCategory(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => {
+                b.classList.remove('bg-slate-900', 'text-white', 'shadow-md');
+                b.classList.add('bg-white', 'border', 'border-slate-200', 'text-slate-600');
+            });
+            btn.classList.remove('bg-white', 'border', 'border-slate-200', 'text-slate-600');
+            btn.classList.add('bg-slate-900', 'text-white', 'shadow-md');
+            renderProducts();
+        }
+
+        function handleSearch(query) {
+            searchQuery = query;
+            renderProducts();
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1, color: product.colors[0], size: product.sizes[0] });
+            }
+            updateCartBadge();
+            toggleCartModal(true);
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartCountBadge');
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            if (totalQty > 0) {
+                badge.innerText = totalQty;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function renderCartItems() {
+            const list = document.getElementById('cartItemsList');
+            if (cart.length === 0) {
+                list.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Keranjang belanja Anda masih kosong.</p>`;
+                document.getElementById('finalTotalDisplay').innerText = `Rp 0`;
+                return;
+            }
+
+            let subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            let uniqueCode = Math.floor(100 + Math.random() * 899);
+            currentTotalWithUnique = subtotal + uniqueCode;
+
+            currentOrderData = {
+                orderId: "ORD-" + Math.floor(100000 + Math.random() * 900000),
+                name: "Pelanggan Xahara",
+                phone: "085717777286",
+                address: "Alamat Customer",
+                notes: "Pesanan Website",
+                cart: cart,
+                baseSubtotal: subtotal,
+                uniqueCode: uniqueCode,
+                total: currentTotalWithUnique
+            };
+
+            list.innerHTML = cart.map((item, index) => `
+                <div class="flex items-center justify-between gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200/80">
+                    <div class="flex items-center gap-3">
+                        <img src="${item.image}" class="w-12 h-12 rounded-xl object-cover">
+                        <div>
+                            <h4 class="font-extrabold text-xs text-slate-900">${item.name}</h4>
+                            <span class="text-[10px] text-slate-500">Rp ${item.price.toLocaleString('id-ID')} x ${item.qty}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="changeQty(${index}, -1)" class="w-7 h-7 bg-white border rounded-lg font-bold text-xs">-</button>
+                        <span class="text-xs font-bold">${item.qty}</span>
+                        <button onclick="changeQty(${index}, 1)" class="w-7 h-7 bg-white border rounded-lg font-bold text-xs">+</button>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('finalTotalDisplay').innerText = `Rp ${currentTotalWithUnique.toLocaleString('id-ID')}`;
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartBadge();
+            renderCartItems();
+        }
 
         function toggleCartModal(show) {
             const modal = document.getElementById('cartModal');
             if (show) {
+                renderCartItems();
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
                 startCountdown(900);
@@ -309,11 +450,14 @@
                 alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu!");
                 return;
             }
+            if (cart.length === 0) {
+                alert("Keranjang belanja masih kosong!");
+                return;
+            }
 
             const d = currentOrderData;
             const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
             
-            // Format Pesan WhatsApp Admin
             const waMessage = 
 `*KONFIRMASI PESANAN - Xahara's Wardrobe*%0A
 *Order ID:* ${d.orderId}%0A
@@ -331,10 +475,10 @@ _Mohon segera diverifikasi. Terima kasih!_`;
 
             const ADMIN_WA_BIASA = "6285770246502"; 
 
-            // 1. Langsung buka WhatsApp terlebih dahulu agar tidak terhalang error server
+            // 1. Langsung buka WhatsApp
             window.open(`https://wa.me/${ADMIN_WA_BIASA}?text=${waMessage}`, '_blank');
 
-            // 2. Kirim foto ke server bot secara latar belakang (background task) menggunakan no-cors / try catch aman
+            // 2. Kirim foto ke server bot via IP & Port Network RyHar
             try {
                 fetch('http://38.45.72.91:2463/api/upload-bukti', {
                     method: 'POST',
@@ -373,6 +517,9 @@ _Mohon segera diverifikasi. Terima kasih!_`;
             navigator.clipboard.writeText(currentTotalWithUnique);
             alert(`Nominal Rp ${currentTotalWithUnique.toLocaleString('id-ID')} berhasil disalin!`);
         }
+
+        // Load awal produk
+        renderProducts();
     </script>
 </body>
 </html>
