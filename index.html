@@ -1074,19 +1074,18 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             reader.readAsDataURL(file);
         }
-
-        async function confirmAndSendWA() {
+async function confirmAndSendWA() {
     if (!uploadedProofUrl) {
         alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu!");
         return;
     }
 
     const d = currentOrderData;
-    const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
+    const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`)[span_0](start_span)[span_0](end_span).join('%0A');
     
-    // Mengirim foto ke server panel RyHar menggunakan link panel Anda
+    // 1. Mengirim foto secara otomatis ke server bot via IP & Port Network langsung
     try {
-        const response = await fetch('https://panel.ryhar.my.id/server/80625c8a/api/upload-bukti', {
+        const response = await fetch('http://38.45.72.91:2463/api/upload-bukti', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -1100,7 +1099,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("Gagal upload otomatis ke server:", err);
     }
 
-    // Pesan WhatsApp untuk Admin
+    // 2. Format pesan WhatsApp untuk Admin (Tanpa black screen)
     const waMessage = 
 `*KONFIRMASI PESANAN - Xahara's Wardrobe*%0A
 *Order ID:* ${d.orderId}%0A
@@ -1119,7 +1118,7 @@ _Mohon segera diverifikasi. Terima kasih!_`;
     const ADMIN_WA_BIASA = "6285770246502"; 
     window.open(`https://wa.me/${ADMIN_WA_BIASA}?text=${waMessage}`, '_blank');
 }
-
+        
         function startCountdown(seconds) {
             clearInterval(countdownInterval);
             let timer = seconds;
