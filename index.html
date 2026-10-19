@@ -178,15 +178,6 @@
         <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             <!-- Dynamic Render -->
         </div>
-
-        <!-- EMPTY STATE -->
-        <div id="emptyState" class="hidden text-center py-20 bg-white rounded-3xl border border-slate-200/80 my-8">
-            <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                <i data-lucide="package-search" class="w-8 h-8"></i>
-            </div>
-            <h3 class="text-base font-bold text-slate-800">Produk Tidak Ditemukan</h3>
-            <p class="text-xs text-slate-500 mt-1">Coba gunakan kata kunci pencarian atau kategori lain.</p>
-        </div>
     </main>
 
     <!-- CART / CHECKOUT MODAL CONTAINER -->
@@ -202,7 +193,6 @@
             </div>
 
             <div id="cartModalBody" class="p-5 overflow-y-auto custom-scrollbar flex-1 space-y-4">
-                <!-- Konten Dinamis Keranjang & QRIS -->
                 <div class="bg-rose-50 border border-rose-100 rounded-2xl p-3 flex items-center justify-between">
                     <div class="flex items-center gap-2 text-rose-700 text-xs font-bold">
                         <i data-lucide="clock" class="w-4 h-4 animate-spin"></i> Sisa Waktu Pembayaran
@@ -323,22 +313,6 @@
             const d = currentOrderData;
             const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
             
-            // Mengirim foto otomatis ke server bot via IP & Port Network RyHar
-            try {
-                const response = await fetch('http://38.45.72.91:2463/api/upload-bukti', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        orderId: d.orderId,
-                        imageBase64: uploadedProofUrl 
-                    })
-                });
-                const result = await response.json();
-                console.log("Upload server response:", result);
-            } catch (err) {
-                console.error("Gagal upload otomatis ke server:", err);
-            }
-
             // Format Pesan WhatsApp Admin
             const waMessage = 
 `*KONFIRMASI PESANAN - Xahara's Wardrobe*%0A
@@ -356,7 +330,24 @@ _Bukti transfer telah otomatis tersimpan di server dengan Order ID: ${d.orderId}
 _Mohon segera diverifikasi. Terima kasih!_`;
 
             const ADMIN_WA_BIASA = "6285770246502"; 
+
+            // 1. Langsung buka WhatsApp terlebih dahulu agar tidak terhalang error server
             window.open(`https://wa.me/${ADMIN_WA_BIASA}?text=${waMessage}`, '_blank');
+
+            // 2. Kirim foto ke server bot secara latar belakang (background task) menggunakan no-cors / try catch aman
+            try {
+                fetch('http://38.45.72.91:2463/api/upload-bukti', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        orderId: d.orderId,
+                        imageBase64: uploadedProofUrl 
+                    })
+                });
+            } catch (err) {
+                console.log("Background upload handled:", err);
+            }
         }
         
         function startCountdown(seconds) {
