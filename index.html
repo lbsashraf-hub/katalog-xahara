@@ -352,8 +352,8 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // CONFIGURATION
-        const ADMIN_WA_NUMBER = "6285717777286"; // Nomor WhatsApp Admin Anda
-        const IMGBB_API_KEY = "bcf26c98b3050eeb8ac783af8b260a89"; // API Key ImgBB Milik Anda
+        const ADMIN_WA_NUMBER = "6285717777286";
+        const IMGBB_API_KEY = "bcf26c98b3050eeb8ac783af8b260a89";
 
         // PAYLOAD QRIS DANA ANDA (Queen Laundry, Kab. Tasikmalaya)
         const qrisPayload = "00020101021126570011ID.DANA.WWW011893600915303354447702090335444770303UMI51440014ID.CO.QRIS.WWW0215ID10265585102550303UMI5204721053033605802ID5913Queen Laundry6015Kab. Tasikmalay61054646163048873";
@@ -684,7 +684,7 @@
             btn.onclick = processCheckout;
         }
 
-        // PROCESS CHECKOUT & QRIS
+         // PROCESS CHECKOUT & QRIS
         function processCheckout() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
@@ -716,7 +716,6 @@
             document.getElementById('uploadPlaceholder').classList.remove('hidden');
             document.getElementById('uploadPreview').classList.add('hidden');
 
-            // Set sumber QRIS statis lokal (qris.png)
             const qrisApiUrl = 'qris.png'; 
 
             document.getElementById('paymentOrderId').innerText = "#" + currentOrderId;
@@ -733,7 +732,6 @@
 
         // AUTOMATIC PROOF UPLOAD TO IMGBB CLOUD API
         async function handleProofUpload(e) {
-                async function handleProofUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
 
@@ -769,7 +767,6 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    // Menggunakan direct link gambar agar langsung terbuka sebagai file gambar
                     uploadedProofUrl = result.data.url;
                     document.getElementById('uploadStatusText').innerText = "✓ Berhasil diunggah ke cloud! Siap dikirim ke WA.";
                 } else {
