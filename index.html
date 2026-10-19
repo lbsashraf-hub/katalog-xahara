@@ -765,10 +765,12 @@
                 });
                 const result = await response.json();
 
-                if (result.success) {
-                    uploadedProofUrl = result.data.url;
+                                if (result.success) {
+                    // Mengubah link CDN i.ibb.co menjadi ibb.co agar aman dari blokir operator
+                    uploadedProofUrl = result.data.url.replace("i.ibb.co", "ibb.co");
                     document.getElementById('uploadStatusText').innerText = "✓ Berhasil diunggah ke cloud! Siap dikirim ke WA.";
                 } else {
+
                     alert("Gagal mengunggah foto. Pastikan koneksi stabil.");
                     uploadedProofUrl = "Gagal Diunggah ke Cloud";
                 }
