@@ -446,19 +446,20 @@
         }
 
         async function confirmAndSendWA() {
-            if (!uploadedProofUrl) {
-                alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu!");
-                return;
-            }
-            if (cart.length === 0) {
-                alert("Keranjang belanja masih kosong!");
-                return;
-            }
+    if (!uploadedProofUrl) {
+        alert("Mohon lampirkan/upload foto bukti transfer terlebih dahulu!");
+        return;
+    }
+    if (cart.length === 0) {
+        alert("Keranjang belanja masih kosong!");
+        return;
+    }
 
-            const d = currentOrderData;
-            const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
-            
-            const waMessage = 
+    const d = currentOrderData;
+    const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('%0A');
+    
+    // 1. Buka WhatsApp Admin
+    const waMessage = 
 `*KONFIRMASI PESANAN - Xahara's Wardrobe*%0A
 *Order ID:* ${d.orderId}%0A
 *Nama:* ${d.name}%0A
@@ -473,26 +474,45 @@ ${d.notes ? `*Catatan:* ${d.notes}%0A` : ''}
 _Bukti transfer telah otomatis tersimpan di server dengan Order ID: ${d.orderId}_%0A
 _Mohon segera diverifikasi. Terima kasih!_`;
 
-            const ADMIN_WA_BIASA = "6285770246502"; 
+    const ADMIN_WA_BIASA = "6285770246502"; 
+    window.open(`https://wa.me/${ADMIN_WA_BIASA}?text=${waMessage}`, '_blank');
 
-            // 1. Langsung buka WhatsApp
-            window.open(`https://wa.me/${ADMIN_WA_BIASA}?text=${waMessage}`, '_blank');
-
-            // 2. Kirim foto ke server bot via IP & Port Network RyHar
-            try {
-                fetch('http://38.45.72.91:2463/api/upload-bukti', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        orderId: d.orderId,
-                        imageBase64: uploadedProofUrl 
-                    })
-                });
-            } catch (err) {
-                console.log("Background upload handled:", err);
-            }
+    // 2. Kirim Gambar ke Server Bot lewat Form Tersembunyi (Anti-Block Browser)
+    try {
+        let iframe = document.getElementById('hidden_upload_iframe');
+        if (!iframe) {
+            iframe = document.createElement('iframe');
+            iframe.id = 'hidden_upload_iframe';
+            iframe.name = 'hidden_upload_iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
         }
+
+        let form = document.createElement('form');
+        form.method = 'POST';
+        form.action = 'http://38.45.72.91:2463/api/upload-bukti';
+        form.target = 'hidden_upload_iframe';
+
+        let inputOrderId = document.createElement('input');
+        inputOrderId.type = 'hidden';
+        inputOrderId.name = 'orderId';
+        inputOrderId.value = d.orderId;
+        form.appendChild(inputOrderId);
+
+        let inputImage = document.createElement('input');
+        inputImage.type = 'hidden';
+        inputImage.name = 'imageBase64';
+        inputImage.value = uploadedProofUrl;
+        form.appendChild(inputImage);
+
+        document.body.appendChild(form);
+        form.submit();
+        setTimeout(() => { form.remove(); }, 2000);
+    } catch (err) {
+        console.log("Form upload error:", err);
+    }
+}
+a
         
         function startCountdown(seconds) {
             clearInterval(countdownInterval);
