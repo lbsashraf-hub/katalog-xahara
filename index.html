@@ -106,6 +106,70 @@
             transform: translateY(-5px);
             box-shadow: 0 12px 25px -8px rgba(16, 185, 129, 0.15);
         }
+
+        /* ==========================================
+           ANIMASI BARU (Nomor 2, 3, 4, 5)
+           ========================================== */
+
+        /* 2. Fade In & Slide Up (Scroll Reveal) */
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal-on-scroll.is-visible {
+            animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* 3. Smooth Image Zoom & Pan */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+
+        .img-zoom-container img {
+            transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .img-zoom-container:hover img {
+            transform: scale(1.08);
+        }
+
+        /* 4. Skeleton Loading Effect */
+        @keyframes skeletonShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .skeleton-loading {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 37%, #f1f5f9 63%);
+            background-size: 200% 100%;
+            animation: skeletonShimmer 1.4s ease infinite;
+        }
+
+        /* 5. Subtle Button Pulse / Glow */
+        @keyframes subtleGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 18px 6px rgba(34, 197, 94, 0.3);
+            }
+        }
+
+        .btn-pulse-glow {
+            animation: subtleGlow 2.5s infinite;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-brand-500 selection:text-white">
@@ -169,7 +233,8 @@
                     Koleksi busana muslimah eksklusif berbahan premium. Anggun, nyaman, ironless, dan presisi untuk penampilan harianmu.
                 </p>
                 <div class="flex items-center gap-3">
-                    <a href="#catalog" class="bg-brand-500 hover:bg-brand-600 text-slate-950 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-brand-500/30 hover:scale-105 flex items-center gap-2">
+                    <!-- ANIMASI NO 5: btn-pulse-glow -->
+                    <a href="#catalog" class="bg-brand-500 hover:bg-brand-600 text-slate-950 font-extrabold text-xs sm:text-sm px-6 py-3 rounded-full transition-all duration-300 shadow-lg hover:scale-105 flex items-center gap-2 btn-pulse-glow">
                         Jelajahi Produk <i data-lucide="arrow-down-right" class="w-4 h-4 animate-bounce"></i>
                     </a>
                 </div>
@@ -366,7 +431,7 @@
                     </div>
                     <p id="uniqueCodeText" class="text-[10px] text-emerald-600 font-bold mt-1">Kode Unik Rp 0</p>
 
-                    <!-- QRIS Image Display (Ukuran Besar & Ketuk untuk Zoom) -->
+                    <!-- QRIS Image Display (Ukuran Besar & Zoomable) -->
                     <div class="my-4 p-4 bg-slate-50 border border-dashed border-slate-300 rounded-2xl w-full max-w-xs mx-auto">
                         <div class="relative group cursor-pointer" onclick="openQrisZoom()">
                             <img src="qris.jpg" alt="QRIS DANA" class="w-64 h-64 sm:w-72 sm:h-72 object-contain mx-auto rounded-xl shadow-md border bg-white p-2 transition-transform duration-300 group-hover:scale-105">
@@ -413,7 +478,7 @@
 
             <!-- PAYMENT FOOTER ACTIONS -->
             <div id="paymentFooter" class="p-5 border-t border-slate-100 bg-slate-50/50 hidden">
-                <button id="btnConfirmWA" onclick="confirmAndSendWA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-3.5 rounded-2xl shadow-lg transition-all text-center flex items-center justify-center gap-2">
+                <button id="btnConfirmWA" onclick="confirmAndSendWA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-3.5 rounded-2xl shadow-lg transition-all text-center flex items-center justify-center gap-2 btn-pulse-glow">
                     <i data-lucide="message-circle" class="w-4 h-4"></i>
                     <span>Konfirmasi ke WhatsApp Admin</span>
                 </button>
@@ -553,6 +618,7 @@
             lucide.createIcons();
         });
 
+        // ANIMASI NO 2 (Slide Up Reveal), NO 3 (Zoom), & NO 4 (Skeleton) dalam Rendering Produk
         function renderProducts(list) {
             const grid = document.getElementById('productGrid');
             const emptyState = document.getElementById('emptyState');
@@ -564,13 +630,14 @@
             }
 
             emptyState.classList.add('hidden');
-            grid.innerHTML = list.map(p => {
+            grid.innerHTML = list.map((p, index) => {
                 const minPrice = Math.min(...p.sizes.map(s => s.price));
                 const firstImg = p.variants[0].images[0];
                 return `
-                    <div onclick="openProductModal(${p.id})" class="bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm card-hover-effect cursor-pointer flex flex-col justify-between">
-                        <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden">
-                            <img src="${firstImg}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                    <div onclick="openProductModal(${p.id})" class="reveal-on-scroll bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm card-hover-effect cursor-pointer flex flex-col justify-between" style="animation-delay: ${index * 0.08}s">
+                        <!-- NO 3: img-zoom-container & NO 4: skeleton-loading -->
+                        <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden img-zoom-container skeleton-loading">
+                            <img src="${firstImg}" alt="${p.name}" onload="this.parentElement.classList.remove('skeleton-loading')" class="w-full h-full object-cover">
                             ${p.badge ? `<span class="absolute top-3 left-3 bg-slate-900 text-white font-black text-[9px] px-2.5 py-1 rounded-full uppercase tracking-wider">${p.badge}</span>` : ''}
                         </div>
                         <div class="p-4 flex flex-col justify-between flex-1">
@@ -591,7 +658,22 @@
                     </div>
                 `;
             }).join('');
+            
             lucide.createIcons();
+            initScrollReveal(); // Menjalankan observer Scroll Reveal
+        }
+
+        // ANIMASI NO 2: Scroll Reveal Observer
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.05 });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
         }
 
         function setupSearchListeners() {
@@ -995,10 +1077,8 @@ _Mohon segera diverifikasi dan diproses. Terima kasih!_`;
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
             if (isMobile) {
-                // Membuka aplikasi WA seluler langsung
                 window.location.href = `whatsapp://send?phone=${ADMIN_WA_NUMBER}&text=${encodedMessage}`;
             } else {
-                // Membuka WA Web / Desktop
                 window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${encodedMessage}`, '_blank');
             }
 
