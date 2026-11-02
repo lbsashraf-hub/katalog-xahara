@@ -450,7 +450,7 @@
                     </div>
                     <p id="uniqueCodeText" class="text-[10px] text-emerald-600 font-bold mt-1">Kode Unik Rp 0</p>
 
-                    <!-- QRIS Image Display (Telah diperbaiki agar tampil penuh tanpa terpotong) -->
+                    <!-- QRIS Image Display -->
                     <div class="my-4 p-4 bg-slate-50 border border-dashed border-slate-300 rounded-2xl w-full max-w-xs mx-auto">
                         <div class="relative group cursor-pointer" onclick="openQrisZoom()">
                             <img src="qris.jpg" alt="QRIS DANA" class="w-full h-auto max-h-[350px] object-contain mx-auto rounded-xl shadow-md border bg-white p-2 transition-transform duration-300 group-hover:scale-105">
@@ -531,6 +531,7 @@
                 rating: 5.0,
                 reviewsCount: 128,
                 badge: "BEST SELLER",
+                videoUrl: "sophia-video.mp4", // Tambahkan link video produk di sini (opsional)
                 variants: [
                     {
                         color: "Hitam",
@@ -568,6 +569,7 @@
                 rating: 4.8,
                 reviewsCount: 95,
                 badge: "NEW",
+                videoUrl: "", 
                 variants: [
                     {
                         color: "Biru",
@@ -601,6 +603,7 @@
                 rating: 4.9,
                 reviewsCount: 62,
                 badge: "HOT",
+                videoUrl: "",
                 variants: [
                     {
                         color: "Putih",
@@ -626,6 +629,7 @@
                 rating: 5.0,
                 reviewsCount: 45,
                 badge: "NEW",
+                videoUrl: "mahya-video.mp4", // Contoh jika ingin diisi video produk Mahya Abaya
                 variants: [
                     {
                         color: "mellow",
@@ -647,9 +651,9 @@
                     }
                 ],
                 sizes: [
-                    { name: "COUNTESS (S-M)", price: 275000, desc: "LD/PB 100/130cm" },
-                    { name: "PRINCESS (L-XL)", price: 285000, desc: "LD/PB 110/135cm" },
-                    { name: "QUEEN (XXL)", price: 300000, desc: "LD/PB 120/140cm" }
+                    { name: "COUNTESS (S-M)", price: 255000, desc: "LD/PB 100/130cm" },
+                    { name: "PRINCESS (L-XL)", price: 270000, desc: "LD/PB 110/135cm" },
+                    { name: "QUEEN (XXL)", price: 285000, desc: "LD/PB 120/140cm" }
                 ],
                 material: "PREMIUM FABRIC",
                 description: "Mahya Abaya dengan pilihan warna earthy modern yang elegan dan bahan bertekstur nyaman, jatuh cantik serta anggun saat dipakai."
@@ -663,6 +667,7 @@
         let currentModalProduct = null;
         let activeVariantIndex = 0;
         let activeImageIndex = 0;
+        let activeMediaType = 'image'; // 'image' atau 'video'
         let currentTotalWithUnique = 0;
         let countdownInterval = null;
         let currentOrderId = "";
@@ -697,6 +702,7 @@
                              ontouchend="setTimeout(() => this.classList.remove('is-zoomed'), 300)">
                             <img src="${firstImg}" alt="${p.name}" onload="this.parentElement.classList.remove('skeleton-loading')" class="w-full h-full object-cover">
                             ${p.badge ? `<span class="absolute top-3 left-3 bg-slate-900 text-white font-black text-[9px] px-2.5 py-1 rounded-full uppercase tracking-wider">${p.badge}</span>` : ''}
+                            ${p.videoUrl ? `<span class="absolute top-3 right-3 bg-emerald-600/90 text-white font-black text-[9px] px-2 py-1 rounded-full flex items-center gap-1 shadow-sm"><i data-lucide="video" class="w-3 h-3"></i> Video</span>` : ''}
                         </div>
                         <div class="p-4 flex flex-col justify-between flex-1">
                             <div>
@@ -788,6 +794,7 @@
             selectedSizeObj = product.sizes[0];
             activeVariantIndex = 0;
             activeImageIndex = 0;
+            activeMediaType = 'image';
 
             renderModalContent();
             document.getElementById('productModal').classList.remove('hidden');
@@ -807,17 +814,29 @@
             content.innerHTML = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-3">
-                        <div class="aspect-[3/4] bg-slate-100 rounded-2xl overflow-hidden border img-zoom-container cursor-zoom-in"
-                             ontouchstart="this.classList.toggle('is-zoomed')">
-                            <img src="${currentImg}" class="w-full h-full object-cover">
+                        <!-- TAMPILAN UTAMA (FOTO / VIDEO) -->
+                        <div class="aspect-[3/4] bg-slate-100 rounded-2xl overflow-hidden border relative img-zoom-container">
+                            ${activeMediaType === 'video' && p.videoUrl ? `
+                                <video src="${p.videoUrl}" controls autoplay class="w-full h-full object-cover rounded-2xl"></video>
+                            ` : `
+                                <img src="${currentImg}" class="w-full h-full object-cover">
+                            `}
                         </div>
-                        <p class="text-[10px] text-center text-slate-400">Sentuh gambar untuk memperbesar</p>
+                        
+                        <!-- THUMBNAIL NAVIGASI (FOTO & VIDEO) -->
                         <div class="flex items-center gap-2 overflow-x-auto pb-1">
                             ${activeVariant.images.map((img, idx) => `
-                                <button onclick="changeModalImage(${idx})" class="w-14 h-14 rounded-xl overflow-hidden border-2 flex-shrink-0 ${idx === activeImageIndex ? 'border-slate-900 shadow-sm' : 'border-transparent opacity-60'}">
+                                <button onclick="changeModalImage(${idx})" class="w-14 h-14 rounded-xl overflow-hidden border-2 flex-shrink-0 ${activeMediaType === 'image' && idx === activeImageIndex ? 'border-slate-900 shadow-sm' : 'border-transparent opacity-60'}">
                                     <img src="${img}" class="w-full h-full object-cover">
                                 </button>
                             `).join('')}
+                            
+                            ${p.videoUrl ? `
+                                <button onclick="changeToVideo()" class="w-14 h-14 rounded-xl overflow-hidden border-2 flex-shrink-0 bg-slate-900 text-white flex flex-col items-center justify-center gap-0.5 ${activeMediaType === 'video' ? 'border-emerald-500 ring-2 ring-emerald-500 shadow-md' : 'border-transparent opacity-80'}">
+                                    <i data-lucide="video" class="w-5 h-5 text-emerald-400"></i>
+                                    <span class="text-[9px] font-bold">Video</span>
+                                </button>
+                            ` : ''}
                         </div>
                     </div>
 
@@ -873,11 +892,18 @@
         function changeModalVariant(idx) {
             activeVariantIndex = idx;
             activeImageIndex = 0;
+            activeMediaType = 'image';
             renderModalContent();
         }
 
         function changeModalImage(idx) {
             activeImageIndex = idx;
+            activeMediaType = 'image';
+            renderModalContent();
+        }
+
+        function changeToVideo() {
+            activeMediaType = 'video';
             renderModalContent();
         }
 
