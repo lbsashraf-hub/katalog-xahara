@@ -171,7 +171,7 @@
     <!-- TOP PROMO BAR -->
     <div class="bg-slate-900 text-white text-[11px] sm:text-xs font-semibold py-2 px-4 text-center tracking-wider uppercase flex items-center justify-center gap-2 relative overflow-hidden">
         <span class="bg-brand-500 text-slate-950 px-2 py-0.5 rounded-full text-[10px] font-black animate-pulse">PROMO</span>
-        <span>Gratis Ongkir Khusus Pengiriman Luar Jawa Min. Belanja 250.000</span>
+        <span>Gratis Ongkir Khusus Pengiriman Dalam Pulau Jawa Min. Belanja 250.000</span>
     </div>
 
     <!-- GLASS NAVBAR -->
@@ -359,7 +359,7 @@
             <div class="px-5 pt-4 pb-2 bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
                 <div class="flex items-center justify-between text-xs mb-1.5">
                     <span id="freeShippingStatus" class="font-extrabold text-slate-800 flex items-center gap-1.5">
-                        <i data-lucide="truck" class="w-4 h-4 text-emerald-600"></i> Gratis Ongkir (Luar Jawa)
+                        <i data-lucide="truck" class="w-4 h-4 text-emerald-600"></i> Gratis Ongkir (Dalam Jawa)
                     </span>
                     <span id="freeShippingPercent" class="font-black text-emerald-600 text-[11px]">0%</span>
                 </div>
@@ -367,7 +367,7 @@
                     <div id="freeShippingBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-700 ease-out shimmer-btn" style="width: 0%"></div>
                 </div>
                 <p id="freeShippingHint" class="text-[10px] text-slate-500 font-medium mt-1.5 leading-tight">
-                    Khusus pengiriman ke <b class="text-slate-900">Luar Pulau Jawa</b>.
+                    Khusus pengiriman ke <b class="text-slate-900">Dalam Pulau Jawa</b>.
                 </p>
             </div>
 
@@ -391,8 +391,8 @@
                 </div>
                 <div>
                     <label class="block text-[11px] font-bold text-slate-600 mb-1">Alamat Lengkap (Jalan, Kota/Kab, Provinsi)</label>
-                    <textarea id="custAddress" rows="3" oninput="updateCartUI()" placeholder="Contoh: Jl. Jend Sudirman, Kab. Pinrang, Sulawesi Selatan" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900"></textarea>
-                    <span class="text-[10px] text-slate-400 italic mt-0.5 block">*Sistem otomatis mendeteksi alamat di luar Jawa untuk Promo Gratis Ongkir.</span>
+                    <textarea id="custAddress" rows="3" oninput="updateCartUI()" placeholder="Contoh: Jl. HZ Mustofa, Tasikmalaya, Jawa Barat" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900"></textarea>
+                    <span class="text-[10px] text-slate-400 italic mt-0.5 block">*Sistem otomatis mendeteksi alamat di Dalam Jawa untuk Promo Gratis Ongkir.</span>
                 </div>
                 <div>
                     <label class="block text-[11px] font-bold text-slate-600 mb-1">Catatan Pesanan (Opsional)</label>
@@ -493,7 +493,9 @@
     <script>
         const ADMIN_WA_NUMBER = "6285864471018"; 
         const FREE_SHIPPING_MIN = 250000; 
-        const IMGBB_API_KEY = ""; 
+        
+        // MASUKKAN API KEY IMGBB ANDA DI SINI
+        const IMGBB_API_KEY = "MASUKKAN_IMGBB_API_KEY_ANDA_DI_SINI"; 
 
         const products = [
             {
@@ -606,19 +608,19 @@
                     {
                         color: "mellow",
                         images: [
-                            "mahya-abaya-mellow.jpeg"
+                            "mahya-mellow.jpeg"
                         ]
                     },
                     {
                         color: "matcha",
                         images: [
-                            "mahya-abaya-matcha.jpeg"
+                            "mahya-matcha.jpeg"
                         ]
                     },
                     {
                         color: "malt",
                         images: [
-                            "mahya-abaya-malt.jpeg"
+                            "mahya-malt.jpeg"
                         ]
                     }
                 ],
@@ -646,25 +648,17 @@
         let currentOrderData = {};
         let uploadedProofUrl = "";
 
-        // FUNGSI DETEKSI WILAYAH LUAR JAWA
-        function checkIsLuarJawa(addressText) {
+        // FUNGSI DETEKSI WILAYAH DALAM PULAU JAWA
+        function checkIsDalamJawa(addressText) {
             if (!addressText) return false;
             const text = addressText.toLowerCase();
             const keywords = [
-                // Sulawesi (termasuk Pinrang)
-                'sulawesi', 'sulsel', 'sulteng', 'sulut', 'sultra', 'sulbar', 'gorontalo',
-                'pinrang', 'makassar', 'manado', 'palu', 'kendari', 'parepare', 'palopo',
-                'sidrap', 'sidenreng', 'enrekang', 'luwu', 'toraja', 'bone', 'gowa', 'maros',
-                // Sumatera
-                'sumatera', 'sumatra', 'aceh', 'medan', 'padang', 'pekanbaru', 'jambi', 'bengkulu',
-                'palembang', 'lampung', 'batam', 'riau', 'bangka', 'belitung',
-                // Kalimantan
-                'kalimantan', 'kaltim', 'kalbar', 'kalsel', 'kalteng', 'kantara',
-                'pontianak', 'banjarmasin', 'samarinda', 'balikpapan', 'palangkaraya', 'tarakan',
-                // Bali & Nusa Tenggara
-                'bali', 'denpasar', 'singaraja', 'ntb', 'lombok', 'mataram', 'bima', 'ntt', 'kupang',
-                // Maluku & Papua
-                'maluku', 'ambon', 'ternate', 'papua', 'jayapura', 'sorong', 'merauke', 'manokwari'
+                // Provinsi & Kota/Kabupaten di Pulau Jawa
+                'jawa barat', 'jawa tengah', 'jawa timur', 'dki jakarta', 'jakarta', 'banten', 'di yogyakarta', 'yogyakarta', 'jogja',
+                'tasikmalaya', 'tasik', 'bandung', 'garut', 'ciamis', 'banjar', 'sumedang', 'cianjur', 'sukabumi', 'bogor', 'depok', 'bekasi', 'karawang', 'purwakarta', 'subang', 'indramayu', 'cirebon', 'majalengka', 'kuningan',
+                'semarang', 'surakarta', 'solo', 'magelang', 'pekalongan', 'salatiga', 'tegal', 'cilacap', 'banyumas', 'purwokerto', 'kebumen', 'wonosobo', 'boyolali', 'klaten', 'sukoharjo', 'wonogiri', 'sragen', 'grobogan', 'blora', 'rembang', 'pati', 'kudus', 'demak', 'temanggung', 'kendal', 'batang', 'pemalang', 'brebes', 'banjarnegara', 'purbalingga', 'jepara',
+                'surabaya', 'malang', 'sidoarjo', 'gresik', 'mojokerto', 'pasuruan', 'probolinggo', 'banyuwangi', 'jember', 'bondowoso', 'situbondo', 'probolinggo', 'lumajang', 'kediri', 'blitar', 'tulungagung', 'trenggalek', 'nganjuk', 'madiun', 'magetan', 'ngawi', 'ponorogo', 'pacitan', 'tuban', 'lamongan', 'bangkalan', 'sampang', 'pamekasan', 'sumenep',
+                'tangerang', 'serang', 'cilegon', 'lebak', 'pandeglang'
             ];
             return keywords.some(k => text.includes(k));
         }
@@ -996,26 +990,26 @@
 
             document.getElementById('cartSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
             
-            // CEK ALAMAT PENERIMA UNTUK CEK LUAR JAWA
+            // CEK ALAMAT PENERIMA UNTUK CEK DALAM JAWA
             const custAddressEl = document.getElementById('custAddress');
             const userAddress = custAddressEl ? custAddressEl.value : '';
-            const isLuarJawa = checkIsLuarJawa(userAddress);
+            const isDalamJawa = checkIsDalamJawa(userAddress);
 
-            if (isLuarJawa) {
+            if (isDalamJawa) {
                 const percent = Math.min(100, Math.round((subtotal / FREE_SHIPPING_MIN) * 100));
                 document.getElementById('freeShippingBar').style.width = `${percent}%`;
                 document.getElementById('freeShippingPercent').innerText = `${percent}%`;
 
                 if (subtotal >= FREE_SHIPPING_MIN) {
-                    document.getElementById('freeShippingHint').innerHTML = `<span class="text-emerald-600 font-extrabold">🎉 Selamat! Pengiriman Luar Jawa Mendapatkan GRATIS ONGKIR!</span>`;
+                    document.getElementById('freeShippingHint').innerHTML = `<span class="text-emerald-600 font-extrabold">🎉 Selamat! Pengiriman Dalam Jawa Mendapatkan GRATIS ONGKIR!</span>`;
                 } else {
                     const remaining = FREE_SHIPPING_MIN - subtotal;
-                    document.getElementById('freeShippingHint').innerHTML = `Tambahkan <b class="text-slate-900">Rp ${remaining.toLocaleString('id-ID')}</b> lagi untuk Gratis Ongkir Luar Jawa!`;
+                    document.getElementById('freeShippingHint').innerHTML = `Tambahkan <b class="text-slate-900">Rp ${remaining.toLocaleString('id-ID')}</b> lagi untuk Gratis Ongkir Dalam Jawa!`;
                 }
             } else {
                 document.getElementById('freeShippingBar').style.width = `0%`;
                 document.getElementById('freeShippingPercent').innerText = `0%`;
-                document.getElementById('freeShippingHint').innerHTML = `Promo Gratis Ongkir berlaku khusus untuk pengiriman ke <b class="text-slate-900">Luar Pulau Jawa</b> (Min. Rp 250.000).`;
+                document.getElementById('freeShippingHint').innerHTML = `Promo Gratis Ongkir berlaku khusus untuk pengiriman ke <b class="text-slate-900">Dalam Pulau Jawa</b> (Min. Rp 250.000). Pengiriman luar Jawa dikenakan biaya ongkir.`;
             }
 
             lucide.createIcons();
@@ -1141,11 +1135,14 @@
             const itemsSummary = d.cart.map(i => `- ${i.name} (${i.color}, ${i.size}) x${i.qty} = Rp ${(i.price*i.qty).toLocaleString('id-ID')}`).join('\n');
             
             const btn = document.getElementById('btnConfirmWA');
-            if (btn) btn.innerText = "Memproses Pesanan...";
+            if (btn) {
+                btn.innerText = "Mengunggah Bukti & Memproses...";
+                btn.disabled = true;
+            }
 
-            let proofLink = uploadedProofUrl ? "Bukti Terlampir / Diupload oleh Pembeli" : "Belum diupload";
+            let proofLink = "Belum diupload";
 
-            if (uploadedProofUrl && IMGBB_API_KEY) {
+            if (uploadedProofUrl && IMGBB_API_KEY && IMGBB_API_KEY !== "MASUKKAN_IMGBB_API_KEY_ANDA_DI_SINI") {
                 try {
                     const cleanBase64 = uploadedProofUrl.replace(/^data:image\/\w+;base64,/, "");
                     const formData = new FormData();
@@ -1161,7 +1158,10 @@
                     }
                 } catch (err) {
                     console.log("Gagal mengunggah foto ke ImgBB:", err);
+                    proofLink = "Bukti Terlampir / Diupload oleh Pembeli";
                 }
+            } else if (uploadedProofUrl) {
+                proofLink = "Bukti Terlampir / Diupload oleh Pembeli (Isi IMGBB_API_KEY untuk Link URL)";
             }
 
             const waMessage = 
@@ -1190,7 +1190,10 @@ _Mohon segera diverifikasi dan diproses. Terima kasih!_`;
                 window.open(`https://wa.me/${ADMIN_WA_NUMBER}?text=${encodedMessage}`, '_blank');
             }
 
-            if (btn) btn.innerText = "Konfirmasi ke WhatsApp Admin";
+            if (btn) {
+                btn.innerText = "Konfirmasi ke WhatsApp Admin";
+                btn.disabled = false;
+            }
         }
 
         function openQrisZoom() {
