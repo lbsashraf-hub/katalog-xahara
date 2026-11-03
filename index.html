@@ -97,16 +97,9 @@
             box-shadow: 0 12px 25px -8px rgba(16, 185, 129, 0.15);
         }
 
-        /* ==========================================
-           EFEK CAHAYA BERJALAN & MEWAH PADA BANNER
-           ========================================== */
         @keyframes lightSweep {
-            0% {
-                transform: translateX(-100%) skewX(-15deg);
-            }
-            100% {
-                transform: translateX(200%) skewX(-15deg);
-            }
+            0% { transform: translateX(-100%) skewX(-15deg); }
+            100% { transform: translateX(200%) skewX(-15deg); }
         }
 
         .luxury-banner {
@@ -118,30 +111,15 @@
         .luxury-banner::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.4),
-                transparent
-            );
+            top: 0; left: 0; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
             animation: lightSweep 4s infinite ease-in-out;
             pointer-events: none;
         }
 
-        /* Fade In & Slide Up (Scroll Reveal) */
         @keyframes slideUpFade {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .reveal-on-scroll {
@@ -153,7 +131,6 @@
             animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
-        /* Smooth Image Zoom & Pan */
         .img-zoom-container {
             overflow: hidden;
             position: relative;
@@ -168,7 +145,6 @@
             transform: scale(1.12);
         }
 
-        /* Skeleton Loading Effect */
         @keyframes skeletonShimmer {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
@@ -180,14 +156,9 @@
             animation: skeletonShimmer 1.4s ease infinite;
         }
 
-        /* Subtle Button Pulse / Glow */
         @keyframes subtleGlow {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(15, 23, 42, 0.3);
-            }
-            50% {
-                box-shadow: 0 0 18px 6px rgba(15, 23, 42, 0.15);
-            }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(15, 23, 42, 0.3); }
+            50% { box-shadow: 0 0 18px 6px rgba(15, 23, 42, 0.15); }
         }
 
         .btn-pulse-glow {
@@ -200,7 +171,7 @@
     <!-- TOP PROMO BAR -->
     <div class="bg-slate-900 text-white text-[11px] sm:text-xs font-semibold py-2 px-4 text-center tracking-wider uppercase flex items-center justify-center gap-2 relative overflow-hidden">
         <span class="bg-brand-500 text-slate-950 px-2 py-0.5 rounded-full text-[10px] font-black animate-pulse">PROMO</span>
-        <span>Gratis Ongkir Seluruh Indonesia Min. Belanja 250.000</span>
+        <span>Gratis Ongkir Khusus Pengiriman Luar Jawa Min. Belanja 250.000</span>
     </div>
 
     <!-- GLASS NAVBAR -->
@@ -250,7 +221,7 @@
                     EXCLUSIVE <br><span class="text-amber-950">ABAYA & GAMIS</span>
                 </h1>
                 <p class="text-slate-800 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
-                    Koleksi busana muslimah eksklusif berbahan premium. Anggun, nyaman, ironless, dan presisi untuk penampilan harianmu.
+                    Koleksi busana muslimah eksklusif berbahan premium dari Tasikmalaya. Anggun, nyaman, ironless, dan presisi untuk penampilan harianmu.
                 </p>
                 <div class="flex items-center gap-3">
                     <a href="#catalog" class="bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs sm:text-sm px-6 py-3 rounded-full transition-all duration-300 shadow-xl hover:scale-105 flex items-center gap-2 btn-pulse-glow">
@@ -310,7 +281,7 @@
                     <img src="logo.png" alt="Xahara's Wardrobe" class="w-8 h-8 object-contain rounded-lg">
                     <span>XAHARA'S WARDROBE</span>
                 </div>
-                <p class="text-xs text-slate-500 mt-2">Platform Belanja Fashion Online & Pembayaran QRIS DANA Semi-Otomatis.</p>
+                <p class="text-xs text-slate-500 mt-2">Pengiriman Langsung dari Tasikmalaya • Pembayaran QRIS DANA Semi-Otomatis.</p>
             </div>
             <div class="text-xs text-slate-500">
                 &copy; 2026 Xahara's Wardrobe. Hak Cipta Dilindungi.
@@ -388,7 +359,7 @@
             <div class="px-5 pt-4 pb-2 bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
                 <div class="flex items-center justify-between text-xs mb-1.5">
                     <span id="freeShippingStatus" class="font-extrabold text-slate-800 flex items-center gap-1.5">
-                        <i data-lucide="truck" class="w-4 h-4 text-emerald-600"></i> Gratis Ongkir
+                        <i data-lucide="truck" class="w-4 h-4 text-emerald-600"></i> Gratis Ongkir (Luar Jawa)
                     </span>
                     <span id="freeShippingPercent" class="font-black text-emerald-600 text-[11px]">0%</span>
                 </div>
@@ -396,7 +367,7 @@
                     <div id="freeShippingBar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-700 ease-out shimmer-btn" style="width: 0%"></div>
                 </div>
                 <p id="freeShippingHint" class="text-[10px] text-slate-500 font-medium mt-1.5 leading-tight">
-                    Tambahkan <b id="freeShippingRemaining" class="text-slate-900">Rp 250.000</b> lagi untuk Gratis Ongkir!
+                    Khusus pengiriman ke <b class="text-slate-900">Luar Pulau Jawa</b>.
                 </p>
             </div>
 
@@ -419,8 +390,9 @@
                     <input type="text" id="custPhone" placeholder="Contoh: 081234567890" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-bold text-slate-600 mb-1">Alamat Lengkap (Jalan, Kelurahan, Kecamatan, Kota)</label>
-                    <textarea id="custAddress" rows="3" placeholder="Masukkan alamat lengkap tujuan pengiriman..." class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900"></textarea>
+                    <label class="block text-[11px] font-bold text-slate-600 mb-1">Alamat Lengkap (Jalan, Kota/Kab, Provinsi)</label>
+                    <textarea id="custAddress" rows="3" oninput="updateCartUI()" placeholder="Contoh: Jl. Jend Sudirman, Kab. Pinrang, Sulawesi Selatan" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:bg-white focus:outline-none focus:ring-2 focus:ring-slate-900"></textarea>
+                    <span class="text-[10px] text-slate-400 italic mt-0.5 block">*Sistem otomatis mendeteksi alamat di luar Jawa untuk Promo Gratis Ongkir.</span>
                 </div>
                 <div>
                     <label class="block text-[11px] font-bold text-slate-600 mb-1">Catatan Pesanan (Opsional)</label>
@@ -531,7 +503,7 @@
                 rating: 5.0,
                 reviewsCount: 128,
                 badge: "BEST SELLER",
-                videoUrl: "sophia-video.mp4", // Tambahkan link video produk di sini (opsional)
+                videoUrl: "",
                 variants: [
                     {
                         color: "Hitam",
@@ -569,7 +541,7 @@
                 rating: 4.8,
                 reviewsCount: 95,
                 badge: "NEW",
-                videoUrl: "", 
+                videoUrl: "",
                 variants: [
                     {
                         color: "Biru",
@@ -629,7 +601,7 @@
                 rating: 5.0,
                 reviewsCount: 45,
                 badge: "NEW",
-                videoUrl: "mahya-video.mp4", // Contoh jika ingin diisi video produk Mahya Abaya
+                videoUrl: "",
                 variants: [
                     {
                         color: "mellow",
@@ -667,12 +639,35 @@
         let currentModalProduct = null;
         let activeVariantIndex = 0;
         let activeImageIndex = 0;
-        let activeMediaType = 'image'; // 'image' atau 'video'
+        let activeMediaType = 'image';
         let currentTotalWithUnique = 0;
         let countdownInterval = null;
         let currentOrderId = "";
         let currentOrderData = {};
         let uploadedProofUrl = "";
+
+        // FUNGSI DETEKSI WILAYAH LUAR JAWA
+        function checkIsLuarJawa(addressText) {
+            if (!addressText) return false;
+            const text = addressText.toLowerCase();
+            const keywords = [
+                // Sulawesi (termasuk Pinrang)
+                'sulawesi', 'sulsel', 'sulteng', 'sulut', 'sultra', 'sulbar', 'gorontalo',
+                'pinrang', 'makassar', 'manado', 'palu', 'kendari', 'parepare', 'palopo',
+                'sidrap', 'sidenreng', 'enrekang', 'luwu', 'toraja', 'bone', 'gowa', 'maros',
+                // Sumatera
+                'sumatera', 'sumatra', 'aceh', 'medan', 'padang', 'pekanbaru', 'jambi', 'bengkulu',
+                'palembang', 'lampung', 'batam', 'riau', 'bangka', 'belitung',
+                // Kalimantan
+                'kalimantan', 'kaltim', 'kalbar', 'kalsel', 'kalteng', 'kantara',
+                'pontianak', 'banjarmasin', 'samarinda', 'balikpapan', 'palangkaraya', 'tarakan',
+                // Bali & Nusa Tenggara
+                'bali', 'denpasar', 'singaraja', 'ntb', 'lombok', 'mataram', 'bima', 'ntt', 'kupang',
+                // Maluku & Papua
+                'maluku', 'ambon', 'ternate', 'papua', 'jayapura', 'sorong', 'merauke', 'manokwari'
+            ];
+            return keywords.some(k => text.includes(k));
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts(products);
@@ -814,7 +809,6 @@
             content.innerHTML = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-3">
-                        <!-- TAMPILAN UTAMA (FOTO / VIDEO) -->
                         <div class="aspect-[3/4] bg-slate-100 rounded-2xl overflow-hidden border relative img-zoom-container">
                             ${activeMediaType === 'video' && p.videoUrl ? `
                                 <video src="${p.videoUrl}" controls autoplay class="w-full h-full object-cover rounded-2xl"></video>
@@ -823,7 +817,6 @@
                             `}
                         </div>
                         
-                        <!-- THUMBNAIL NAVIGASI (FOTO & VIDEO) -->
                         <div class="flex items-center gap-2 overflow-x-auto pb-1">
                             ${activeVariant.images.map((img, idx) => `
                                 <button onclick="changeModalImage(${idx})" class="w-14 h-14 rounded-xl overflow-hidden border-2 flex-shrink-0 ${activeMediaType === 'image' && idx === activeImageIndex ? 'border-slate-900 shadow-sm' : 'border-transparent opacity-60'}">
@@ -1003,15 +996,26 @@
 
             document.getElementById('cartSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
             
-            const percent = Math.min(100, Math.round((subtotal / FREE_SHIPPING_MIN) * 100));
-            document.getElementById('freeShippingBar').style.width = `${percent}%`;
-            document.getElementById('freeShippingPercent').innerText = `${percent}%`;
+            // CEK ALAMAT PENERIMA UNTUK CEK LUAR JAWA
+            const custAddressEl = document.getElementById('custAddress');
+            const userAddress = custAddressEl ? custAddressEl.value : '';
+            const isLuarJawa = checkIsLuarJawa(userAddress);
 
-            if (subtotal >= FREE_SHIPPING_MIN) {
-                document.getElementById('freeShippingHint').innerHTML = `<span class="text-emerald-600 font-extrabold">🎉 Selamat! Anda Mendapatkan GRATIS ONGKIR!</span>`;
+            if (isLuarJawa) {
+                const percent = Math.min(100, Math.round((subtotal / FREE_SHIPPING_MIN) * 100));
+                document.getElementById('freeShippingBar').style.width = `${percent}%`;
+                document.getElementById('freeShippingPercent').innerText = `${percent}%`;
+
+                if (subtotal >= FREE_SHIPPING_MIN) {
+                    document.getElementById('freeShippingHint').innerHTML = `<span class="text-emerald-600 font-extrabold">🎉 Selamat! Pengiriman Luar Jawa Mendapatkan GRATIS ONGKIR!</span>`;
+                } else {
+                    const remaining = FREE_SHIPPING_MIN - subtotal;
+                    document.getElementById('freeShippingHint').innerHTML = `Tambahkan <b class="text-slate-900">Rp ${remaining.toLocaleString('id-ID')}</b> lagi untuk Gratis Ongkir Luar Jawa!`;
+                }
             } else {
-                const remaining = FREE_SHIPPING_MIN - subtotal;
-                document.getElementById('freeShippingHint').innerHTML = `Tambahkan <b class="text-slate-900">Rp ${remaining.toLocaleString('id-ID')}</b> lagi untuk Gratis Ongkir!`;
+                document.getElementById('freeShippingBar').style.width = `0%`;
+                document.getElementById('freeShippingPercent').innerText = `0%`;
+                document.getElementById('freeShippingHint').innerHTML = `Promo Gratis Ongkir berlaku khusus untuk pengiriman ke <b class="text-slate-900">Luar Pulau Jawa</b> (Min. Rp 250.000).`;
             }
 
             lucide.createIcons();
