@@ -494,8 +494,8 @@
         const ADMIN_WA_NUMBER = "6285864471018"; 
         const FREE_SHIPPING_MIN = 250000; 
         
-        // MASUKKAN API KEY IMGBB ANDA DI SINI
-        const IMGBB_API_KEY = "MASUKKAN_IMGBB_API_KEY_ANDA_DI_SINI"; 
+        // API Key ImgBB Anda yang aktif
+        const IMGBB_API_KEY = "bcf26c98b3050eeb8ac783af8b260a89"; 
 
         const products = [
             {
@@ -608,19 +608,19 @@
                     {
                         color: "mellow",
                         images: [
-                            "mahya-mellow.jpeg"
+                            "mahya-abaya-mellow.jpeg"
                         ]
                     },
                     {
                         color: "matcha",
                         images: [
-                            "mahya-matcha.jpeg"
+                            "mahya-abaya-matcha.jpeg"
                         ]
                     },
                     {
                         color: "malt",
                         images: [
-                            "mahya-malt.jpeg"
+                            "mahya-abaya-malt.jpeg"
                         ]
                     }
                 ],
@@ -653,11 +653,10 @@
             if (!addressText) return false;
             const text = addressText.toLowerCase();
             const keywords = [
-                // Provinsi & Kota/Kabupaten di Pulau Jawa
                 'jawa barat', 'jawa tengah', 'jawa timur', 'dki jakarta', 'jakarta', 'banten', 'di yogyakarta', 'yogyakarta', 'jogja',
                 'tasikmalaya', 'tasik', 'bandung', 'garut', 'ciamis', 'banjar', 'sumedang', 'cianjur', 'sukabumi', 'bogor', 'depok', 'bekasi', 'karawang', 'purwakarta', 'subang', 'indramayu', 'cirebon', 'majalengka', 'kuningan',
                 'semarang', 'surakarta', 'solo', 'magelang', 'pekalongan', 'salatiga', 'tegal', 'cilacap', 'banyumas', 'purwokerto', 'kebumen', 'wonosobo', 'boyolali', 'klaten', 'sukoharjo', 'wonogiri', 'sragen', 'grobogan', 'blora', 'rembang', 'pati', 'kudus', 'demak', 'temanggung', 'kendal', 'batang', 'pemalang', 'brebes', 'banjarnegara', 'purbalingga', 'jepara',
-                'surabaya', 'malang', 'sidoarjo', 'gresik', 'mojokerto', 'pasuruan', 'probolinggo', 'banyuwangi', 'jember', 'bondowoso', 'situbondo', 'probolinggo', 'lumajang', 'kediri', 'blitar', 'tulungagung', 'trenggalek', 'nganjuk', 'madiun', 'magetan', 'ngawi', 'ponorogo', 'pacitan', 'tuban', 'lamongan', 'bangkalan', 'sampang', 'pamekasan', 'sumenep',
+                'surabaya', 'malang', 'sidoarjo', 'gresik', 'mojokerto', 'pasuruan', 'probolinggo', 'banyuwangi', 'jember', 'bondowoso', 'situbondo', 'lumajang', 'kediri', 'blitar', 'tulungagung', 'trenggalek', 'nganjuk', 'madiun', 'magetan', 'ngawi', 'ponorogo', 'pacitan', 'tuban', 'lamongan', 'bangkalan', 'sampang', 'pamekasan', 'sumenep',
                 'tangerang', 'serang', 'cilegon', 'lebak', 'pandeglang'
             ];
             return keywords.some(k => text.includes(k));
@@ -1142,7 +1141,7 @@
 
             let proofLink = "Belum diupload";
 
-            if (uploadedProofUrl && IMGBB_API_KEY && IMGBB_API_KEY !== "MASUKKAN_IMGBB_API_KEY_ANDA_DI_SINI") {
+            if (uploadedProofUrl && IMGBB_API_KEY) {
                 try {
                     const cleanBase64 = uploadedProofUrl.replace(/^data:image\/\w+;base64,/, "");
                     const formData = new FormData();
@@ -1160,8 +1159,6 @@
                     console.log("Gagal mengunggah foto ke ImgBB:", err);
                     proofLink = "Bukti Terlampir / Diupload oleh Pembeli";
                 }
-            } else if (uploadedProofUrl) {
-                proofLink = "Bukti Terlampir / Diupload oleh Pembeli (Isi IMGBB_API_KEY untuk Link URL)";
             }
 
             const waMessage = 
