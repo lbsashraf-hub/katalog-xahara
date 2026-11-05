@@ -233,7 +233,7 @@
             </div>
         </div>
 
-        <!-- SEKSI SHOWCASE DOKUMENTASI WORKSHOP (DENGAN SLIDER VIDEO/FOTO 1, 2, 3...) -->
+        <!-- SEKSI SHOWCASE DOKUMENTASI WORKSHOP (DENGAN SLIDER VIDEO/FOTO) -->
         <section class="mb-14 reveal-on-scroll">
             <div class="luxury-banner text-slate-900 rounded-3xl p-6 sm:p-10 shadow-2xl border border-slate-300/40 relative overflow-hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
@@ -250,7 +250,7 @@
                             Setiap potong busana Xahara's Wardrobe dikerjakan secara langsung oleh penjahit profesional kami. Bukan barang impor maupun konveksi masal asal pasaran, kami memastikan kualitas pola, kerapihan jahitan tepi, hingga ketahanan bahan terjaga secara presisi.
                         </p>
                         
-                        <!-- Navigasi Slide 1, Slide 2, Slide 3... -->
+                        <!-- Navigasi Slide -->
                         <div class="pt-2">
                             <p class="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-2">Pilih Dokumentasi Slide:</p>
                             <div id="workshopSlidesNav" class="flex flex-wrap gap-2">
@@ -275,17 +275,16 @@
                         </div>
                     </div>
 
-                    <!-- Kanan: Pemutar Slide Media (Video / Foto) -->
+                    <!-- Kanan: Pemutar Slide Media -->
                     <div class="lg:col-span-6">
                         <div class="relative rounded-2xl overflow-hidden border-2 border-white/50 shadow-2xl aspect-video bg-slate-950 group">
                             <div id="workshopMediaContainer" class="w-full h-full flex items-center justify-center">
                                 <!-- Ditampilkan via JS -->
                             </div>
                             <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-white/10 z-20">
-                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> <span id="workshopBadgeLabel">Slide 1: Proses Pemotongan Kain</span>
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> <span id="workshopBadgeLabel">Slide 1</span>
                             </div>
 
-                            <!-- Tombol Navigasi Kiri / Kanan Slide -->
                             <button onclick="prevWorkshopSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full backdrop-blur-md transition z-20">
                                 <i data-lucide="chevron-left" class="w-5 h-5"></i>
                             </button>
@@ -561,11 +560,9 @@
     <script>
         const ADMIN_WA_NUMBER = "6285864471018"; 
         const FREE_SHIPPING_MIN = 250000; 
-        
-        // API Key ImgBB Anda yang aktif
         const IMGBB_API_KEY = "bcf26c98b3050eeb8ac783af8b260a89"; 
 
-        // DATA SLIDE WORKSHOP (DOKUMENTASI PRODUKSI)
+        // DATA SLIDE WORKSHOP
         const workshopSlides = [
             {
                 type: "video",
@@ -611,7 +608,6 @@
                 `;
             }
 
-            // Render Nav Buttons Slide 1, 2, 3...
             const navContainer = document.getElementById('workshopSlidesNav');
             navContainer.innerHTML = workshopSlides.map((s, idx) => `
                 <button onclick="setWorkshopSlide(${idx})" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${idx === currentWorkshopIndex ? 'bg-slate-900 text-white border-slate-900 shadow-sm' : 'bg-white/80 text-slate-700 border-slate-300 hover:bg-white'}">
@@ -644,28 +640,21 @@
                 category: "Abaya",
                 rating: 5.0,
                 reviewsCount: 128,
-                badge: "BEST SELLER",
-                videoUrl: "sophia-video.mp4",
+                badge: "SOLD OUT",
+                isSoldOut: true,
+                videoUrls: ["sophia-video.mp4"],
                 variants: [
                     {
                         color: "Hitam",
-                        images: [
-                            "sophia-hitam.jpeg",
-                            "sophia-hitam-slide2.jpeg",
-                        ]
+                        images: ["sophia-hitam.jpeg", "sophia-hitam-slide2.jpeg"]
                     },
                     {
                         color: "beige",
-                        images: [
-                            "sophia-beige.jpeg",
-                        ]
+                        images: ["sophia-beige.jpeg"]
                     },
                     {
                         color: "burnt choco",
-                        images: [
-                            "sophia-burnt-choco.jpeg", 
-                            "sophia-burnt-choco-slide2.jpeg"
-                        ]
+                        images: ["sophia-burnt-choco.jpeg", "sophia-burnt-choco-slide2.jpeg"]
                     }
                 ],
                 sizes: [
@@ -683,23 +672,20 @@
                 rating: 4.8,
                 reviewsCount: 95,
                 badge: "NEW",
-                videoUrl: "tarfa-video.mp4",
+                isSoldOut: false,
+                // DUKUNGAN MULTI-VIDEO (2 VIDEO) UNTUK TARFA ABAYA
+                videoUrls: [
+                    "tarfa-video.mp4", 
+                    "tarfa-video-2.mp4"
+                ],
                 variants: [
                     {
                         color: "Biru",
-                        images: [
-                            "tarfa-biru.jpeg",
-                            "tarfa-biru-slide2.jpeg",
-                            "tarfa-biru-slide3.jpeg"
-                        ]
+                        images: ["tarfa-biru.jpeg", "tarfa-biru-slide2.jpeg", "tarfa-biru-slide3.jpeg"]
                     },
                     {
                         color: "Dusty",
-                        images: [
-                            "tarfa-dusty.jpeg",
-                            "tarfa-dusty-slide2.jpeg",
-                            "tarfa-dusty-slide3.jpeg"
-                        ]
+                        images: ["tarfa-dusty.jpeg", "tarfa-dusty-slide2.jpeg", "tarfa-dusty-slide3.jpeg"]
                     }
                 ],
                 sizes: [
@@ -716,16 +702,13 @@
                 category: "Abaya",
                 rating: 4.9,
                 reviewsCount: 62,
-                badge: "HOT",
-                videoUrl: "",
+                badge: "UNIQUE",
+                isSoldOut: false, // STATUS SOLD OUT AKTIF (Ubah ke false jika barang sudah ready kembali)
+                videoUrls: ["seoul-video.mp4"],
                 variants: [
                     {
                         color: "Putih",
-                        images: [
-                            "seoul-putih.jpeg",
-                            "seoul-putih-slide2.jpeg",
-                            "seoul-putih-slide3.jpeg"
-                        ]
+                        images: ["seoul-putih.jpeg", "seoul-putih-slide2.jpeg", "seoul-putih-slide3.jpeg"]
                     }
                 ],
                 sizes: [
@@ -742,32 +725,18 @@
                 category: "Abaya",
                 rating: 5.0,
                 reviewsCount: 45,
-                badge: "NEW",
-                videoUrl: "mahya-video.mp4",
+                badge: "SOLD OUT",
+                isSoldOut: true,
+                videoUrls: ["mahya-video.mp4"],
                 variants: [
-                    {
-                        color: "mellow",
-                        images: [
-                            "mahya-mellow.jpeg"
-                        ]
-                    },
-                    {
-                        color: "matcha",
-                        images: [
-                            "mahya-matcha.jpeg"
-                        ]
-                    },
-                    {
-                        color: "malt",
-                        images: [
-                            "mahya-malt.jpeg"
-                        ]
-                    }
+                    { color: "mellow", images: ["mahya-abaya-mellow.jpeg"] },
+                    { color: "matcha", images: ["mahya-abaya-matcha.jpeg"] },
+                    { color: "malt", images: ["mahya-abaya-malt.jpeg"] }
                 ],
                 sizes: [
-                    { name: "COUNTESS (S-M)", price: 255000, desc: "LD/PB 100/130cm" },
-                    { name: "PRINCESS (L-XL)", price: 270000, desc: "LD/PB 110/135cm" },
-                    { name: "QUEEN (XXL)", price: 285000, desc: "LD/PB 120/140cm" }
+                    { name: "COUNTESS (S-M)", price: 275000, desc: "LD/PB 100/130cm" },
+                    { name: "PRINCESS (L-XL)", price: 285000, desc: "LD/PB 110/135cm" },
+                    { name: "QUEEN (XXL)", price: 300000, desc: "LD/PB 120/140cm" }
                 ],
                 material: "PREMIUM FABRIC",
                 description: "Mahya Abaya dengan pilihan warna earthy modern yang elegan dan bahan bertekstur nyaman, jatuh cantik serta anggun saat dipakai."
@@ -781,14 +750,14 @@
         let currentModalProduct = null;
         let activeVariantIndex = 0;
         let activeImageIndex = 0;
-        let activeMediaType = 'image';
+        let activeMediaType = 'image'; // 'image' atau 'video'
+        let activeVideoIndex = 0;     // Indeks video yang sedang diputar di modal
         let currentTotalWithUnique = 0;
         let countdownInterval = null;
         let currentOrderId = "";
         let currentOrderData = {};
         let uploadedProofUrl = "";
 
-        // FUNGSI DETEKSI WILAYAH DALAM PULAU JAWA
         function checkIsDalamJawa(addressText) {
             if (!addressText) return false;
             const text = addressText.toLowerCase();
@@ -824,18 +793,31 @@
                 const minPrice = Math.min(...p.sizes.map(s => s.price));
                 const firstImg = p.variants[0].images[0];
                 return `
-                    <div class="reveal-on-scroll bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm card-hover-effect flex flex-col justify-between" style="animation-delay: ${index * 0.08}s">
+                    <div class="reveal-on-scroll bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm card-hover-effect flex flex-col justify-between ${p.isSoldOut ? 'opacity-90' : ''}" style="animation-delay: ${index * 0.08}s">
                         <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden img-zoom-container skeleton-loading cursor-pointer" 
                              onclick="openProductModal(${p.id})"
                              ontouchstart="this.classList.add('is-zoomed')" 
                              ontouchend="setTimeout(() => this.classList.remove('is-zoomed'), 300)">
-                            <img src="${firstImg}" alt="${p.name}" onload="this.parentElement.classList.remove('skeleton-loading')" class="w-full h-full object-cover">
-                            ${p.badge ? `<span class="absolute top-3 left-3 bg-slate-900 text-white font-black text-[9px] px-2.5 py-1 rounded-full uppercase tracking-wider">${p.badge}</span>` : ''}
-                            ${p.videoUrl ? `<span class="absolute top-3 right-3 bg-emerald-600/90 text-white font-black text-[9px] px-2 py-1 rounded-full flex items-center gap-1 shadow-sm"><i data-lucide="video" class="w-3 h-3"></i> Video</span>` : ''}
+                            <img src="${firstImg}" alt="${p.name}" onload="this.parentElement.classList.remove('skeleton-loading')" class="w-full h-full object-cover ${p.isSoldOut ? 'grayscale-[30%]' : ''}">
+                            
+                            ${p.isSoldOut ? `
+                                <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-[2px] flex items-center justify-center">
+                                    <span class="bg-rose-950/90 text-rose-100 border border-rose-500/30 font-black text-[11px] px-4 py-1.5 rounded-full uppercase tracking-widest shadow-xl backdrop-blur-md">
+                                        SOLD OUT
+                                    </span>
+                                </div>
+                            ` : `
+                                ${p.badge ? `<span class="absolute top-3 left-3 bg-slate-900 text-white font-black text-[9px] px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">${p.badge}</span>` : ''}
+                                ${p.videoUrls && p.videoUrls.length > 0 ? `<span class="absolute top-3 right-3 bg-emerald-600/90 text-white font-black text-[9px] px-2 py-1 rounded-full flex items-center gap-1 shadow-sm"><i data-lucide="video" class="w-3 h-3"></i> ${p.videoUrls.length} Video</span>` : ''}
+                            `}
                         </div>
+
                         <div class="p-4 flex flex-col justify-between flex-1">
                             <div>
-                                <span class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-widest">${p.category}</span>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-[10px] font-extrabold ${p.isSoldOut ? 'text-rose-600' : 'text-emerald-600'} uppercase tracking-widest">${p.category}</span>
+                                    ${p.isSoldOut ? `<span class="text-[9px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md">Habis</span>` : ''}
+                                </div>
                                 <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 mt-0.5 line-clamp-1">${p.name}</h3>
                             </div>
                             <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between">
@@ -843,8 +825,8 @@
                                     <span class="text-[10px] text-slate-400 block">Mulai dari</span>
                                     <span class="font-black text-xs sm:text-sm text-slate-900">Rp ${minPrice.toLocaleString('id-ID')}</span>
                                 </div>
-                                <button onclick="openProductModal(${p.id})" class="w-8 h-8 rounded-full bg-slate-900 hover:bg-brand-600 text-white flex items-center justify-center transition-colors">
-                                    <i data-lucide="plus" class="w-4 h-4"></i>
+                                <button onclick="openProductModal(${p.id})" class="w-8 h-8 rounded-full ${p.isSoldOut ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-slate-900 hover:bg-brand-600 text-white'} flex items-center justify-center transition-colors">
+                                    <i data-lucide="${p.isSoldOut ? 'eye' : 'plus'}" class="w-4 h-4"></i>
                                 </button>
                             </div>
                         </div>
@@ -924,6 +906,7 @@
             activeVariantIndex = 0;
             activeImageIndex = 0;
             activeMediaType = 'image';
+            activeVideoIndex = 0;
 
             renderModalContent();
             document.getElementById('productModal').classList.remove('hidden');
@@ -944,13 +927,22 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-3">
                         <div class="aspect-[3/4] bg-slate-100 rounded-2xl overflow-hidden border relative img-zoom-container">
-                            ${activeMediaType === 'video' && p.videoUrl ? `
-                                <video src="${p.videoUrl}" controls autoplay class="w-full h-full object-cover rounded-2xl"></video>
+                            ${activeMediaType === 'video' && p.videoUrls && p.videoUrls.length > 0 ? `
+                                <video src="${p.videoUrls[activeVideoIndex]}" controls autoplay class="w-full h-full object-cover rounded-2xl"></video>
+                                <div class="absolute top-3 left-3 bg-emerald-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10">
+                                    Memutar Video ${activeVideoIndex + 1} dari ${p.videoUrls.length}
+                                </div>
                             ` : `
-                                <img src="${currentImg}" class="w-full h-full object-cover">
+                                <img src="${currentImg}" class="w-full h-full object-cover ${p.isSoldOut ? 'grayscale-[20%]' : ''}">
                             `}
+                            ${p.isSoldOut ? `
+                                <div class="absolute top-4 left-4 bg-rose-950/90 text-rose-100 font-black text-xs px-3.5 py-1.5 rounded-full uppercase tracking-widest border border-rose-500/30 shadow-lg backdrop-blur-md">
+                                    SOLD OUT
+                                </div>
+                            ` : ''}
                         </div>
                         
+                        <!-- Thumbnail Pilihan Foto & Video -->
                         <div class="flex items-center gap-2 overflow-x-auto pb-1">
                             ${activeVariant.images.map((img, idx) => `
                                 <button onclick="changeModalImage(${idx})" class="w-14 h-14 rounded-xl overflow-hidden border-2 flex-shrink-0 ${activeMediaType === 'image' && idx === activeImageIndex ? 'border-slate-900 shadow-sm' : 'border-transparent opacity-60'}">
@@ -958,18 +950,21 @@
                                 </button>
                             `).join('')}
                             
-                            ${p.videoUrl ? `
-                                <button onclick="changeToVideo()" class="w-14 h-14 rounded-xl overflow-hidden border-2 flex-shrink-0 bg-slate-900 text-white flex flex-col items-center justify-center gap-0.5 ${activeMediaType === 'video' ? 'border-emerald-500 ring-2 ring-emerald-500 shadow-md' : 'border-transparent opacity-80'}">
-                                    <i data-lucide="video" class="w-5 h-5 text-emerald-400"></i>
-                                    <span class="text-[9px] font-bold">Video</span>
+                            ${p.videoUrls && p.videoUrls.map((vid, vIdx) => `
+                                <button onclick="changeToVideo(${vIdx})" class="w-14 h-14 rounded-xl overflow-hidden border-2 flex-shrink-0 bg-slate-900 text-white flex flex-col items-center justify-center gap-0.5 ${activeMediaType === 'video' && activeVideoIndex === vIdx ? 'border-emerald-500 ring-2 ring-emerald-500 shadow-md' : 'border-transparent opacity-80'}">
+                                    <i data-lucide="video" class="w-4 h-4 text-emerald-400"></i>
+                                    <span class="text-[9px] font-bold">Vid ${vIdx + 1}</span>
                                 </button>
-                            ` : ''}
+                            `).join('')}
                         </div>
                     </div>
 
                     <div class="flex flex-col justify-between">
                         <div>
-                            <span class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-widest">${p.category}</span>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-widest">${p.category}</span>
+                                ${p.isSoldOut ? `<span class="bg-rose-100 text-rose-800 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Sold Out</span>` : ''}
+                            </div>
                             <h2 class="text-xl font-black text-slate-900 mt-1">${p.name}</h2>
                             <div class="flex items-center gap-2 mt-2">
                                 <span class="font-black text-lg text-slate-900">Rp ${selectedSizeObj.price.toLocaleString('id-ID')}</span>
@@ -1001,14 +996,27 @@
                         </div>
 
                         <div class="mt-6 pt-4 border-t border-slate-100 space-y-2">
-                            <button onclick="addToCartFromModal()" class="w-full bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs py-3.5 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2">
-                                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-                                <span>Tambah ke Keranjang</span>
-                            </button>
-                            <button onclick="askProductToWA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-3 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2">
-                                <i data-lucide="message-circle" class="w-4 h-4"></i>
-                                <span>Tanya Stok & Bahan via WhatsApp</span>
-                            </button>
+                            ${p.isSoldOut ? `
+                                <div class="bg-rose-50 border border-rose-200 p-3.5 rounded-2xl text-center">
+                                    <p class="text-xs font-bold text-rose-800 flex items-center justify-center gap-1.5">
+                                        <i data-lucide="alert-circle" class="w-4 h-4 text-rose-600"></i> Maaf, Produk Ini Sudah Sold Out
+                                    </p>
+                                    <p class="text-[10px] text-rose-600 mt-1">Stok untuk batch ini telah habis. Silakan hubungi admin untuk info restok.</p>
+                                </div>
+                                <button onclick="askProductToWA()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs py-3.5 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2">
+                                    <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i>
+                                    <span>Tanya Info Restok / PO via WhatsApp</span>
+                                </button>
+                            ` : `
+                                <button onclick="addToCartFromModal()" class="w-full bg-brand-500 hover:bg-brand-600 text-slate-950 font-black text-xs py-3.5 rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2">
+                                    <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                                    <span>Tambah ke Keranjang</span>
+                                </button>
+                                <button onclick="askProductToWA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-3 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2">
+                                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                                    <span>Tanya Stok & Bahan via WhatsApp</span>
+                                </button>
+                            `}
                         </div>
                     </div>
                 </div>
@@ -1029,8 +1037,9 @@
             renderModalContent();
         }
 
-        function changeToVideo() {
+        function changeToVideo(vIdx = 0) {
             activeMediaType = 'video';
+            activeVideoIndex = vIdx;
             renderModalContent();
         }
 
@@ -1044,7 +1053,9 @@
             const p = currentModalProduct;
             const activeVariant = p.variants[activeVariantIndex];
             
-            const message = `Halo Kak, saya ingin bertanya mengenai produk berikut:\n\n*${p.name}*\n- Warna: ${activeVariant.color}\n- Ukuran: ${selectedSizeObj.name} (${selectedSizeObj.desc})\n- Harga: Rp ${selectedSizeObj.price.toLocaleString('id-ID')}\n- Bahan: ${p.material}\n\nApakah stok warna dan ukuran tersebut tersedia? Dan bagaimana detail bahannya? Terima kasih.`;
+            const message = p.isSoldOut ? 
+                `Halo Kak, saya berminat dengan produk *${p.name}* (${activeVariant.color}, Size ${selectedSizeObj.name}) yang sudah Sold Out. Apakah ada rencana restok atau bisa Pre-Order (PO)?` :
+                `Halo Kak, saya ingin bertanya mengenai produk berikut:\n\n*${p.name}*\n- Warna: ${activeVariant.color}\n- Ukuran: ${selectedSizeObj.name} (${selectedSizeObj.desc})\n- Harga: Rp ${selectedSizeObj.price.toLocaleString('id-ID')}\n- Bahan: ${p.material}\n\nApakah stok warna dan ukuran tersebut tersedia? Terima kasih.`;
             
             const encodedMessage = encodeURIComponent(message);
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -1057,6 +1068,10 @@
         }
 
         function addToCartFromModal() {
+            if (currentModalProduct.isSoldOut) {
+                alert("Maaf, produk ini sudah habis!");
+                return;
+            }
             const variantColor = currentModalProduct.variants[activeVariantIndex].color;
             const currentImg = currentModalProduct.variants[activeVariantIndex].images[activeImageIndex];
             const itemKey = `${currentModalProduct.id}-${variantColor}-${selectedSizeObj.name}`;
@@ -1130,7 +1145,6 @@
 
             document.getElementById('cartSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
             
-            // CEK ALAMAT PENERIMA UNTUK CEK DALAM JAWA
             const custAddressEl = document.getElementById('custAddress');
             const userAddress = custAddressEl ? custAddressEl.value : '';
             const isDalamJawa = checkIsDalamJawa(userAddress);
@@ -1149,7 +1163,7 @@
             } else {
                 document.getElementById('freeShippingBar').style.width = `0%`;
                 document.getElementById('freeShippingPercent').innerText = `0%`;
-                document.getElementById('freeShippingHint').innerHTML = `Promo Gratis Ongkir berlaku khusus untuk pengiriman ke <b class="text-slate-900">Dalam Pulau Jawa</b> (Min. Rp 250.000). Pengiriman luar Jawa dikenakan biaya ongkir.`;
+                document.getElementById('freeShippingHint').innerHTML = `Promo Gratis Ongkir berlaku khusus untuk pengiriman ke <b class="text-slate-900">Dalam Pulau Jawa</b> (Min. Rp 250.000).`;
             }
 
             lucide.createIcons();
