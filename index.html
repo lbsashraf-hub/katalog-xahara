@@ -102,10 +102,12 @@
             100% { transform: translateX(200%) skewX(-15deg); }
         }
 
+        /* WARNA BACKGROUND KREM / NUDE ELEGAN SENADA */
         .luxury-banner {
-            background: linear-gradient(135deg, #e4d8d3 0%, #d7ccc8 50%, #c4b5af 100%);
+            background: linear-gradient(135deg, #e8dfdb 0%, #dcd0cb 50%, #cebfaa 100%);
             position: relative;
             overflow: hidden;
+            color: #1e293b;
         }
 
         .luxury-banner::after {
@@ -212,12 +214,12 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 flex-1 w-full">
         
         <!-- HERO BANNER -->
-        <div id="heroBanner" class="relative rounded-3xl overflow-hidden shadow-2xl mb-10 luxury-banner min-h-[300px] sm:min-h-[380px] flex items-center animate-fade-in-up px-6 sm:px-12 border border-white/40">
+        <div id="heroBanner" class="relative rounded-3xl overflow-hidden shadow-2xl mb-8 luxury-banner min-h-[300px] sm:min-h-[380px] flex items-center animate-fade-in-up px-6 sm:px-12 border border-slate-300/40">
             <div class="relative z-20 max-w-xl">
-                <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/60 text-slate-900 text-[11px] font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-widest mb-4 shadow-sm">
+                <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/80 text-slate-900 text-[11px] font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-widest mb-4 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-slate-900 animate-ping"></span> NEW COLLECTION 2026
                 </div>
-                <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-none mb-3 text-slate-950 drop-shadow-sm">
+                <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-none mb-3 text-slate-900 drop-shadow-sm">
                     EXCLUSIVE <br><span class="text-amber-950">ABAYA & GAMIS</span>
                 </h1>
                 <p class="text-slate-800 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
@@ -230,6 +232,72 @@
                 </div>
             </div>
         </div>
+
+        <!-- SEKSI SHOWCASE DOKUMENTASI WORKSHOP (DENGAN SLIDER VIDEO/FOTO 1, 2, 3...) -->
+        <section class="mb-14 reveal-on-scroll">
+            <div class="luxury-banner text-slate-900 rounded-3xl p-6 sm:p-10 shadow-2xl border border-slate-300/40 relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                    
+                    <!-- Kiri: Teks Deskripsi & Tombol Slide Selector -->
+                    <div class="lg:col-span-6 space-y-4">
+                        <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/80 text-slate-900 text-[11px] font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
+                            <i data-lucide="scissors" class="w-3.5 h-3.5"></i> 100% IN-HOUSE PRODUCTION
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-tight text-slate-900">
+                            Dari Workshop Sendiri di <span class="text-amber-950">Tasikmalaya</span>
+                        </h2>
+                        <p class="text-slate-800 text-xs sm:text-sm leading-relaxed font-medium" id="workshopDesc">
+                            Setiap potong busana Xahara's Wardrobe dikerjakan secara langsung oleh penjahit profesional kami. Bukan barang impor maupun konveksi masal asal pasaran, kami memastikan kualitas pola, kerapihan jahitan tepi, hingga ketahanan bahan terjaga secara presisi.
+                        </p>
+                        
+                        <!-- Navigasi Slide 1, Slide 2, Slide 3... -->
+                        <div class="pt-2">
+                            <p class="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-2">Pilih Dokumentasi Slide:</p>
+                            <div id="workshopSlidesNav" class="flex flex-wrap gap-2">
+                                <!-- Rendered via JS -->
+                            </div>
+                        </div>
+
+                        <!-- Poin Keunggulan Jahitan -->
+                        <div class="grid grid-cols-2 gap-3 pt-2">
+                            <div class="flex items-center gap-2.5 p-3 rounded-2xl bg-white/60 border border-white/60 backdrop-blur-sm shadow-sm">
+                                <div class="p-2 bg-slate-900 text-white rounded-xl">
+                                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                                </div>
+                                <span class="text-xs font-bold text-slate-900">Jahitan Rapi & Kuat</span>
+                            </div>
+                            <div class="flex items-center gap-2.5 p-3 rounded-2xl bg-white/60 border border-white/60 backdrop-blur-sm shadow-sm">
+                                <div class="p-2 bg-slate-900 text-white rounded-xl">
+                                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                                </div>
+                                <span class="text-xs font-bold text-slate-900">Bahan Premium Ironless</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kanan: Pemutar Slide Media (Video / Foto) -->
+                    <div class="lg:col-span-6">
+                        <div class="relative rounded-2xl overflow-hidden border-2 border-white/50 shadow-2xl aspect-video bg-slate-950 group">
+                            <div id="workshopMediaContainer" class="w-full h-full flex items-center justify-center">
+                                <!-- Ditampilkan via JS -->
+                            </div>
+                            <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-white/10 z-20">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> <span id="workshopBadgeLabel">Slide 1: Proses Pemotongan Kain</span>
+                            </div>
+
+                            <!-- Tombol Navigasi Kiri / Kanan Slide -->
+                            <button onclick="prevWorkshopSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full backdrop-blur-md transition z-20">
+                                <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                            </button>
+                            <button onclick="nextWorkshopSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/80 text-white p-2 rounded-full backdrop-blur-md transition z-20">
+                                <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
         <!-- CATALOG SECTION HEADER -->
         <div id="catalog" class="pt-4 mb-6 animate-fade-in-up">
@@ -497,6 +565,78 @@
         // API Key ImgBB Anda yang aktif
         const IMGBB_API_KEY = "bcf26c98b3050eeb8ac783af8b260a89"; 
 
+        // DATA SLIDE WORKSHOP (DOKUMENTASI PRODUKSI)
+        const workshopSlides = [
+            {
+                type: "video",
+                src: "proses-penjahitan.mp4",
+                title: "Slide 1: Proses Pemotongan Kain",
+                desc: "Setiap potong busana Xahara's Wardrobe dikerjakan secara langsung oleh penjahit profesional kami. Bukan barang impor maupun konveksi masal asal pasaran, kami memastikan kualitas pola terjaga presisi."
+            },
+            {
+                type: "video",
+                src: "proses-penjahitan-2.mp4",
+                title: "Slide 2: Proses Penjahitan Detail",
+                desc: "Tahap penjahitan menggunakan mesin berstandar tinggi dengan ketelitian pada setiap tepian jahitan, memastikan busana tidak mudah robek, rapi, dan nyaman dipakai seharian."
+            },
+            {
+                type: "video",
+                src: "proses-penjahitan-3.mp4",
+                title: "Slide 3: Quality Control & Finishing",
+                desc: "Sebelum dikemas dan dikirim ke seluruh pelanggan, setiap produk melewati tahap penyetrikaan uap, pembersihan benang sisa, dan pengecekan kualitas 2 layer."
+            }
+        ];
+
+        let currentWorkshopIndex = 0;
+
+        function renderWorkshopSlide() {
+            const slide = workshopSlides[currentWorkshopIndex];
+            const container = document.getElementById('workshopMediaContainer');
+            const badgeLabel = document.getElementById('workshopBadgeLabel');
+            const descEl = document.getElementById('workshopDesc');
+
+            badgeLabel.innerText = slide.title;
+            descEl.innerText = slide.desc;
+
+            if (slide.type === 'video') {
+                container.innerHTML = `
+                    <video autoplay muted loop playsinline controls class="w-full h-full object-cover">
+                        <source src="${slide.src}" type="video/mp4">
+                        Browser Anda tidak mendukung video HTML5.
+                    </video>
+                `;
+            } else {
+                container.innerHTML = `
+                    <img src="${slide.src}" class="w-full h-full object-cover">
+                `;
+            }
+
+            // Render Nav Buttons Slide 1, 2, 3...
+            const navContainer = document.getElementById('workshopSlidesNav');
+            navContainer.innerHTML = workshopSlides.map((s, idx) => `
+                <button onclick="setWorkshopSlide(${idx})" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${idx === currentWorkshopIndex ? 'bg-slate-900 text-white border-slate-900 shadow-sm' : 'bg-white/80 text-slate-700 border-slate-300 hover:bg-white'}">
+                    Slide ${idx + 1}
+                </button>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function nextWorkshopSlide() {
+            currentWorkshopIndex = (currentWorkshopIndex + 1) % workshopSlides.length;
+            renderWorkshopSlide();
+        }
+
+        function prevWorkshopSlide() {
+            currentWorkshopIndex = (currentWorkshopIndex - 1 + workshopSlides.length) % workshopSlides.length;
+            renderWorkshopSlide();
+        }
+
+        function setWorkshopSlide(idx) {
+            currentWorkshopIndex = idx;
+            renderWorkshopSlide();
+        }
+
         const products = [
             {
                 id: 1,
@@ -505,7 +645,7 @@
                 rating: 5.0,
                 reviewsCount: 128,
                 badge: "BEST SELLER",
-                videoUrl: "sophia-video.mp4", // Dukungan video produk diaktifkan kembali
+                videoUrl: "sophia-video.mp4",
                 variants: [
                     {
                         color: "Hitam",
@@ -543,7 +683,7 @@
                 rating: 4.8,
                 reviewsCount: 95,
                 badge: "NEW",
-                videoUrl: "tarfa-video.mp4", // Dukungan video produk diaktifkan kembali
+                videoUrl: "tarfa-video.mp4",
                 variants: [
                     {
                         color: "Biru",
@@ -608,19 +748,19 @@
                     {
                         color: "mellow",
                         images: [
-                            "mahya-abaya-mellow.jpeg"
+                            "mahya-mellow.jpeg"
                         ]
                     },
                     {
                         color: "matcha",
                         images: [
-                            "mahya-abaya-matcha.jpeg"
+                            "mahya-matcha.jpeg"
                         ]
                     },
                     {
                         color: "malt",
                         images: [
-                            "mahya-abaya-malt.jpeg"
+                            "mahya-malt.jpeg"
                         ]
                     }
                 ],
@@ -664,6 +804,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts(products);
+            renderWorkshopSlide();
             setupSearchListeners();
             lucide.createIcons();
         });
