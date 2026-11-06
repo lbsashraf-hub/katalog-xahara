@@ -102,6 +102,7 @@
             100% { transform: translateX(200%) skewX(-15deg); }
         }
 
+        /* WARNA BACKGROUND KREM / NUDE ELEGAN SENADA */
         .luxury-banner {
             background: linear-gradient(135deg, #e8dfdb 0%, #dcd0cb 50%, #cebfaa 100%);
             position: relative;
@@ -232,10 +233,12 @@
             </div>
         </div>
 
-        <!-- SEKSI SHOWCASE DOKUMENTASI WORKSHOP -->
+        <!-- SEKSI SHOWCASE DOKUMENTASI WORKSHOP (DENGAN SLIDER VIDEO/FOTO) -->
         <section class="mb-14 reveal-on-scroll">
             <div class="luxury-banner text-slate-900 rounded-3xl p-6 sm:p-10 shadow-2xl border border-slate-300/40 relative overflow-hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                    
+                    <!-- Kiri: Teks Deskripsi & Tombol Slide Selector -->
                     <div class="lg:col-span-6 space-y-4">
                         <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/80 text-slate-900 text-[11px] font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                             <i data-lucide="scissors" class="w-3.5 h-3.5"></i> 100% IN-HOUSE PRODUCTION
@@ -247,11 +250,15 @@
                             Setiap potong busana Xahara's Wardrobe dikerjakan secara langsung oleh penjahit profesional kami. Bukan barang impor maupun konveksi masal asal pasaran, kami memastikan kualitas pola, kerapihan jahitan tepi, hingga ketahanan bahan terjaga secara presisi.
                         </p>
                         
+                        <!-- Navigasi Slide -->
                         <div class="pt-2">
                             <p class="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-2">Pilih Dokumentasi Slide:</p>
-                            <div id="workshopSlidesNav" class="flex flex-wrap gap-2"></div>
+                            <div id="workshopSlidesNav" class="flex flex-wrap gap-2">
+                                <!-- Rendered via JS -->
+                            </div>
                         </div>
 
+                        <!-- Poin Keunggulan Jahitan -->
                         <div class="grid grid-cols-2 gap-3 pt-2">
                             <div class="flex items-center gap-2.5 p-3 rounded-2xl bg-white/60 border border-white/60 backdrop-blur-sm shadow-sm">
                                 <div class="p-2 bg-slate-900 text-white rounded-xl">
@@ -268,9 +275,12 @@
                         </div>
                     </div>
 
+                    <!-- Kanan: Pemutar Slide Media -->
                     <div class="lg:col-span-6">
                         <div class="relative rounded-2xl overflow-hidden border-2 border-white/50 shadow-2xl aspect-video bg-slate-950 group">
-                            <div id="workshopMediaContainer" class="w-full h-full flex items-center justify-center"></div>
+                            <div id="workshopMediaContainer" class="w-full h-full flex items-center justify-center">
+                                <!-- Ditampilkan via JS -->
+                            </div>
                             <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-white/10 z-20">
                                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> <span id="workshopBadgeLabel">Slide 1</span>
                             </div>
@@ -283,6 +293,7 @@
                             </button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -305,6 +316,7 @@
                 </div>
             </div>
 
+            <!-- Categories Filter Pills -->
             <div class="flex items-center gap-2 overflow-x-auto py-4 custom-scrollbar" id="categoryContainer">
                 <button onclick="filterCategory('all', this)" class="cat-btn active bg-slate-900 text-white px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md transition-all duration-300">Semua Produk</button>
                 <button onclick="filterCategory('Abaya', this)" class="cat-btn bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 px-5 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-300">Abaya</button>
@@ -313,7 +325,9 @@
         </div>
 
         <!-- PRODUCT GRID -->
-        <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
+        <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            <!-- Rendered via JavaScript -->
+        </div>
 
         <!-- EMPTY STATE -->
         <div id="emptyState" class="hidden text-center py-20 bg-white rounded-3xl border border-slate-200/80 my-8">
@@ -323,6 +337,7 @@
             <h3 class="text-base font-bold text-slate-800">Produk Tidak Ditemukan</h3>
             <p class="text-xs text-slate-500 mt-1">Coba gunakan kata kunci pencarian atau kategori lain.</p>
         </div>
+
     </main>
 
     <!-- FOOTER -->
@@ -363,10 +378,12 @@
                     <span>Paling Populer</span>
                     <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 sort-check"></i>
                 </button>
+
                 <button onclick="selectSort('low-high', 'Harga: Termurah')" class="sort-opt-btn w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition-all">
                     <span>Harga: Termurah</span>
                     <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 hidden sort-check"></i>
                 </button>
+
                 <button onclick="selectSort('high-low', 'Harga: Termahal')" class="sort-opt-btn w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition-all">
                     <span>Harga: Termahal</span>
                     <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 hidden sort-check"></i>
@@ -381,7 +398,9 @@
             <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-white/90 hover:bg-white text-slate-700 p-2 rounded-full z-20 shadow-md transition-all hover:rotate-90">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
-            <div id="modalContent" class="p-6 overflow-y-auto custom-scrollbar"></div>
+            <div id="modalContent" class="p-6 overflow-y-auto custom-scrollbar">
+                <!-- Rendered via JS -->
+            </div>
         </div>
     </div>
 
@@ -421,7 +440,9 @@
 
             <!-- STEP 1: CART ITEMS -->
             <div id="cartStepItems" class="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar">
-                <div id="cartList" class="space-y-3"></div>
+                <div id="cartList" class="space-y-3">
+                    <!-- Rendered via JS -->
+                </div>
             </div>
 
             <!-- STEP 2: CHECKOUT FORM -->
@@ -468,6 +489,7 @@
                     </div>
                     <p id="uniqueCodeText" class="text-[10px] text-emerald-600 font-bold mt-1">Kode Unik Rp 0</p>
 
+                    <!-- QRIS Image Display -->
                     <div class="my-4 p-4 bg-slate-50 border border-dashed border-slate-300 rounded-2xl w-full max-w-xs mx-auto">
                         <div class="relative group cursor-pointer" onclick="openQrisZoom()">
                             <img src="qris.jpg" alt="QRIS DANA" class="w-full h-auto max-h-[350px] object-contain mx-auto rounded-xl shadow-md border bg-white p-2 transition-transform duration-300 group-hover:scale-105">
@@ -481,6 +503,7 @@
                     </div>
                 </div>
 
+                <!-- Upload Bukti Transfer -->
                 <div class="space-y-2">
                     <label class="block text-xs font-bold text-slate-800">Upload Bukti Transfer Pembayaran</label>
                     <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:bg-slate-50 transition cursor-pointer relative">
@@ -499,6 +522,7 @@
                 </div>
             </div>
 
+            <!-- CART FOOTER ACTIONS -->
             <div id="cartFooter" class="p-5 border-t border-slate-100 bg-slate-50/50">
                 <div class="flex items-center justify-between mb-3">
                     <span class="text-xs font-bold text-slate-500">Subtotal</span>
@@ -510,6 +534,7 @@
                 </button>
             </div>
 
+            <!-- PAYMENT FOOTER ACTIONS -->
             <div id="paymentFooter" class="p-5 border-t border-slate-100 bg-slate-50/50 hidden">
                 <button id="btnConfirmWA" onclick="confirmAndSendWA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-3.5 rounded-2xl shadow-lg transition-all text-center flex items-center justify-center gap-2 btn-pulse-glow">
                     <i data-lucide="message-circle" class="w-4 h-4"></i>
@@ -537,6 +562,7 @@
         const FREE_SHIPPING_MIN = 250000; 
         const IMGBB_API_KEY = "bcf26c98b3050eeb8ac783af8b260a89"; 
 
+        // DATA SLIDE WORKSHOP
         const workshopSlides = [
             {
                 type: "video",
@@ -566,8 +592,6 @@
             const badgeLabel = document.getElementById('workshopBadgeLabel');
             const descEl = document.getElementById('workshopDesc');
 
-            if (!container || !badgeLabel || !descEl) return;
-
             badgeLabel.innerText = slide.title;
             descEl.innerText = slide.desc;
 
@@ -585,13 +609,11 @@
             }
 
             const navContainer = document.getElementById('workshopSlidesNav');
-            if (navContainer) {
-                navContainer.innerHTML = workshopSlides.map((s, idx) => `
-                    <button onclick="setWorkshopSlide(${idx})" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${idx === currentWorkshopIndex ? 'bg-slate-900 text-white border-slate-900 shadow-sm' : 'bg-white/80 text-slate-700 border-slate-300 hover:bg-white'}">
-                        Slide ${idx + 1}
-                    </button>
-                `).join('');
-            }
+            navContainer.innerHTML = workshopSlides.map((s, idx) => `
+                <button onclick="setWorkshopSlide(${idx})" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${idx === currentWorkshopIndex ? 'bg-slate-900 text-white border-slate-900 shadow-sm' : 'bg-white/80 text-slate-700 border-slate-300 hover:bg-white'}">
+                    Slide ${idx + 1}
+                </button>
+            `).join('');
 
             lucide.createIcons();
         }
@@ -622,9 +644,18 @@
                 isSoldOut: true,
                 videoUrls: ["sophia-video.mp4"],
                 variants: [
-                    { color: "Hitam", images: ["sophia-hitam.jpeg", "sophia-hitam-slide2.jpeg"] },
-                    { color: "beige", images: ["sophia-beige.jpeg"] },
-                    { color: "burnt choco", images: ["sophia-burnt-choco.jpeg", "sophia-burnt-choco-slide2.jpeg"] }
+                    {
+                        color: "Hitam",
+                        images: ["sophia-hitam.jpeg", "sophia-hitam-slide2.jpeg"]
+                    },
+                    {
+                        color: "beige",
+                        images: ["sophia-beige.jpeg"]
+                    },
+                    {
+                        color: "burnt choco",
+                        images: ["sophia-burnt-choco.jpeg", "sophia-burnt-choco-slide2.jpeg"]
+                    }
                 ],
                 sizes: [
                     { name: "COUNTESS (S-M)", price: 255000, desc: "LD/PB 100/130cm" },
@@ -632,11 +663,7 @@
                     { name: "QUEEN (XXL)", price: 285000, desc: "LD/PB 120/140cm" }
                 ],
                 material: "SOPHIA ANTI UV JACQUARD",
-                description: "Abaya eksklusif bermaterial Sophia Anti UV Jacquard. Karakteristik: Flowy, Ironless, Tidak Menerawang, dan Adem.",
-                reviews: [
-                    { name: "Siti A.", rating: 5, date: "12 Okt 2026", comment: "Bahan nya adem banget dan beneran ironless gak gampang kusut!", photo: "https://i.ibb.co/6R3p81S/sophia-hitam.jpg" },
-                    { name: "Dewi R.", rating: 5, date: "18 Okt 2026", comment: "Jahitan rapih banget khas Tasikmalaya, puas belanja di sini.", photo: "" }
-                ]
+                description: "Abaya eksklusif bermaterial Sophia Anti UV Jacquard. Karakteristik: Flowy, Ironless, Tidak Menerawang, dan Adem."
             },
             {
                 id: 2,
@@ -646,10 +673,20 @@
                 reviewsCount: 95,
                 badge: "NEW",
                 isSoldOut: false,
-                videoUrls: ["tarfa-video.mp4", "tarfa-video-2.mp4"],
+                // DUKUNGAN MULTI-VIDEO (2 VIDEO) UNTUK TARFA ABAYA
+                videoUrls: [
+                    "tarfa-video.mp4", 
+                    "tarfa-video-2.mp4"
+                ],
                 variants: [
-                    { color: "Biru", images: ["tarfa-biru.jpeg", "tarfa-biru-slide2.jpeg", "tarfa-biru-slide3.jpeg"] },
-                    { color: "Dusty", images: ["tarfa-dusty.jpeg", "tarfa-dusty-slide2.jpeg", "tarfa-dusty-slide3.jpeg"] }
+                    {
+                        color: "Biru",
+                        images: ["tarfa-biru.jpeg", "tarfa-biru-slide2.jpeg", "tarfa-biru-slide3.jpeg"]
+                    },
+                    {
+                        color: "Dusty",
+                        images: ["tarfa-dusty.jpeg", "tarfa-dusty-slide2.jpeg", "tarfa-dusty-slide3.jpeg"]
+                    }
                 ],
                 sizes: [
                     { name: "COUNTESS (S-M)", price: 245000, desc: "LD/PB 100/130cm" },
@@ -657,10 +694,7 @@
                     { name: "QUEEN (XXL)", price: 270000, desc: "LD/PB 120/140cm" }
                 ],
                 material: "CERUTY BABYDOLL PREMIUM + FURING KATUN",
-                description: "Gamis mewah berbahan Ceruty Babydoll berkualitas tinggi dilapisi furing katun adem. Desain anggun dengan detail pita dan potongan lebar yang jatuh cantik.",
-                reviews: [
-                    { name: "Rina M.", rating: 5, date: "02 Nov 2026", comment: "Cantik banget warnanya, pas dipakai anggun dan jatuh di badan.", photo: "" }
-                ]
+                description: "Gamis mewah berbahan Ceruty Babydoll berkualitas tinggi dilapisi furing katun adem. Desain anggun dengan detail pita dan potongan lebar yang jatuh cantik."
             },
             {
                 id: 3,
@@ -669,10 +703,13 @@
                 rating: 4.9,
                 reviewsCount: 62,
                 badge: "UNIQUE",
-                isSoldOut: false,
+                isSoldOut: false, // STATUS SOLD OUT AKTIF (Ubah ke false jika barang sudah ready kembali)
                 videoUrls: ["seoul-video.mp4"],
                 variants: [
-                    { color: "Putih", images: ["seoul-putih.jpeg", "seoul-putih-slide2.jpeg", "seoul-putih-slide3.jpeg"] }
+                    {
+                        color: "Putih",
+                        images: ["seoul-putih.jpeg", "seoul-putih-slide2.jpeg", "seoul-putih-slide3.jpeg"]
+                    }
                 ],
                 sizes: [
                     { name: "COUNTESS (S-M)", price: 260000, desc: "LD/PB 100/130cm" },
@@ -680,8 +717,7 @@
                     { name: "QUEEN (XXL)", price: 285000, desc: "LD/PB 120/140cm" }
                 ],
                 material: "CERUTY BABYDOLL PREMIUM",
-                description: "Seoul Abaya dengan desain elegan khas korea, berbahan ceruty premium berfuring yang nyaman dan anggun dikenakan.",
-                reviews: []
+                description: "Seoul Abaya dengan desain elegan khas korea, berbahan ceruty premium berfuring yang nyaman dan anggun dikenakan."
             },
             {
                 id: 4,
@@ -703,8 +739,7 @@
                     { name: "QUEEN (XXL)", price: 300000, desc: "LD/PB 120/140cm" }
                 ],
                 material: "PREMIUM FABRIC",
-                description: "Mahya Abaya dengan pilihan warna earthy modern yang elegan dan bahan bertekstur nyaman, jatuh cantik serta anggun saat dipakai.",
-                reviews: []
+                description: "Mahya Abaya dengan pilihan warna earthy modern yang elegan dan bahan bertekstur nyaman, jatuh cantik serta anggun saat dipakai."
             }
         ];
 
@@ -715,14 +750,13 @@
         let currentModalProduct = null;
         let activeVariantIndex = 0;
         let activeImageIndex = 0;
-        let activeMediaType = 'image'; 
-        let activeVideoIndex = 0;     
+        let activeMediaType = 'image'; // 'image' atau 'video'
+        let activeVideoIndex = 0;     // Indeks video yang sedang diputar di modal
         let currentTotalWithUnique = 0;
         let countdownInterval = null;
         let currentOrderId = "";
         let currentOrderData = {};
         let uploadedProofUrl = "";
-        let newReviewPhotoBase64 = "";
 
         function checkIsDalamJawa(addressText) {
             if (!addressText) return false;
@@ -748,8 +782,6 @@
             const grid = document.getElementById('productGrid');
             const emptyState = document.getElementById('emptyState');
 
-            if (!grid || !emptyState) return;
-
             if (!list || list.length === 0) {
                 grid.innerHTML = '';
                 emptyState.classList.remove('hidden');
@@ -763,7 +795,9 @@
                 return `
                     <div class="reveal-on-scroll bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm card-hover-effect flex flex-col justify-between ${p.isSoldOut ? 'opacity-90' : ''}" style="animation-delay: ${index * 0.08}s">
                         <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden img-zoom-container skeleton-loading cursor-pointer" 
-                             onclick="openProductModal(${p.id})">
+                             onclick="openProductModal(${p.id})"
+                             ontouchstart="this.classList.add('is-zoomed')" 
+                             ontouchend="setTimeout(() => this.classList.remove('is-zoomed'), 300)">
                             <img src="${firstImg}" alt="${p.name}" onload="this.parentElement.classList.remove('skeleton-loading')" class="w-full h-full object-cover ${p.isSoldOut ? 'grayscale-[30%]' : ''}">
                             
                             ${p.isSoldOut ? `
@@ -837,16 +871,13 @@
 
         function toggleSortModal(show) {
             const m = document.getElementById('sortModal');
-            if(m) {
-                if(show) m.classList.remove('hidden');
-                else m.classList.add('hidden');
-            }
+            if(show) m.classList.remove('hidden');
+            else m.classList.add('hidden');
         }
 
         function selectSort(type, label) {
             currentSortType = type;
-            const sortLabelEl = document.getElementById('currentSortLabel');
-            if(sortLabelEl) sortLabelEl.innerText = label;
+            document.getElementById('currentSortLabel').innerText = label;
             toggleSortModal(false);
             applyFilters();
         }
@@ -870,35 +901,28 @@
 
         function openProductModal(id) {
             const product = products.find(p => p.id === id);
-            if (!product) return;
             currentModalProduct = product;
             selectedSizeObj = product.sizes[0];
             activeVariantIndex = 0;
             activeImageIndex = 0;
             activeMediaType = 'image';
             activeVideoIndex = 0;
-            newReviewPhotoBase64 = "";
 
             renderModalContent();
-            const modal = document.getElementById('productModal');
-            if(modal) modal.classList.remove('hidden');
+            document.getElementById('productModal').classList.remove('hidden');
             lucide.createIcons();
         }
 
         function closeProductModal() {
-            const modal = document.getElementById('productModal');
-            if(modal) modal.classList.add('hidden');
+            document.getElementById('productModal').classList.add('hidden');
         }
 
         function renderModalContent() {
             const p = currentModalProduct;
-            if (!p) return;
             const activeVariant = p.variants[activeVariantIndex];
             const currentImg = activeVariant.images[activeImageIndex];
 
             const content = document.getElementById('modalContent');
-            if (!content) return;
-
             content.innerHTML = `
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-3">
@@ -918,6 +942,7 @@
                             ` : ''}
                         </div>
                         
+                        <!-- Thumbnail Pilihan Foto & Video -->
                         <div class="flex items-center gap-2 overflow-x-auto pb-1">
                             ${activeVariant.images.map((img, idx) => `
                                 <button onclick="changeModalImage(${idx})" class="w-14 h-14 rounded-xl overflow-hidden border-2 flex-shrink-0 ${activeMediaType === 'image' && idx === activeImageIndex ? 'border-slate-900 shadow-sm' : 'border-transparent opacity-60'}">
@@ -995,181 +1020,8 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- SEKSI ULASAN & FOTO PELANGGAN (DENGAN PREVIEW FOTO) -->
-                <div class="mt-10 pt-6 border-t border-slate-200">
-                    <h3 class="font-extrabold text-sm text-slate-900 mb-4 flex items-center gap-2">
-                        <i data-lucide="star" class="w-4 h-4 text-amber-500 fill-amber-500"></i> Ulasan & Foto Asli Pelanggan (${p.reviews ? p.reviews.length : 0})
-                    </h3>
-                    
-                    <div class="space-y-3 mb-6" id="reviewListContainer">
-                        ${!p.reviews || p.reviews.length === 0 ? `
-                            <p class="text-xs text-slate-400 italic">Belum ada ulasan untuk produk ini. Jadilah yang pertama memberikan ulasan!</p>
-                        ` : p.reviews.map((r, rIdx) => `
-                            <div class="bg-slate-50 border border-slate-100 p-3.5 rounded-2xl flex gap-3 items-start relative">
-                                ${r.photo && r.photo.trim() !== "" ? `<img src="${r.photo}" class="w-14 h-14 object-cover rounded-xl border flex-shrink-0 shadow-sm">` : ''}
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-center justify-between">
-                                        <h4 class="font-extrabold text-xs text-slate-900">${r.name}</h4>
-                                        <span class="text-[10px] text-slate-400">${r.date}</span>
-                                    </div>
-                                    <div class="flex text-amber-500 my-1">
-                                        ${'<i data-lucide="star" class="w-3 h-3 fill-amber-500"></i>'.repeat(r.rating)}
-                                    </div>
-                                    <p class="text-xs text-slate-700 leading-tight">${r.comment}</p>
-                                </div>
-                                <button onclick="deleteReview(${p.id}, ${rIdx})" class="text-slate-300 hover:text-rose-600 p-1 transition-colors" title="Hapus Ulasan">
-                                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                                </button>
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    <div class="bg-slate-100 p-4 rounded-2xl border border-slate-200 space-y-3">
-                        <h4 class="font-extrabold text-xs text-slate-900 flex items-center gap-1.5">
-                            <i data-lucide="message-square-plus" class="w-4 h-4 text-emerald-600"></i> Tulis Ulasan & Upload Foto Pelanggan
-                        </h4>
-                        <div class="space-y-2">
-                            <input type="text" id="reviewName" placeholder="Nama Kamu (Contoh: Rina)" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-slate-900">
-                            <textarea id="reviewComment" rows="2" placeholder="Bagaimana kualitas bahan dan jahitannya?" class="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-slate-900"></textarea>
-                            
-                            <!-- KOTAK PRATINJAU (PREVIEW) FOTO SEBELUM DIKIRIM -->
-                            <div id="previewContainer" class="hidden items-center gap-3 pt-1">
-                                <img id="reviewPhotoPreview" src="" class="w-16 h-16 object-cover rounded-xl border shadow-sm">
-                                <button type="button" onclick="removeReviewPhoto()" class="text-xs font-bold text-rose-600 hover:underline">Hapus Foto</button>
-                            </div>
-
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
-                                <input type="file" id="reviewFile" accept="image/*" onchange="handleReviewPhotoUpload(event)" class="text-xs text-slate-500 cursor-pointer">
-                                <button id="btnSubmitReview" onclick="submitCustomerReview(${p.id})" class="bg-slate-900 hover:bg-slate-800 text-white text-xs font-extrabold px-5 py-2.5 rounded-xl shadow-md transition-all">
-                                    Kirim Ulasan
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             `;
             lucide.createIcons();
-        }
-
-        function handleReviewPhotoUpload(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            if (file.size > 5 * 1024 * 1024) {
-                alert("Ukuran foto ulasan terlalu besar! Maksimal 5MB.");
-                e.target.value = "";
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(evt) {
-                newReviewPhotoBase64 = evt.target.result;
-
-                // Tampilkan pratinjau gambar di layar HP
-                const previewImg = document.getElementById('reviewPhotoPreview');
-                const previewContainer = document.getElementById('previewContainer');
-                
-                if (previewImg && previewContainer) {
-                    previewImg.src = newReviewPhotoBase64;
-                    previewContainer.classList.remove('hidden');
-                    previewContainer.classList.add('flex');
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function removeReviewPhoto() {
-            newReviewPhotoBase64 = "";
-            const fileInput = document.getElementById('reviewFile');
-            const previewContainer = document.getElementById('previewContainer');
-            
-            if (fileInput) fileInput.value = "";
-            if (previewContainer) {
-                previewContainer.classList.add('hidden');
-                previewContainer.classList.remove('flex');
-            }
-        }
-
-        async function submitCustomerReview(productId) {
-            const nameEl = document.getElementById('reviewName');
-            const commentEl = document.getElementById('reviewComment');
-            
-            if (!nameEl || !commentEl) return;
-            const name = nameEl.value.trim();
-            const comment = commentEl.value.trim();
-
-            if (!name || !comment) {
-                alert("Mohon isi nama dan komentar ulasan Anda!");
-                return;
-            }
-
-            const btn = document.getElementById('btnSubmitReview');
-            if (btn) {
-                btn.innerText = "Mengunggah Foto ke Cloud...";
-                btn.disabled = true;
-            }
-
-            let finalPhotoUrl = "";
-
-            if (newReviewPhotoBase64 && IMGBB_API_KEY) {
-                try {
-                    const base64Data = newReviewPhotoBase64.includes(',') ? newReviewPhotoBase64.split(',')[1] : newReviewPhotoBase64;
-                    
-                    const formData = new FormData();
-                    formData.append("key", IMGBB_API_KEY);
-                    formData.append("image", base64Data);
-
-                    const response = await fetch("https://api.imgbb.com/1/upload", {
-                        method: "POST",
-                        body: formData
-                    });
-                    const resData = await response.json();
-                    
-                    if (resData && resData.success && resData.data) {
-                        finalPhotoUrl = resData.data.url || resData.data.display_url || "";
-                    } else {
-                        console.error("Gagal dari server ImgBB:", resData);
-                    }
-                } catch (err) {
-                    console.error("Error jaringan ImgBB:", err);
-                }
-            }
-
-            const product = products.find(prod => prod.id === productId);
-            if (product) {
-                if (!product.reviews) {
-                    product.reviews = [];
-                }
-
-                product.reviews.unshift({
-                    name,
-                    rating: 5,
-                    date: "Baru saja",
-                    comment,
-                    photo: finalPhotoUrl
-                });
-            }
-
-            if (btn) {
-                btn.innerText = "Kirim Ulasan";
-                btn.disabled = false;
-            }
-
-            newReviewPhotoBase64 = "";
-
-            alert("Terima kasih! Ulasan dan foto permanen Anda berhasil dikirim.");
-            renderModalContent();
-        }
-
-        function deleteReview(productId, reviewIndex) {
-            if (confirm("Apakah Anda yakin ingin menghapus ulasan ini?")) {
-                const product = products.find(prod => prod.id === productId);
-                if (product && product.reviews) {
-                    product.reviews.splice(reviewIndex, 1);
-                    renderModalContent();
-                }
-            }
         }
 
         function changeModalVariant(idx) {
@@ -1245,86 +1097,73 @@
             toggleCartModal(true);
             
             const cartBtn = document.getElementById('cartIconBtn');
-            if(cartBtn) {
-                cartBtn.classList.add('shake-cart');
-                setTimeout(() => cartBtn.classList.remove('shake-cart'), 500);
-            }
+            cartBtn.classList.add('shake-cart');
+            setTimeout(() => cartBtn.classList.remove('shake-cart'), 500);
         }
 
         function updateCartUI() {
             const badge = document.getElementById('cartCountBadge');
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             
-            if (badge) {
-                if (totalItems > 0) {
-                    badge.innerText = totalItems;
-                    badge.classList.remove('hidden');
-                } else {
-                    badge.classList.add('hidden');
-                }
+            if (totalItems > 0) {
+                badge.innerText = totalItems;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
             }
 
             const cartList = document.getElementById('cartList');
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
-            if (cartList) {
-                if (cart.length === 0) {
-                    cartList.innerHTML = `
-                        <div class="text-center py-12">
-                            <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3">
-                                <i data-lucide="shopping-bag" class="w-6 h-6"></i>
-                            </div>
-                            <p class="text-xs font-bold text-slate-700">Keranjang Masih Kosong</p>
-                            <p class="text-[10px] text-slate-400 mt-0.5">Yuk pilih busana favoritmu sekarang!</p>
+            if (cart.length === 0) {
+                cartList.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
                         </div>
-                    `;
-                } else {
-                    cartList.innerHTML = cart.map((item, index) => `
-                        <div class="flex items-center gap-3 p-3 bg-slate-50 border border-slate-100 rounded-2xl">
-                            <img src="${item.image}" class="w-14 h-14 object-cover rounded-xl border">
-                            <div class="flex-1 min-w-0">
-                                <h4 class="font-extrabold text-xs text-slate-900 truncate">${item.name}</h4>
-                                <p class="text-[10px] font-semibold text-slate-500 mt-0.5">${item.color} • ${item.size}</p>
-                                <p class="font-black text-xs text-slate-900 mt-1">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</p>
-                            </div>
-                            <div class="flex items-center gap-1.5 bg-white border border-slate-200 rounded-xl p-1">
-                                <button onclick="changeQty(${index}, -1)" class="w-6 h-6 flex items-center justify-center text-slate-600 hover:bg-slate-100 rounded-lg font-bold text-xs">-</button>
-                                <span class="text-xs font-black w-4 text-center">${item.qty}</span>
-                                <button onclick="changeQty(${index}, 1)" class="w-6 h-6 flex items-center justify-center text-slate-600 hover:bg-slate-100 rounded-lg font-bold text-xs">+</button>
-                            </div>
+                        <p class="text-xs font-bold text-slate-700">Keranjang Masih Kosong</p>
+                        <p class="text-[10px] text-slate-400 mt-0.5">Yuk pilih busana favoritmu sekarang!</p>
+                    </div>
+                `;
+            } else {
+                cartList.innerHTML = cart.map((item, index) => `
+                    <div class="flex items-center gap-3 p-3 bg-slate-50 border border-slate-100 rounded-2xl">
+                        <img src="${item.image}" class="w-14 h-14 object-cover rounded-xl border">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-extrabold text-xs text-slate-900 truncate">${item.name}</h4>
+                            <p class="text-[10px] font-semibold text-slate-500 mt-0.5">${item.color} • ${item.size}</p>
+                            <p class="font-black text-xs text-slate-900 mt-1">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</p>
                         </div>
-                    `).join('');
-                }
+                        <div class="flex items-center gap-1.5 bg-white border border-slate-200 rounded-xl p-1">
+                            <button onclick="changeQty(${index}, -1)" class="w-6 h-6 flex items-center justify-center text-slate-600 hover:bg-slate-100 rounded-lg font-bold text-xs">-</button>
+                            <span class="text-xs font-black w-4 text-center">${item.qty}</span>
+                            <button onclick="changeQty(${index}, 1)" class="w-6 h-6 flex items-center justify-center text-slate-600 hover:bg-slate-100 rounded-lg font-bold text-xs">+</button>
+                        </div>
+                    </div>
+                `).join('');
             }
 
-            const subtotalEl = document.getElementById('cartSubtotal');
-            if (subtotalEl) subtotalEl.innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
+            document.getElementById('cartSubtotal').innerText = `Rp ${subtotal.toLocaleString('id-ID')}`;
             
             const custAddressEl = document.getElementById('custAddress');
             const userAddress = custAddressEl ? custAddressEl.value : '';
             const isDalamJawa = checkIsDalamJawa(userAddress);
 
-            const freeShippingBar = document.getElementById('freeShippingBar');
-            const freeShippingPercent = document.getElementById('freeShippingPercent');
-            const freeShippingHint = document.getElementById('freeShippingHint');
+            if (isDalamJawa) {
+                const percent = Math.min(100, Math.round((subtotal / FREE_SHIPPING_MIN) * 100));
+                document.getElementById('freeShippingBar').style.width = `${percent}%`;
+                document.getElementById('freeShippingPercent').innerText = `${percent}%`;
 
-            if (freeShippingBar && freeShippingPercent && freeShippingHint) {
-                if (isDalamJawa) {
-                    const percent = Math.min(100, Math.round((subtotal / FREE_SHIPPING_MIN) * 100));
-                    freeShippingBar.style.width = `${percent}%`;
-                    freeShippingPercent.innerText = `${percent}%`;
-
-                    if (subtotal >= FREE_SHIPPING_MIN) {
-                        freeShippingHint.innerHTML = `<span class="text-emerald-600 font-extrabold">🎉 Selamat! Pengiriman Dalam Jawa Mendapatkan GRATIS ONGKIR!</span>`;
-                    } else {
-                        const remaining = FREE_SHIPPING_MIN - subtotal;
-                        freeShippingHint.innerHTML = `Tambahkan <b class="text-slate-900">Rp ${remaining.toLocaleString('id-ID')}</b> lagi untuk Gratis Ongkir Dalam Jawa!`;
-                    }
+                if (subtotal >= FREE_SHIPPING_MIN) {
+                    document.getElementById('freeShippingHint').innerHTML = `<span class="text-emerald-600 font-extrabold">🎉 Selamat! Pengiriman Dalam Jawa Mendapatkan GRATIS ONGKIR!</span>`;
                 } else {
-                    freeShippingBar.style.width = `0%`;
-                    freeShippingPercent.innerText = `0%`;
-                    freeShippingHint.innerHTML = `Promo Gratis Ongkir berlaku khusus untuk pengiriman ke <b class="text-slate-900">Dalam Pulau Jawa</b> (Min. Rp 250.000).`;
+                    const remaining = FREE_SHIPPING_MIN - subtotal;
+                    document.getElementById('freeShippingHint').innerHTML = `Tambahkan <b class="text-slate-900">Rp ${remaining.toLocaleString('id-ID')}</b> lagi untuk Gratis Ongkir Dalam Jawa!`;
                 }
+            } else {
+                document.getElementById('freeShippingBar').style.width = `0%`;
+                document.getElementById('freeShippingPercent').innerText = `0%`;
+                document.getElementById('freeShippingHint').innerHTML = `Promo Gratis Ongkir berlaku khusus untuk pengiriman ke <b class="text-slate-900">Dalam Pulau Jawa</b> (Min. Rp 250.000).`;
             }
 
             lucide.createIcons();
@@ -1340,29 +1179,25 @@
 
         function toggleCartModal(show) {
             const modal = document.getElementById('cartModal');
-            if (modal) {
-                if (show) {
-                    modal.classList.remove('hidden');
-                    goToCartItems();
-                } else {
-                    modal.classList.add('hidden');
-                }
+            if (show) {
+                modal.classList.remove('hidden');
+                goToCartItems();
+            } else {
+                modal.classList.add('hidden');
             }
         }
 
         function goToCartItems() {
-            document.getElementById('cartStepItems')?.classList.remove('hidden');
-            document.getElementById('cartStepForm')?.classList.add('hidden');
-            document.getElementById('cartStepPayment')?.classList.add('hidden');
+            document.getElementById('cartStepItems').classList.remove('hidden');
+            document.getElementById('cartStepForm').classList.add('hidden');
+            document.getElementById('cartStepPayment').classList.add('hidden');
             
-            document.getElementById('cartFooter')?.classList.remove('hidden');
-            document.getElementById('paymentFooter')?.classList.add('hidden');
+            document.getElementById('cartFooter').classList.remove('hidden');
+            document.getElementById('paymentFooter').classList.add('hidden');
             
             const btn = document.getElementById('cartPrimaryBtn');
-            if (btn) {
-                btn.innerText = "Lanjut Pengiriman";
-                btn.setAttribute('onclick', 'goToCheckoutForm()');
-            }
+            btn.innerText = "Lanjut Pengiriman";
+            btn.setAttribute('onclick', 'goToCheckoutForm()');
         }
 
         function goToCheckoutForm() {
@@ -1370,25 +1205,23 @@
                 alert("Keranjang belanja Anda masih kosong!");
                 return;
             }
-            document.getElementById('cartStepItems')?.classList.add('hidden');
-            document.getElementById('cartStepForm')?.classList.remove('hidden');
-            document.getElementById('cartStepPayment')?.classList.add('hidden');
+            document.getElementById('cartStepItems').classList.add('hidden');
+            document.getElementById('cartStepForm').classList.remove('hidden');
+            document.getElementById('cartStepPayment').classList.add('hidden');
 
-            document.getElementById('cartFooter')?.classList.remove('hidden');
-            document.getElementById('paymentFooter')?.classList.add('hidden');
+            document.getElementById('cartFooter').classList.remove('hidden');
+            document.getElementById('paymentFooter').classList.add('hidden');
 
             const btn = document.getElementById('cartPrimaryBtn');
-            if (btn) {
-                btn.innerText = "Lanjut Pembayaran QRIS";
-                btn.setAttribute('onclick', 'processCheckout()');
-            }
+            btn.innerText = "Lanjut Pembayaran QRIS";
+            btn.setAttribute('onclick', 'processCheckout()');
         }
 
         function processCheckout() {
-            const name = document.getElementById('custName')?.value.trim() || "";
-            const phone = document.getElementById('custPhone')?.value.trim() || "";
-            const address = document.getElementById('custAddress')?.value.trim() || "";
-            const notes = document.getElementById('custNotes')?.value.trim() || "";
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const notes = document.getElementById('custNotes').value.trim();
 
             if (!name || !phone || !address) {
                 alert("Mohon lengkapi Nama, Nomor WhatsApp, dan Alamat Lengkap!");
@@ -1412,20 +1245,16 @@
                 total: currentTotalWithUnique
             };
 
-            const orderIdEl = document.getElementById('paymentOrderId');
-            const totalDisplayEl = document.getElementById('finalTotalDisplay');
-            const uniqueCodeEl = document.getElementById('uniqueCodeText');
+            document.getElementById('paymentOrderId').innerText = `#${currentOrderId}`;
+            document.getElementById('finalTotalDisplay').innerText = `Rp ${currentTotalWithUnique.toLocaleString('id-ID')}`;
+            document.getElementById('uniqueCodeText').innerText = `Kode Unik Rp ${uniqueCode}`;
 
-            if (orderIdEl) orderIdEl.innerText = `#${currentOrderId}`;
-            if (totalDisplayEl) totalDisplayEl.innerText = `Rp ${currentTotalWithUnique.toLocaleString('id-ID')}`;
-            if (uniqueCodeEl) uniqueCodeEl.innerText = `Kode Unik Rp ${uniqueCode}`;
+            document.getElementById('cartStepItems').classList.add('hidden');
+            document.getElementById('cartStepForm').classList.add('hidden');
+            document.getElementById('cartStepPayment').classList.remove('hidden');
 
-            document.getElementById('cartStepItems')?.classList.add('hidden');
-            document.getElementById('cartStepForm')?.classList.add('hidden');
-            document.getElementById('cartStepPayment')?.classList.remove('hidden');
-
-            document.getElementById('cartFooter')?.classList.add('hidden');
-            document.getElementById('paymentFooter')?.classList.remove('hidden');
+            document.getElementById('cartFooter').classList.add('hidden');
+            document.getElementById('paymentFooter').classList.remove('hidden');
 
             startCountdown(900);
         }
@@ -1442,15 +1271,10 @@
             const reader = new FileReader();
             reader.onload = function(evt) {
                 uploadedProofUrl = evt.target.result;
-                const previewImg = document.getElementById('previewImg');
-                const fileNameDisplay = document.getElementById('fileNameDisplay');
-                const uploadPlaceholder = document.getElementById('uploadPlaceholder');
-                const uploadPreview = document.getElementById('uploadPreview');
-
-                if (previewImg) previewImg.src = uploadedProofUrl;
-                if (fileNameDisplay) fileNameDisplay.innerText = file.name;
-                if (uploadPlaceholder) uploadPlaceholder.classList.add('hidden');
-                if (uploadPreview) uploadPreview.classList.remove('hidden');
+                document.getElementById('previewImg').src = uploadedProofUrl;
+                document.getElementById('fileNameDisplay').innerText = file.name;
+                document.getElementById('uploadPlaceholder').classList.add('hidden');
+                document.getElementById('uploadPreview').classList.remove('hidden');
             };
             reader.readAsDataURL(file);
         }
@@ -1483,7 +1307,7 @@
                         body: formData
                     });
                     const resData = await response.json();
-                    if (resData && resData.success && resData.data && resData.data.url) {
+                    if (resData && resData.data && resData.data.url) {
                         proofLink = resData.data.url;
                     }
                 } catch (err) {
@@ -1547,11 +1371,11 @@ _Mohon segera diverifikasi dan diproses. Terima kasih!_`;
             countdownInterval = setInterval(() => {
                 const minutes = Math.floor(timer / 60);
                 const secs = timer % 60;
-                if (display) display.innerText = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                display.innerText = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 
                 if (--timer < 0) {
                     clearInterval(countdownInterval);
-                    if (display) display.innerText = "EXPIRED";
+                    display.innerText = "EXPIRED";
                     alert("Waktu batas pembayaran telah habis. Silakan lakukan checkout ulang.");
                     toggleCartModal(false);
                 }
