@@ -233,12 +233,11 @@
             </div>
         </div>
 
-        <!-- SEKSI SHOWCASE DOKUMENTASI WORKSHOP (DENGAN SLIDER VIDEO/FOTO) -->
+        <!-- SEKSI SHOWCASE DOKUMENTASI WORKSHOP -->
         <section class="mb-14 reveal-on-scroll">
             <div class="luxury-banner text-slate-900 rounded-3xl p-6 sm:p-10 shadow-2xl border border-slate-300/40 relative overflow-hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
                     
-                    <!-- Kiri: Teks Deskripsi & Tombol Slide Selector -->
                     <div class="lg:col-span-6 space-y-4">
                         <div class="inline-flex items-center gap-2 bg-white/70 backdrop-blur-md border border-white/80 text-slate-900 text-[11px] font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-widest shadow-sm">
                             <i data-lucide="scissors" class="w-3.5 h-3.5"></i> 100% IN-HOUSE PRODUCTION
@@ -250,15 +249,11 @@
                             Setiap potong busana Xahara's Wardrobe dikerjakan secara langsung oleh penjahit profesional kami. Bukan barang impor maupun konveksi masal asal pasaran, kami memastikan kualitas pola, kerapihan jahitan tepi, hingga ketahanan bahan terjaga secara presisi.
                         </p>
                         
-                        <!-- Navigasi Slide -->
                         <div class="pt-2">
                             <p class="text-[11px] font-extrabold text-slate-700 uppercase tracking-wider mb-2">Pilih Dokumentasi Slide:</p>
-                            <div id="workshopSlidesNav" class="flex flex-wrap gap-2">
-                                <!-- Rendered via JS -->
-                            </div>
+                            <div id="workshopSlidesNav" class="flex flex-wrap gap-2"></div>
                         </div>
 
-                        <!-- Poin Keunggulan Jahitan -->
                         <div class="grid grid-cols-2 gap-3 pt-2">
                             <div class="flex items-center gap-2.5 p-3 rounded-2xl bg-white/60 border border-white/60 backdrop-blur-sm shadow-sm">
                                 <div class="p-2 bg-slate-900 text-white rounded-xl">
@@ -275,12 +270,9 @@
                         </div>
                     </div>
 
-                    <!-- Kanan: Pemutar Slide Media -->
                     <div class="lg:col-span-6">
                         <div class="relative rounded-2xl overflow-hidden border-2 border-white/50 shadow-2xl aspect-video bg-slate-950 group">
-                            <div id="workshopMediaContainer" class="w-full h-full flex items-center justify-center">
-                                <!-- Ditampilkan via JS -->
-                            </div>
+                            <div id="workshopMediaContainer" class="w-full h-full flex items-center justify-center"></div>
                             <div class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 border border-white/10 z-20">
                                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> <span id="workshopBadgeLabel">Slide 1</span>
                             </div>
@@ -325,9 +317,7 @@
         </div>
 
         <!-- PRODUCT GRID -->
-        <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            <!-- Rendered via JavaScript -->
-        </div>
+        <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"></div>
 
         <!-- EMPTY STATE -->
         <div id="emptyState" class="hidden text-center py-20 bg-white rounded-3xl border border-slate-200/80 my-8">
@@ -356,7 +346,7 @@
         </div>
     </footer>
 
-    <!-- POP-UP SORTING ELEGAN -->
+    <!-- POP-UP SORTING -->
     <div id="sortModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4 transition-all duration-300" onclick="toggleSortModal(false)">
         <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-6 shadow-2xl relative border border-slate-100 animate-fade-in-up" onclick="event.stopPropagation()">
             <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-4 sm:hidden"></div>
@@ -378,12 +368,10 @@
                     <span>Paling Populer</span>
                     <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 sort-check"></i>
                 </button>
-
                 <button onclick="selectSort('low-high', 'Harga: Termurah')" class="sort-opt-btn w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition-all">
                     <span>Harga: Termurah</span>
                     <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 hidden sort-check"></i>
                 </button>
-
                 <button onclick="selectSort('high-low', 'Harga: Termahal')" class="sort-opt-btn w-full flex items-center justify-between p-3.5 rounded-2xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs transition-all">
                     <span>Harga: Termahal</span>
                     <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 hidden sort-check"></i>
@@ -398,9 +386,7 @@
             <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-white/90 hover:bg-white text-slate-700 p-2 rounded-full z-20 shadow-md transition-all hover:rotate-90">
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
-            <div id="modalContent" class="p-6 overflow-y-auto custom-scrollbar">
-                <!-- Rendered via JS -->
-            </div>
+            <div id="modalContent" class="p-6 overflow-y-auto custom-scrollbar"></div>
         </div>
     </div>
 
@@ -422,7 +408,7 @@
                 </button>
             </div>
 
-            <!-- PROGRESS BAR INDIKATOR GRATIS ONGKIR -->
+            <!-- PROGRESS BAR GRATIS ONGKIR -->
             <div class="px-5 pt-4 pb-2 bg-gradient-to-b from-slate-50 to-white border-b border-slate-100">
                 <div class="flex items-center justify-between text-xs mb-1.5">
                     <span id="freeShippingStatus" class="font-extrabold text-slate-800 flex items-center gap-1.5">
@@ -440,9 +426,7 @@
 
             <!-- STEP 1: CART ITEMS -->
             <div id="cartStepItems" class="flex-1 overflow-y-auto p-5 space-y-4 custom-scrollbar">
-                <div id="cartList" class="space-y-3">
-                    <!-- Rendered via JS -->
-                </div>
+                <div id="cartList" class="space-y-3"></div>
             </div>
 
             <!-- STEP 2: CHECKOUT FORM -->
@@ -489,7 +473,6 @@
                     </div>
                     <p id="uniqueCodeText" class="text-[10px] text-emerald-600 font-bold mt-1">Kode Unik Rp 0</p>
 
-                    <!-- QRIS Image Display -->
                     <div class="my-4 p-4 bg-slate-50 border border-dashed border-slate-300 rounded-2xl w-full max-w-xs mx-auto">
                         <div class="relative group cursor-pointer" onclick="openQrisZoom()">
                             <img src="qris.jpg" alt="QRIS DANA" class="w-full h-auto max-h-[350px] object-contain mx-auto rounded-xl shadow-md border bg-white p-2 transition-transform duration-300 group-hover:scale-105">
@@ -503,7 +486,6 @@
                     </div>
                 </div>
 
-                <!-- Upload Bukti Transfer -->
                 <div class="space-y-2">
                     <label class="block text-xs font-bold text-slate-800">Upload Bukti Transfer Pembayaran</label>
                     <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:bg-slate-50 transition cursor-pointer relative">
@@ -522,7 +504,7 @@
                 </div>
             </div>
 
-            <!-- CART FOOTER ACTIONS -->
+            <!-- CART FOOTER -->
             <div id="cartFooter" class="p-5 border-t border-slate-100 bg-slate-50/50">
                 <div class="flex items-center justify-between mb-3">
                     <span class="text-xs font-bold text-slate-500">Subtotal</span>
@@ -534,7 +516,7 @@
                 </button>
             </div>
 
-            <!-- PAYMENT FOOTER ACTIONS -->
+            <!-- PAYMENT FOOTER -->
             <div id="paymentFooter" class="p-5 border-t border-slate-100 bg-slate-50/50 hidden">
                 <button id="btnConfirmWA" onclick="confirmAndSendWA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-3.5 rounded-2xl shadow-lg transition-all text-center flex items-center justify-center gap-2 btn-pulse-glow">
                     <i data-lucide="message-circle" class="w-4 h-4"></i>
@@ -673,7 +655,7 @@
                 reviewsCount: 95,
                 badge: "NEW",
                 isSoldOut: false,
-                // DUKUNGAN MULTI-VIDEO (2 VIDEO) UNTUK TARFA ABAYA
+                // DUKUNGAN MULTI-VIDEO (2 VIDEO)
                 videoUrls: [
                     "tarfa-video.mp4", 
                     "tarfa-video-2.mp4"
@@ -703,7 +685,7 @@
                 rating: 4.9,
                 reviewsCount: 62,
                 badge: "UNIQUE",
-                isSoldOut: false, // STATUS SOLD OUT AKTIF (Ubah ke false jika barang sudah ready kembali)
+                isSoldOut: false,
                 videoUrls: ["seoul-video.mp4"],
                 variants: [
                     {
@@ -725,13 +707,15 @@
                 category: "Abaya",
                 rating: 5.0,
                 reviewsCount: 45,
-                badge: "SOLD OUT",
-                isSoldOut: true,
-                videoUrls: ["mahya-video.mp4"],
+                badge: "BEST SELLER",
+                isSoldOut: false,
+                videoUrls: ["mahya-video.mp4", "mahya-video-2.mp4"], // DUA VIDEO JUGA DIDUKUNG DISINI
                 variants: [
-                    { color: "mellow", images: ["mahya-abaya-mellow.jpeg"] },
+                    { color: "burgundy", images: ["mahya-abaya-burgundy.jpeg"] },
                     { color: "matcha", images: ["mahya-abaya-matcha.jpeg"] },
-                    { color: "malt", images: ["mahya-abaya-malt.jpeg"] }
+                    { color: "malt", images: ["mahya-abaya-malt.jpeg"] },
+                    { color: "black", images: ["mahya-abaya-black.jpeg"] },
+                    { color: "dark navy", images: ["mahya-abaya-dark-navy.jpeg"] }
                 ],
                 sizes: [
                     { name: "COUNTESS (S-M)", price: 275000, desc: "LD/PB 100/130cm" },
@@ -942,7 +926,7 @@
                             ` : ''}
                         </div>
                         
-                        <!-- Thumbnail Pilihan Foto & Video -->
+                        <!-- Thumbnail Pilihan Foto & Multi-Video -->
                         <div class="flex items-center gap-2 overflow-x-auto pb-1">
                             ${activeVariant.images.map((img, idx) => `
                                 <button onclick="changeModalImage(${idx})" class="w-14 h-14 rounded-xl overflow-hidden border-2 flex-shrink-0 ${activeMediaType === 'image' && idx === activeImageIndex ? 'border-slate-900 shadow-sm' : 'border-transparent opacity-60'}">
