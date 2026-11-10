@@ -102,7 +102,6 @@
             100% { transform: translateX(200%) skewX(-15deg); }
         }
 
-        /* WARNA BACKGROUND KREM / NUDE ELEGAN SENADA */
         .luxury-banner {
             background: linear-gradient(135deg, #e8dfdb 0%, #dcd0cb 50%, #cebfaa 100%);
             position: relative;
@@ -193,7 +192,7 @@
                 <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-4 top-3.5"></i>
             </div>
 
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 sm:gap-3">
                 <button id="cartIconBtn" onclick="toggleCartModal(true)" class="relative p-2.5 text-slate-800 hover:text-brand-600 bg-slate-100/80 hover:bg-slate-100 rounded-full transition-all duration-300 hover:scale-110 active:scale-95 focus:outline-none">
                     <i data-lucide="shopping-bag" class="w-5 h-5"></i>
                     <span id="cartCountBadge" class="hidden absolute -top-1 -right-1 bg-brand-500 text-slate-950 text-[10px] font-extrabold rounded-full h-5 w-5 border-2 border-white flex items-center justify-center animate-bounce">0</span>
@@ -332,15 +331,26 @@
 
     <!-- FOOTER -->
     <footer class="bg-slate-900 text-slate-400 border-t border-slate-800 py-12 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-6">
-            <div>
-                <div class="flex items-center justify-center sm:justify-start gap-2 font-black text-xl text-white tracking-tight">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-2 font-black text-xl text-white tracking-tight">
                     <img src="logo.png" alt="Xahara's Wardrobe" class="w-8 h-8 object-contain rounded-lg">
                     <span>XAHARA'S WARDROBE</span>
                 </div>
                 <p class="text-xs text-slate-500 mt-2">Pengiriman Langsung dari Tasikmalaya • Pembayaran QRIS DANA Semi-Otomatis.</p>
             </div>
-            <div class="text-xs text-slate-500">
+
+            <!-- HANYA LOGO IKON SOSIAL MEDIA DI FOOTER SESUAI PERMINTAAN -->
+            <div class="flex items-center gap-3">
+                <a href="https://www.instagram.com/x.a.h.a.r.a?dlrf=eWoyNDRtcGFvZXly&utm_source=qr" target="_blank" title="Instagram Xahara" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 shadow-md border border-slate-700/60 hover:scale-110">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                </a>
+                <a href="https://www.tiktok.com/@xaharaidn" target="_blank" title="TikTok Xahara" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-slate-950 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 shadow-md border border-slate-700/60 hover:scale-110">
+                    <i data-lucide="video" class="w-5 h-5"></i>
+                </a>
+            </div>
+
+            <div class="text-xs text-slate-500 text-center md:text-right">
                 &copy; 2026 Xahara's Wardrobe. Hak Cipta Dilindungi.
             </div>
         </div>
@@ -655,7 +665,6 @@
                 reviewsCount: 95,
                 badge: "NEW",
                 isSoldOut: false,
-                // DUKUNGAN MULTI-VIDEO (2 VIDEO)
                 videoUrls: [
                     "tarfa-video.mp4", 
                     "tarfa-video-2.mp4"
@@ -709,7 +718,7 @@
                 reviewsCount: 45,
                 badge: "BEST SELLER",
                 isSoldOut: false,
-                videoUrls: ["mahya-video.mp4", "mahya-video-2.mp4"], // DUA VIDEO JUGA DIDUKUNG DISINI
+                videoUrls: ["mahya-video.mp4", "mahya-video-2.mp4", "mahya-video-3.mp4", "mahya-video-4.mp4"],
                 variants: [
                     { color: "burgundy", images: ["mahya-abaya-burgundy.jpeg"] },
                     { color: "matcha", images: ["mahya-abaya-matcha.jpeg"] },
@@ -727,6 +736,36 @@
             }
         ];
 
+        // INITIAL DATABASE ULASAN TEKS (DEFAULT + LOCALSTORAGE)
+        const defaultReviews = {
+            1: [
+                { name: "Siti Rahma", rating: 5, date: "12 Oktober 2026", comment: "Bahan Sophia Anti UV-nya adem banget dan benar-benar tidak menerawang. Jahitan rapi khas produk lokal Tasikmalaya!", likes: 14, verified: true },
+                { name: "Dewi Lestari", rating: 5, date: "05 Oktober 2026", comment: "Suka sekali! Modelnya elegan dan flowy saat dipakai jalan.", likes: 8, verified: true }
+            ],
+            2: [
+                { name: "Anisa Fitri", rating: 5, date: "01 November 2026", comment: "Cerutinya lembut dan furingnya adem tidak bikin gerah. Puas belanja di Xahara!", likes: 19, verified: true },
+                { name: "Rina Marlina", rating: 4, date: "28 Oktober 2026", comment: "Warna sesuai foto katalog. Pengiriman cepat.", likes: 5, verified: true }
+            ],
+            3: [
+                { name: "Khadijah", rating: 5, date: "20 Oktober 2026", comment: "Model Korea-nya cantik banget, unik dan jarang ada di pasaran.", likes: 11, verified: true }
+            ],
+            4: [
+                { name: "Zahra S.", rating: 5, date: "10 November 2026", comment: "Warna burgundy-nya mewah parah! Worth it banget harganya.", likes: 22, verified: true }
+            ]
+        };
+
+        function getStoredReviews() {
+            const saved = localStorage.getItem('xahara_product_text_reviews');
+            if (saved) {
+                try { return JSON.parse(saved); } catch(e) { return defaultReviews; }
+            }
+            return defaultReviews;
+        }
+
+        function saveReviewsToStorage(reviewsObj) {
+            localStorage.setItem('xahara_product_text_reviews', JSON.stringify(reviewsObj));
+        }
+
         let cart = [];
         let activeCategory = 'all';
         let currentSortType = 'featured';
@@ -734,13 +773,14 @@
         let currentModalProduct = null;
         let activeVariantIndex = 0;
         let activeImageIndex = 0;
-        let activeMediaType = 'image'; // 'image' atau 'video'
-        let activeVideoIndex = 0;     // Indeks video yang sedang diputar di modal
+        let activeMediaType = 'image'; 
+        let activeVideoIndex = 0;     
         let currentTotalWithUnique = 0;
         let countdownInterval = null;
         let currentOrderId = "";
         let currentOrderData = {};
         let uploadedProofUrl = "";
+        let reviewFormRating = 5;
 
         function checkIsDalamJawa(addressText) {
             if (!addressText) return false;
@@ -765,6 +805,7 @@
         function renderProducts(list) {
             const grid = document.getElementById('productGrid');
             const emptyState = document.getElementById('emptyState');
+            const allReviews = getStoredReviews();
 
             if (!list || list.length === 0) {
                 grid.innerHTML = '';
@@ -776,6 +817,11 @@
             grid.innerHTML = list.map((p, index) => {
                 const minPrice = Math.min(...p.sizes.map(s => s.price));
                 const firstImg = p.variants[0].images[0];
+                
+                const pReviews = allReviews[p.id] || [];
+                const dynamicReviewsCount = pReviews.length > 0 ? pReviews.length : p.reviewsCount;
+                const dynamicRating = pReviews.length > 0 ? (pReviews.reduce((acc, r) => acc + r.rating, 0) / pReviews.length).toFixed(1) : p.rating;
+
                 return `
                     <div class="reveal-on-scroll bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm card-hover-effect flex flex-col justify-between ${p.isSoldOut ? 'opacity-90' : ''}" style="animation-delay: ${index * 0.08}s">
                         <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden img-zoom-container skeleton-loading cursor-pointer" 
@@ -800,9 +846,13 @@
                             <div>
                                 <div class="flex items-center justify-between">
                                     <span class="text-[10px] font-extrabold ${p.isSoldOut ? 'text-rose-600' : 'text-emerald-600'} uppercase tracking-widest">${p.category}</span>
-                                    ${p.isSoldOut ? `<span class="text-[9px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md">Habis</span>` : ''}
+                                    <div class="flex items-center gap-1 text-[11px] font-bold text-amber-600">
+                                        <i data-lucide="star" class="w-3 h-3 fill-amber-400 text-amber-400"></i>
+                                        <span>${dynamicRating}</span>
+                                        <span class="text-slate-400 font-normal">(${dynamicReviewsCount})</span>
+                                    </div>
                                 </div>
-                                <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 mt-0.5 line-clamp-1">${p.name}</h3>
+                                <h3 class="font-extrabold text-xs sm:text-sm text-slate-900 mt-1 line-clamp-1">${p.name}</h3>
                             </div>
                             <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between">
                                 <div>
@@ -891,6 +941,7 @@
             activeImageIndex = 0;
             activeMediaType = 'image';
             activeVideoIndex = 0;
+            reviewFormRating = 5;
 
             renderModalContent();
             document.getElementById('productModal').classList.remove('hidden');
@@ -905,6 +956,11 @@
             const p = currentModalProduct;
             const activeVariant = p.variants[activeVariantIndex];
             const currentImg = activeVariant.images[activeImageIndex];
+            const allReviews = getStoredReviews();
+            const pReviews = allReviews[p.id] || [];
+            
+            const totalCount = pReviews.length > 0 ? pReviews.length : p.reviewsCount;
+            const avgRating = pReviews.length > 0 ? (pReviews.reduce((acc, r) => acc + r.rating, 0) / pReviews.length).toFixed(1) : p.rating;
 
             const content = document.getElementById('modalContent');
             content.innerHTML = `
@@ -950,9 +1006,23 @@
                                 ${p.isSoldOut ? `<span class="bg-rose-100 text-rose-800 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider">Sold Out</span>` : ''}
                             </div>
                             <h2 class="text-xl font-black text-slate-900 mt-1">${p.name}</h2>
+                            
                             <div class="flex items-center gap-2 mt-2">
                                 <span class="font-black text-lg text-slate-900">Rp ${selectedSizeObj.price.toLocaleString('id-ID')}</span>
                             </div>
+
+                            <!-- RATING & REVIEW BADGE -->
+                            <div class="flex items-center gap-2 mt-2 pt-2 border-t border-slate-100">
+                                <div class="flex items-center text-amber-500">
+                                    <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
+                                </div>
+                                <span class="font-black text-xs text-slate-900">${avgRating}</span>
+                                <span class="text-xs text-slate-400">•</span>
+                                <a href="#reviewSection" onclick="document.getElementById('reviewSectionContent').scrollIntoView({behavior: 'smooth'})" class="text-xs font-bold text-emerald-600 hover:underline">
+                                    Lihat ${totalCount} Ulasan Pelanggan
+                                </a>
+                            </div>
+
                             <p class="text-xs text-slate-600 mt-3 leading-relaxed">${p.description}</p>
                             
                             <div class="mt-4">
@@ -1004,8 +1074,150 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- SEKSI ULASAN PRODUK (KHUSUS TEKS & RATING) -->
+                <div id="reviewSection" class="mt-10 pt-8 border-t border-slate-200" id="reviewSectionContent">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <div>
+                            <h3 class="font-black text-base text-slate-900 flex items-center gap-2">
+                                <i data-lucide="message-square-quote" class="w-5 h-5 text-emerald-600"></i>
+                                Ulasan & Penilaian Pelanggan (${totalCount})
+                            </h3>
+                            <p class="text-xs text-slate-500 mt-0.5">Testimoni jujur dari pelanggan yang telah berbelanja.</p>
+                        </div>
+                        <button onclick="toggleReviewForm()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition flex items-center gap-2 self-start">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Tulis Ulasan
+                        </button>
+                    </div>
+
+                    <!-- FORMULIR TULIS ULASAN -->
+                    <div id="reviewFormContainer" class="hidden bg-slate-50 border border-slate-200 rounded-2xl p-5 mb-6 animate-fade-in-up">
+                        <h4 class="font-extrabold text-xs text-slate-900 mb-3 uppercase tracking-wider">Tulis Ulasan Produk Ini</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Nama Lengkap / Panggilan</label>
+                                <input type="text" id="reviewAuthor" placeholder="Contoh: Siti A." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-slate-900">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Rating Bintang</label>
+                                <div class="flex items-center gap-1.5" id="starSelector">
+                                    ${[1, 2, 3, 4, 5].map(star => `
+                                        <button type="button" onclick="setReviewRating(${star})" class="p-1 focus:outline-none">
+                                            <i data-lucide="star" class="w-6 h-6 ${star <= reviewFormRating ? 'fill-amber-400 text-amber-400' : 'text-slate-300'} transition-colors"></i>
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Komentar & Pengalaman</label>
+                                <textarea id="reviewComment" rows="3" placeholder="Ceritakan kualitas bahan, kenyamanan, dan kerapihan jahitan..." class="w-full px-3 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-slate-900"></textarea>
+                            </div>
+                            <div class="flex items-center justify-end gap-2 pt-2">
+                                <button onclick="toggleReviewForm()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs rounded-xl transition">Batal</button>
+                                <button onclick="submitProductReview(${p.id})" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow-md transition">Kirim Ulasan</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DAFTAR ULASAN TEKS -->
+                    <div class="space-y-3" id="reviewListContainer">
+                        ${pReviews.length === 0 ? `
+                            <p class="text-xs text-slate-400 italic text-center py-6 bg-slate-50 rounded-2xl">Belum ada ulasan untuk produk ini. Jadilah yang pertama memberikan ulasan!</p>
+                        ` : pReviews.map((r, rIdx) => `
+                            <div class="bg-slate-50 border border-slate-200/80 rounded-2xl p-4 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full bg-slate-900 text-white font-black text-xs flex items-center justify-center">
+                                            ${r.name.charAt(0).toUpperCase()}
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center gap-1.5">
+                                                <span class="font-extrabold text-xs text-slate-900">${r.name}</span>
+                                                ${r.verified ? `<span class="bg-emerald-100 text-emerald-800 text-[9px] font-black px-2 py-0.5 rounded-full flex items-center gap-0.5"><i data-lucide="check-circle" class="w-3 h-3"></i> Terverifikasi</span>` : ''}
+                                            </div>
+                                            <span class="text-[10px] text-slate-400">${r.date}</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center text-amber-400">
+                                        ${Array.from({length: 5}).map((_, i) => `
+                                            <i data-lucide="star" class="w-3.5 h-3.5 ${i < r.rating ? 'fill-amber-400 text-amber-400' : 'text-slate-200'}"></i>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                <p class="text-xs text-slate-700 leading-relaxed pl-10">${r.comment}</p>
+                                <div class="pl-10 pt-1 flex items-center gap-3">
+                                    <button onclick="likeReview(${p.id}, ${rIdx})" class="flex items-center gap-1 text-[11px] font-bold text-slate-500 hover:text-emerald-600 transition">
+                                        <i data-lucide="thumbs-up" class="w-3.5 h-3.5"></i> Membantu (${r.likes || 0})
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
             `;
             lucide.createIcons();
+        }
+
+        function toggleReviewForm() {
+            const form = document.getElementById('reviewFormContainer');
+            if (form) {
+                form.classList.toggle('hidden');
+            }
+        }
+
+        function setReviewRating(rating) {
+            reviewFormRating = rating;
+            const starBtns = document.querySelectorAll('#starSelector button');
+            starBtns.forEach((btn, idx) => {
+                const icon = btn.querySelector('i');
+                if (idx < rating) {
+                    icon.classList.add('fill-amber-400', 'text-amber-400');
+                    icon.classList.remove('text-slate-300');
+                } else {
+                    icon.classList.remove('fill-amber-400', 'text-amber-400');
+                    icon.classList.add('text-slate-300');
+                }
+            });
+        }
+
+        function submitProductReview(productId) {
+            const author = document.getElementById('reviewAuthor').value.trim();
+            const comment = document.getElementById('reviewComment').value.trim();
+
+            if (!author || !comment) {
+                alert("Mohon masukkan nama dan komentar ulasan Anda!");
+                return;
+            }
+
+            const allReviews = getStoredReviews();
+            if (!allReviews[productId]) {
+                allReviews[productId] = [];
+            }
+
+            const newReview = {
+                name: author,
+                rating: reviewFormRating,
+                date: "Baru saja",
+                comment: comment,
+                likes: 0,
+                verified: true
+            };
+
+            allReviews[productId].unshift(newReview);
+            saveReviewsToStorage(allReviews);
+
+            renderModalContent();
+            renderProducts(products);
+            alert("Terima kasih! Ulasan Anda berhasil ditambahkan.");
+        }
+
+        function likeReview(productId, reviewIndex) {
+            const allReviews = getStoredReviews();
+            if (allReviews[productId] && allReviews[productId][reviewIndex]) {
+                allReviews[productId][reviewIndex].likes = (allReviews[productId][reviewIndex].likes || 0) + 1;
+                saveReviewsToStorage(allReviews);
+                renderModalContent();
+            }
         }
 
         function changeModalVariant(idx) {
