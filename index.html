@@ -1462,11 +1462,12 @@
                 if (result.success) {
                     showPaymentInterface(result.qris_image);
                 } else {
-                    handleFallbackToManual("Gagal membuat QRIS otomatis: " + (result.message || "Coba lagi"));
+                    // Jika backend merespon gagal, tetap lanjutkan dengan QRIS statis / manual yang aman
+                    showPaymentInterface(null);
                 }
             } catch (error) {
-                console.warn("Terdeteksi blokir Mixed Content HTTPS, mengalihkan ke mode QRIS statis / manual...", error);
-                // Fallback otomatis agar pembeli tetap bisa checkout lewat QRIS statis toko & konfirmasi WA
+                console.warn("Koneksi backend HTTP terhalang (Mixed Content/CORS), menggunakan antarmuka pembayaran standar...", error);
+                // Fallback otomatis tanpa pop-up error agar pembeli tetap nyaman menyelesaikan pesanan
                 showPaymentInterface(null);
             } finally {
                 btn.innerText = "Lanjut Pembayaran QRIS Otomatis";
@@ -1495,11 +1496,6 @@
             startPaymentStatusChecker(currentOrderId);
         }
 
-        function handleFallbackToManual(msg) {
-            console.log(msg);
-            showPaymentInterface(null);
-        }
-
         // Fungsi mengecek otomatis apakah pembayaran sudah lunas di server setiap 5 detik
         function startPaymentStatusChecker(orderId) {
             clearInterval(paymentCheckInterval);
@@ -1517,7 +1513,7 @@
                         toggleCartModal(false);
                     }
                 } catch (err) {
-                    // Abaikan error polling jika sedang di jaringan HTTPS strict, gunakan konfirmasi WA di bawah
+                    // Abaikan error polling jika terkendala jaringan HTTPS strict
                 }
             }, 5000);
         }
