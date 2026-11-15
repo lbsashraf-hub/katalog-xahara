@@ -337,10 +337,9 @@
                     <img src="logo.png" alt="Xahara's Wardrobe" class="w-8 h-8 object-contain rounded-lg">
                     <span>XAHARA'S WARDROBE</span>
                 </div>
-                <p class="text-xs text-slate-500 mt-2">Pengiriman Langsung dari Tasikmalaya • Pembayaran QRIS DANA Semi-Otomatis.</p>
+                <p class="text-xs text-slate-500 mt-2">Pengiriman Langsung dari Tasikmalaya • Pembayaran QRIS GoPay Otomatis.</p>
             </div>
 
-            <!-- HANYA LOGO IKON SOSIAL MEDIA DI FOOTER SESUAI PERMINTAAN -->
             <div class="flex items-center gap-3">
                 <a href="https://www.instagram.com/x.a.h.a.r.a?dlrf=eWoyNDRtcGFvZXly&utm_source=qr" target="_blank" title="Instagram Xahara" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-300 shadow-md border border-slate-700/60 hover:scale-110">
                     <img src="logo-ig.png" alt="Instagram" class="w-full h-full object-cover">
@@ -461,7 +460,7 @@
                 </div>
             </div>
 
-            <!-- STEP 3: PAYMENT QRIS & UPLOAD -->
+            <!-- STEP 3: PAYMENT QRIS & AUTO STATUS -->
             <div id="cartStepPayment" class="flex-1 overflow-y-auto p-5 space-y-4 hidden custom-scrollbar">
                 <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl flex items-center justify-between">
                     <div>
@@ -485,19 +484,22 @@
 
                     <div class="my-4 p-4 bg-slate-50 border border-dashed border-slate-300 rounded-2xl w-full max-w-xs mx-auto">
                         <div class="relative group cursor-pointer" onclick="openQrisZoom()">
-                            <img src="qris.jpg" alt="QRIS DANA" class="w-full h-auto max-h-[350px] object-contain mx-auto rounded-xl shadow-md border bg-white p-2 transition-transform duration-300 group-hover:scale-105">
+                            <img id="qrisImageElement" src="qris.jpg" alt="QRIS GoPay" class="w-full h-auto max-h-[350px] object-contain mx-auto rounded-xl shadow-md border bg-white p-2 transition-transform duration-300 group-hover:scale-105">
                             <div class="absolute inset-0 bg-slate-900/10 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                 <span class="bg-white/90 text-slate-800 text-[11px] font-bold px-3 py-1.5 rounded-full shadow-sm flex items-center gap-1">
                                     <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Ketuk untuk Perbesar
                                 </span>
                             </div>
                         </div>
-                        <p class="text-[11px] font-extrabold text-slate-700 mt-3">Scan QRIS menggunakan DANA / BCA / QRIS All Payment</p>
+                        <p class="text-[11px] font-extrabold text-slate-700 mt-3">Scan QRIS menggunakan GoPay / DANA / QRIS All Payment</p>
+                        <div class="mt-2 inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-bold border border-emerald-200">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Menunggu Pembayaran Otomatis...
+                        </div>
                     </div>
                 </div>
 
                 <div class="space-y-2">
-                    <label class="block text-xs font-bold text-slate-800">Upload Bukti Transfer Pembayaran</label>
+                    <label class="block text-xs font-bold text-slate-800">Upload Bukti Transfer (Opsional / Cadangan)</label>
                     <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:bg-slate-50 transition cursor-pointer relative">
                         <input type="file" id="proofFile" accept="image/*" onchange="handleProofUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10">
                         <div id="uploadPlaceholder">
@@ -530,7 +532,7 @@
             <div id="paymentFooter" class="p-5 border-t border-slate-100 bg-slate-50/50 hidden">
                 <button id="btnConfirmWA" onclick="confirmAndSendWA()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs py-3.5 rounded-2xl shadow-lg transition-all text-center flex items-center justify-center gap-2 btn-pulse-glow">
                     <i data-lucide="message-circle" class="w-4 h-4"></i>
-                    <span>Konfirmasi ke WhatsApp Admin</span>
+                    <span>Konfirmasi Manual via WhatsApp</span>
                 </button>
             </div>
         </div>
@@ -543,13 +545,16 @@
                 <i data-lucide="x" class="w-5 h-5"></i>
             </button>
             <p class="text-xs font-black text-slate-900 mb-3 uppercase tracking-wider">Scan QRIS Pembayaran</p>
-            <img src="qris.jpg" class="w-full h-auto object-contain rounded-2xl border shadow-inner">
+            <img id="qrisZoomImageElement" src="qris.jpg" class="w-full h-auto object-contain rounded-2xl border shadow-inner">
             <p class="text-[10px] text-slate-400 mt-2">Ketuk di luar gambar untuk menutup</p>
         </div>
     </div>
 
     <!-- MAIN JAVASCRIPT -->
     <script>
+        // URL BACKEND SERVER GOPAY API DI PTERODACTYL ANDA
+        const BACKEND_API_URL = "http://38.45.72.91:2486"; 
+        
         const ADMIN_WA_NUMBER = "6285864471018"; 
         const FREE_SHIPPING_MIN = 250000; 
         const IMGBB_API_KEY = "bcf26c98b3050eeb8ac783af8b260a89"; 
@@ -736,7 +741,6 @@
             }
         ];
 
-        // INITIAL DATABASE ULASAN TEKS (DEFAULT + LOCALSTORAGE)
         const defaultReviews = {
             1: [
                 { name: "Siti Rahma", rating: 5, date: "12 Oktober 2026", comment: "Bahan Sophia Anti UV-nya adem banget dan benar-benar tidak menerawang. Jahitan rapi khas produk lokal Tasikmalaya!", likes: 14, verified: true },
@@ -777,6 +781,7 @@
         let activeVideoIndex = 0;     
         let currentTotalWithUnique = 0;
         let countdownInterval = null;
+        let paymentCheckInterval = null;
         let currentOrderId = "";
         let currentOrderData = {};
         let uploadedProofUrl = "";
@@ -982,7 +987,6 @@
                             ` : ''}
                         </div>
                         
-                        <!-- Thumbnail Pilihan Foto & Multi-Video -->
                         <div class="flex items-center gap-2 overflow-x-auto pb-1">
                             ${activeVariant.images.map((img, idx) => `
                                 <button onclick="changeModalImage(${idx})" class="w-14 h-14 rounded-xl overflow-hidden border-2 flex-shrink-0 ${activeMediaType === 'image' && idx === activeImageIndex ? 'border-slate-900 shadow-sm' : 'border-transparent opacity-60'}">
@@ -1011,7 +1015,6 @@
                                 <span class="font-black text-lg text-slate-900">Rp ${selectedSizeObj.price.toLocaleString('id-ID')}</span>
                             </div>
 
-                            <!-- RATING & REVIEW BADGE -->
                             <div class="flex items-center gap-2 mt-2 pt-2 border-t border-slate-100">
                                 <div class="flex items-center text-amber-500">
                                     <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-400"></i>
@@ -1075,7 +1078,7 @@
                     </div>
                 </div>
 
-                <!-- SEKSI ULASAN PRODUK (KHUSUS TEKS & RATING) -->
+                <!-- SEKSI ULASAN PRODUK -->
                 <div id="reviewSection" class="mt-10 pt-8 border-t border-slate-200" id="reviewSectionContent">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                         <div>
@@ -1090,7 +1093,6 @@
                         </button>
                     </div>
 
-                    <!-- FORMULIR TULIS ULASAN -->
                     <div id="reviewFormContainer" class="hidden bg-slate-50 border border-slate-200 rounded-2xl p-5 mb-6 animate-fade-in-up">
                         <h4 class="font-extrabold text-xs text-slate-900 mb-3 uppercase tracking-wider">Tulis Ulasan Produk Ini</h4>
                         <div class="space-y-3">
@@ -1119,7 +1121,6 @@
                         </div>
                     </div>
 
-                    <!-- DAFTAR ULASAN TEKS -->
                     <div class="space-y-3" id="reviewListContainer">
                         ${pReviews.length === 0 ? `
                             <p class="text-xs text-slate-400 italic text-center py-6 bg-slate-50 rounded-2xl">Belum ada ulasan untuk produk ini. Jadilah yang pertama memberikan ulasan!</p>
@@ -1160,9 +1161,7 @@
 
         function toggleReviewForm() {
             const form = document.getElementById('reviewFormContainer');
-            if (form) {
-                form.classList.toggle('hidden');
-            }
+            if (form) form.classList.toggle('hidden');
         }
 
         function setReviewRating(rating) {
@@ -1190,9 +1189,7 @@
             }
 
             const allReviews = getStoredReviews();
-            if (!allReviews[productId]) {
-                allReviews[productId] = [];
-            }
+            if (!allReviews[productId]) allReviews[productId] = [];
 
             const newReview = {
                 name: author,
@@ -1367,9 +1364,7 @@
 
         function changeQty(index, delta) {
             cart[index].qty += delta;
-            if (cart[index].qty <= 0) {
-                cart.splice(index, 1);
-            }
+            if (cart[index].qty <= 0) cart.splice(index, 1);
             updateCartUI();
         }
 
@@ -1380,6 +1375,7 @@
                 goToCartItems();
             } else {
                 modal.classList.add('hidden');
+                clearInterval(paymentCheckInterval);
             }
         }
 
@@ -1409,11 +1405,14 @@
             document.getElementById('paymentFooter').classList.add('hidden');
 
             const btn = document.getElementById('cartPrimaryBtn');
-            btn.innerText = "Lanjut Pembayaran QRIS";
+            btn.innerText = "Lanjut Pembayaran QRIS Otomatis";
             btn.setAttribute('onclick', 'processCheckout()');
         }
 
-        function processCheckout() {
+        // ==========================================
+        // CHECKOUT OTOMATIS KE BACKEND GOPAY API
+        // ==========================================
+        async function processCheckout() {
             const name = document.getElementById('custName').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
             const address = document.getElementById('custAddress').value.trim();
@@ -1427,7 +1426,7 @@
             const baseSubtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             const uniqueCode = Math.floor(Math.random() * 899) + 100;
             currentTotalWithUnique = baseSubtotal + uniqueCode;
-            currentOrderId = `ORD-${Math.floor(100000 + Math.random() * 900000)}`;
+            currentOrderId = `XHR-${Math.floor(100000 + Math.random() * 900000)}`;
 
             currentOrderData = {
                 orderId: currentOrderId,
@@ -1441,18 +1440,77 @@
                 total: currentTotalWithUnique
             };
 
-            document.getElementById('paymentOrderId').innerText = `#${currentOrderId}`;
-            document.getElementById('finalTotalDisplay').innerText = `Rp ${currentTotalWithUnique.toLocaleString('id-ID')}`;
-            document.getElementById('uniqueCodeText').innerText = `Kode Unik Rp ${uniqueCode}`;
+            const btn = document.getElementById('cartPrimaryBtn');
+            btn.innerText = "Menghubungkan ke Server GoPay...";
+            btn.disabled = true;
 
-            document.getElementById('cartStepItems').classList.add('hidden');
-            document.getElementById('cartStepForm').classList.add('hidden');
-            document.getElementById('cartStepPayment').classList.remove('hidden');
+            try {
+                // Request pembuatan QRIS otomatis ke server Pterodactyl Anda
+                const response = await fetch(`${BACKEND_API_URL}/api/create-gopay`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        order_id: currentOrderId,
+                        amount: currentTotalWithUnique,
+                        customer_name: name,
+                        customer_phone: phone
+                    })
+                });
 
-            document.getElementById('cartFooter').classList.add('hidden');
-            document.getElementById('paymentFooter').classList.remove('hidden');
+                const result = await response.json();
 
-            startCountdown(900);
+                if (result.success) {
+                    document.getElementById('paymentOrderId').innerText = `#${currentOrderId}`;
+                    document.getElementById('finalTotalDisplay').innerText = `Rp ${currentTotalWithUnique.toLocaleString('id-ID')}`;
+                    document.getElementById('uniqueCodeText').innerText = `Kode Unik Rp ${uniqueCode}`;
+
+                    // Perbarui gambar QRIS jika backend mengembalikan gambar base64 dinamis
+                    if (result.qris_image) {
+                        document.getElementById('qrisImageElement').src = result.qris_image;
+                        document.getElementById('qrisZoomImageElement').src = result.qris_image;
+                    }
+
+                    document.getElementById('cartStepItems').classList.add('hidden');
+                    document.getElementById('cartStepForm').classList.add('hidden');
+                    document.getElementById('cartStepPayment').classList.remove('hidden');
+
+                    document.getElementById('cartFooter').classList.add('hidden');
+                    document.getElementById('paymentFooter').classList.remove('hidden');
+
+                    startCountdown(900);
+                    startPaymentStatusChecker(currentOrderId);
+                } else {
+                    alert("Gagal membuat QRIS Otomatis: " + (result.message || "Coba lagi"));
+                }
+            } catch (error) {
+                console.error("Error API GoPay:", error);
+                alert("Gagal terhubung ke server pembayaran otomatis. Pastikan server backend menyala.");
+            } finally {
+                btn.innerText = "Lanjut Pembayaran QRIS Otomatis";
+                btn.disabled = false;
+            }
+        }
+
+        // Fungsi mengecek otomatis apakah pembayaran sudah lunas di server setiap 5 detik
+        function startPaymentStatusChecker(orderId) {
+            clearInterval(paymentCheckInterval);
+            paymentCheckInterval = setInterval(async () => {
+                try {
+                    const res = await fetch(`${BACKEND_API_URL}/api/check-status?order_id=${orderId}`);
+                    const data = await res.json();
+
+                    if (data.status === 'PAID' || data.status === 'SUCCESS') {
+                        clearInterval(paymentCheckInterval);
+                        clearInterval(countdownInterval);
+                        alert(`🎉 PEMBAYARAN BERHASIL!\n\nPesanan #${orderId} telah terkonfirmasi lunas secara otomatis. Terima kasih telah berbelanja di Xahara's Wardrobe!`);
+                        cart = [];
+                        updateCartUI();
+                        toggleCartModal(false);
+                    }
+                } catch (err) {
+                    console.log("Menunggu konfirmasi pembayaran...", err);
+                }
+            }, 5000);
         }
 
         function handleProofUpload(e) {
@@ -1507,7 +1565,6 @@
                         proofLink = resData.data.url;
                     }
                 } catch (err) {
-                    console.log("Gagal mengunggah foto ke ImgBB:", err);
                     proofLink = "Bukti Terlampir / Diupload oleh Pembeli";
                 }
             }
@@ -1539,7 +1596,7 @@ _Mohon segera diverifikasi dan diproses. Terima kasih!_`;
             }
 
             if (btn) {
-                btn.innerText = "Konfirmasi ke WhatsApp Admin";
+                btn.innerText = "Konfirmasi Manual via WhatsApp";
                 btn.disabled = false;
             }
         }
@@ -1554,9 +1611,7 @@ _Mohon segera diverifikasi dan diproses. Terima kasih!_`;
 
         function closeQrisZoom() {
             const modal = document.getElementById('qrisZoomModal');
-            if (modal) {
-                modal.classList.add('hidden');
-            }
+            if (modal) modal.classList.add('hidden');
         }
 
         function startCountdown(seconds) {
@@ -1571,6 +1626,7 @@ _Mohon segera diverifikasi dan diproses. Terima kasih!_`;
 
                 if (--timer < 0) {
                     clearInterval(countdownInterval);
+                    clearInterval(paymentCheckInterval);
                     display.innerText = "EXPIRED";
                     alert("Waktu batas pembayaran telah habis. Silakan lakukan checkout ulang.");
                     toggleCartModal(false);
