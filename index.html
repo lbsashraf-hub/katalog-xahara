@@ -1460,35 +1460,44 @@
                 const result = await response.json();
 
                 if (result.success) {
-                    document.getElementById('paymentOrderId').innerText = `#${currentOrderId}`;
-                    document.getElementById('finalTotalDisplay').innerText = `Rp ${currentTotalWithUnique.toLocaleString('id-ID')}`;
-                    document.getElementById('uniqueCodeText').innerText = `Kode Unik Rp ${uniqueCode}`;
-
-                    // Perbarui gambar QRIS jika backend mengembalikan gambar base64 dinamis
-                    if (result.qris_image) {
-                        document.getElementById('qrisImageElement').src = result.qris_image;
-                        document.getElementById('qrisZoomImageElement').src = result.qris_image;
-                    }
-
-                    document.getElementById('cartStepItems').classList.add('hidden');
-                    document.getElementById('cartStepForm').classList.add('hidden');
-                    document.getElementById('cartStepPayment').classList.remove('hidden');
-
-                    document.getElementById('cartFooter').classList.add('hidden');
-                    document.getElementById('paymentFooter').classList.remove('hidden');
-
-                    startCountdown(900);
-                    startPaymentStatusChecker(currentOrderId);
+                    showPaymentInterface(result.qris_image);
                 } else {
-                    alert("Gagal membuat QRIS Otomatis: " + (result.message || "Coba lagi"));
+                    handleFallbackToManual("Gagal membuat QRIS otomatis: " + (result.message || "Coba lagi"));
                 }
             } catch (error) {
-                console.error("Error API GoPay:", error);
-                alert("Gagal terhubung ke server pembayaran otomatis. Pastikan server backend menyala.");
+                console.warn("Terdeteksi blokir Mixed Content HTTPS, mengalihkan ke mode QRIS statis / manual...", error);
+                // Fallback otomatis agar pembeli tetap bisa checkout lewat QRIS statis toko & konfirmasi WA
+                showPaymentInterface(null);
             } finally {
                 btn.innerText = "Lanjut Pembayaran QRIS Otomatis";
                 btn.disabled = false;
             }
+        }
+
+        function showPaymentInterface(qrisImageBase64) {
+            document.getElementById('paymentOrderId').innerText = `#${currentOrderId}`;
+            document.getElementById('finalTotalDisplay').innerText = `Rp ${currentTotalWithUnique.toLocaleString('id-ID')}`;
+            document.getElementById('uniqueCodeText').innerText = `Kode Unik Rp ${currentOrderData.uniqueCode}`;
+
+            if (qrisImageBase64) {
+                document.getElementById('qrisImageElement').src = qrisImageBase64;
+                document.getElementById('qrisZoomImageElement').src = qrisImageBase64;
+            }
+
+            document.getElementById('cartStepItems').classList.add('hidden');
+            document.getElementById('cartStepForm').classList.add('hidden');
+            document.getElementById('cartStepPayment').classList.remove('hidden');
+
+            document.getElementById('cartFooter').classList.add('hidden');
+            document.getElementById('paymentFooter').classList.remove('hidden');
+
+            startCountdown(900);
+            startPaymentStatusChecker(currentOrderId);
+        }
+
+        function handleFallbackToManual(msg) {
+            console.log(msg);
+            showPaymentInterface(null);
         }
 
         // Fungsi mengecek otomatis apakah pembayaran sudah lunas di server setiap 5 detik
@@ -1508,7 +1517,7 @@
                         toggleCartModal(false);
                     }
                 } catch (err) {
-                    console.log("Menunggu konfirmasi pembayaran...", err);
+                    // Abaikan error polling jika sedang di jaringan HTTPS strict, gunakan konfirmasi WA di bawah
                 }
             }, 5000);
         }
